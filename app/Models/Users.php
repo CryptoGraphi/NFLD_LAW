@@ -25,7 +25,11 @@ class Users extends Model
 	protected $deletedField         = 'deleted_at';
 
 	// Validation
-	protected $validationRules      = [];
+	protected $validationRules      = [
+		'userEmail' => 'required|valid_email|is_unique[users.userEmail]',
+		'userPassword' => 'required|min_length[8]',
+		'userSalt' => 'required'
+	];
 	protected $validationMessages   = [];
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
@@ -67,6 +71,7 @@ class Users extends Model
 	// register a user into the database 
 	public function registerUser($data)
 	{
+		return $this->insert($data);
 
 	}
 

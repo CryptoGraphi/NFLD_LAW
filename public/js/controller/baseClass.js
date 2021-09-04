@@ -8,13 +8,13 @@
  */
 
 
-class baseClass {
+export class baseClass {
 
 
     constructor()
     {
         // add routing functions to the baseClass
-        this.Routes = new Route();
+        this.Routes =  new Route();
     }
 
     // the method name to call from our application 
@@ -39,18 +39,17 @@ class baseClass {
     // function inorder to validate our methods if not throw an error
     validateClassMethod(url = this.getMethodName(2))
     {
-        if (typeof this[url] !== 'undefined') {
-            return this[url];
-        } 
 
-        if (url === '' || url === undefined || url === null) {
+        if (typeof this[url] !== 'undefined') {
+            let executeFunction = this[url];
+            return executeFunction();
+        } else {
             if (typeof this['index'] !== 'undefined') {
-                return this['index'];
-            } else {
-                 return false;
+                let executeFunction = this['index'];
+                return executeFunction();
+            } else { // this is the function doesnt exist then we will not execute anything and the baseCLass will exit
+                return false;
             }
         }
-        return false;
     }
-
 }

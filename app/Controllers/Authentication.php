@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Users;
 use authenticationWorker;
+use hash;
 use sessionManager;
 use registration;
 
@@ -16,6 +17,10 @@ class Authentication extends BaseController
 	{
 		// verify that sessions are active before
 		session_start();
+
+
+
+		// check to see if 
 	}
 
 	public function index()
@@ -47,6 +52,7 @@ class Authentication extends BaseController
 						unset($_SESSION['SESSION_HONEYPOTVALUE']);
 						http_response_code(401);
 						header('refresh: 0; /home/login');
+						die();
 					}
 				} else {
 					$_SESSION['SESSION_HONEYPOTVALUE'] = $input['SID_TRACKER'];
@@ -73,7 +79,8 @@ class Authentication extends BaseController
 						// update value in database inorder to login
 						$updateSession = [
 							"userAccessToken" => $SESSION_AUTH_HANDSHAKE,
-							"userSessionID" => $SESSION_TOKEN
+							"userSessionID" => $SESSION_TOKEN,
+							"userLastLogin" => date("Y-m-d")
 						];
 
 						// update our database to the new login session for the user 
@@ -87,26 +94,28 @@ class Authentication extends BaseController
 								$_SESSION['SESSION_ID'] = $SESSION_ID;
 								$_SESSION['SESSION_TOKEN'] = $SESSION_TOKEN;
 								$_SESSION['SESSION_AUTH_HANDSHAKE'] = $SESSION_AUTH_HANDSHAKE;
-
 								helper('sessionManager');
 								$session = new sessionManager($_SESSION['SESSION_AUTH_HANDSHAKE'], $_SESSION['SESSION_TOKEN']);
 
 								if ($session->checkAuthenticationSession($userData['userSessionID'], $userData['userAccessToken'])) {
 									$_SESSION['SESSION_TOKEN_EXPIRY'] = $session->getSessionExpiry();
-									echo "session_was started successfuly";
+									// set session cookie
+
 									// redirect to the login page 
-									header('refresh; 0; /dashboard/');
+									header('refresh: 0; /dashboard/');
 								} else {
 									// session failed 
 									// inputs dont match possible bug in our code;
 									$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
-									header('refresh: 0; /');
+									header('refresh: 0; /home/login/');
+									die();
 								}
 							} else {
 								// session has failled to create so probaly a db related error 
 								// inputs dont match possible bug in our code;
 								$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
-								header('refresh: 0; /');
+								header('refresh: 0; /home/login/');
+								die();
 							}
 						} else {
 							// our handshake failed for some reason
@@ -114,6 +123,7 @@ class Authentication extends BaseController
 							// inputs dont match possible bug in our code;
 							$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
 							header('refresh: 0; /home/login/');
+							die();
 						}
 					} else {
 						// incorrect username or passowrd 
@@ -122,16 +132,19 @@ class Authentication extends BaseController
 						// inputs dont match possible bug in our code;
 						$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
 						header('refresh: 0; /home/login/');
+						die();
 					}
 				} else {
 					// inputs dont match possible bug in our code;
 					$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
 					header('refresh: 0; /home/login/');
+					die();
 				}
 			} else {
 				// invalid username -> username doesnt exist 
 				$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
 				header('refresh: 0; /home/login/');
+				die();
 			}
 		} else {
 			http_response_code(403);
@@ -144,12 +157,66 @@ class Authentication extends BaseController
 
 		// register the user with
 		helper('register');
+		helper('hashing');
 		$userModel = new Users();
-		$registration = new registration($_POST);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+		$registration = new registration($_POST);  
+		$hash = new hash();   
+		$input = $registration->getPostValues();    
+
+		if ($registration->checkRequestMethod() === true)
+		{
+			// check if username exists in dbUsernam
+			if (empty($userModel->lookupUser($input['email'])))
+			{
+				// now compare the 2 hashes that we need 
+				if ($registration->passwordsMatch($input['password'], $input['passwordConfirm']))
+				{
+					if ($registration->verifyPasswordLength($input['password'], $input['passwordConfirm'])){
+						// generate our db stuff
+					 	$salt = 	hash::generateSalt();
+						$password = hash::generateHash($input['password'], $salt);
+						$dbQuery = $registration->generateDBInsertQuery($input['email'], $password, $salt);
+
+						if ($result = $userModel->registerUser($dbQuery)) {
+							// goto login page an force user to login for the first time
+
+
+						}
+					} else {
+						// password dont match required length;
+						$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "passwords to short";
+						http_response_code(401);
+						header('refresh: 0; /home/register/');
+					}
+					
+				} else {
+					/// password dont match trigger an error
+					$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "passwords dont match";
+					http_response_code(401);
+					header('refresh: 0; /home/register/');
+				}
+			} else {
+				// user already exists so tell user the username is already in use
+				$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "user Exists please choose differnt email";
+				http_response_code(401);
+				header('refresh: 0; /home/register/');
+			}
+
+		} else 
+		{
+			// trigger request method 
+			$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "request method isnt valid";
+			http_response_code(401);
+			header('refresh: 0; /home/register/');
+		}
+
 
 
 	}
+	// destory all the sessions inside of the database
 	public function logout()
 	{
+		session_destroy();
+		header('refresh: 0; /');
 	}
 }

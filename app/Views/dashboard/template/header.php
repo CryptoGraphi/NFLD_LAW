@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="/img/Freewill-logos/Freewill-logos_black.png" />
     <link rel='stylesheet' href='/css/index.css' />
     <script src='/js/router.js'></script>
-
+    <script src='/js/app.js'></script>
+    
     <title>NFLDLAW - FreeWill Lawyer</title>
 </head>
 
@@ -35,13 +36,17 @@
                 <a class="nav-link" href="#">Home </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/home/about/">About Us</a>
+                <a class="nav-link" href="/home/about/">Create Document</a>
             </li>
             <li class='nav-item'>
-                <a href='/home/login/' class='nav-link'>Login</a>
+                <a href='/home/login/' class='nav-link'> My Account</a>
             </li>
-            <li>
-                <a href='/home/register/'><button class='btn btn-transparent started'>Get Started</button></a>
+            <li class='nav-item'>
+                <a class='nav-link' href='/home/register/'>Request Lawyer</a>
+            </li>
+
+            <li class='nav-item'>
+                <a  class='nav-link' href=''> Logout </a>
             </li>
             <li class='nav-item'>
                 <a href="https://www.facebook.com/nfldlawfirm"><i class="bi bi-facebook social"></i></a>

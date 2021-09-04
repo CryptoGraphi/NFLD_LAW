@@ -6,6 +6,10 @@
  */
 
 
+import { baseClass} from './baseClass.js';
+
+
+
 class home extends baseClass {
 
     constructor()
@@ -17,7 +21,7 @@ class home extends baseClass {
 
     index()
     {
-
+        
     }
 
     login()
@@ -26,7 +30,10 @@ class home extends baseClass {
 
     }
 
-
+    about()
+    {
+      
+    }
 }
 
 

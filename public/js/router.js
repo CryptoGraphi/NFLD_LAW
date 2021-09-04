@@ -15,50 +15,55 @@
 // DEFUALT SETTINGS 
 const ROUTE_PATH_MODULES = '/js/modules/';
 const ROUTE_PATH_CONTROLLER = '/js/controller/';
+const ROUTE_PATH_MODELS = 'js/models/';
 const ROUTE_PATH_VIEWS = '/js/views/';
 const ROUTE_PATH_ROOT = '/js/';
 
 class Route {
     
-    loadController(filename)
+    async loadController(filename)
     {
         let script = document.createElement('script');
         script.src = ROUTE_PATH_CONTROLLER + filename + ".js";
-
-       
+        script.type = 'module';
         document.head.appendChild(script);
         return true;
     }
 
-    loadCoreModules(filename)
+    async loadCoreModules(filename)
     {
         let script = document.createElement('script');
         script.src = ROUTE_PATH_CONTROLLER + filename + ".js";
+        script.type = 'module';
         document.head.appendChild(script);
             return true;
     }
 
 
-    loadView(filename)
+    async loadView(filename)
     {
         let script = document.createElement('script');
         script.src = ROUTE_PATH_VIEWS + filename + ".js";
+        script.type = 'module';
+        document.head.appendChild(script);
+    }
 
-        if (this.contentLoaded === true) {
-            document.head.appendChild(script);
-            return true;
-        }
+    async loadModel(ModalName)
+    {
+        let script = document.createElement('script');
+        script.src = ROUTE_PATH_MODELS + ModelName + ".js";
+        script.type = 'module';
+        document.head.appendChild(script);
     }
 
 
-    loadModule(filename) 
+    async loadModule(filename) 
     {
         let script = document.createElement('script');
         script.src = ROUTE_PATH_MODULES + filename + ".js";
+        script.type = 'module';
 
-        if (this.contentLoaded === true) {
-            document.body.appendChild(script);
-        }
+        document.head.appendChild(script);
     }
 
     // return the current path of window
@@ -100,12 +105,4 @@ const Routing = new Route();
 // check for an empty parmater if so we will load out 
 if (Routing.setCurrentRoute() === false) {
     Routing.loadController('home');
-}  else {
-  
 }
-
-
-
-
-
-

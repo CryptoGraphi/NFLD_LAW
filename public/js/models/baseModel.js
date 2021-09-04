@@ -10,15 +10,26 @@
 
 class baseModel {
 
-
-    constructor()
+    constructor(self)
     {
-    
+        self.modelName = this.modelName;
+    }
+
+    getObjectData(methodName)
+    {
 
     }
-    // add a feature inordet to access information by
+
+
+    setObjectData(methodName, data)
+    {
+
+    }
+
+    deleteObjectData(methodName, data)
+    {
+
+    }
+
     
-
-
-
 }
