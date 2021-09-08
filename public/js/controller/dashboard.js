@@ -7,7 +7,6 @@
  */
 
 import { baseClass } from "./baseClass.js";
-import { wizard } from "../modules/wizard.js";
 
 class dashboard extends baseClass {
 
@@ -28,7 +27,8 @@ class dashboard extends baseClass {
        
         // this is for using the third parmter as document fetching to load any scripts that are needed for the section of the page
         switch($URL){
-           case "lastwill":
+           case "lastwill": 
+                Routing.loadModel('lastWill');
                 Routing.loadView('contracts/lastwill');
            break;
         }

@@ -2,17 +2,33 @@
 
     <div class='row'>
 
-        <h1 class='text-center '> Choose your document </h1>
+    <div class='col-md-12 mb-4 mt-4'>
+        <h1> Getting Started </h1>
+        <small class='small-caption'>  Getting starting started is easy </small>
+
+        <p class='small-caption'>
+        Just follow the step-by-step instructions to fill out the necessary information for your
+                            forms.
+        </p>
+
+        <p style='font-weight: bold;'>&copy; NFLD LAW freewillLawyer.com</p>
+
+</div>
+
+  
+        
+    
         <div class='col-sm iconTile'>
-            <i class="bi bi-tv icon"></i>
+           <img src='/img/SVG/document_choose.svg' class='img-fluid' />
+            <span> Choose your document </span>
+        </div>    
+        
+        <div class='col-sm iconTile'>
+            <img src='/img/SVG/fill_form.svg' class='img-fluid' />
             <span> Answer a few simple questions</span>
         </div>
         <div class='col-sm iconTile'>
-            <i class="bi bi-hand-index-fill icon"></i>
-            <span> Choose your document </span>
-        </div>
-        <div class='col-sm iconTile'>
-            <i class="bi bi-hourglass-split icon"></i>
+            <img src='/img/SVG/clock.svg' class='img-fluid'/>
             <span> It take(s) just 5 minute(s) </span>
         </div>
 
@@ -27,7 +43,7 @@
                     <h3 style='text-align: center; color: rgb(56, 56, 56); font-weight: 400;' class='mt-4'><i
                             class="bi bi-book" style='margin: 10px;'></i>Legal
                         Documents, Forms, and Contracts</h3>
-                    <small style='font-style: italic; color: slategray;'> Please select a legal form or contrat to get
+                    <small style='font-style: italic; color: slategray;'> Please select a legal form or contract to get
                         started</small>
                 </div>
 
@@ -71,9 +87,12 @@
 
 
     <div class='row' style='margin-top: 10%;'>
-    <h1>Your current contracts </h1>
-        <small style='color: slategray; font-style: italic;'> View your current legal contract and forms </small>
-
+    <h1>Your current contracts </h1>     
+    <small style='color: slategray; font-style: italic;'> View your current legal contract and forms </small>
+<div class='coll-sm-6'>
+    <img src='/img/SVG/my_documents.svg' class='img-fluid' />
+</div>
+  
         <table class="table table-striped mt-4">
   <thead>
     <tr>
@@ -102,14 +121,15 @@
 
 
     <div class='row' style='margin-top: 10%;'>
-        <h1> Need other legal services? </h1>
-        <small style='color: slategrey; font-style: italic;'> Need something else ?</small>
-        <div class='col-sm mt-4'>
-            <img src='/img/maarten-van-den-heuvel-_pc8aMbI9UQ-unsplash.jpg' class='img-fluid mt-4' />
+        <h1> legal services? </h1>
+        <small style='color: slategrey; font-style: italic;'> Didn't find out what you were looking for? Please contact our legal Team.
+        <br/> About the nature of the request and we would, gladly book  you for a free consolutation.
+    </small>
+        <div class='col-sm-4 mt-4'>
+            <img src='/img/SVG/services.svg' class='img-fluid mt-4' />
         </div>
 
         <div class='mt-4'>
-            <p> Need other legal services? Please contact our experienced legal team? via our request form </p>
             <button id='requestForm' class='btn started'> Contact Legal Team </button>
         </div>
     </div>

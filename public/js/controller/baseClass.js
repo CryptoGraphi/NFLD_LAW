@@ -39,7 +39,6 @@ export class baseClass {
     // function inorder to validate our methods if not throw an error
     validateClassMethod(url = this.getMethodName(2))
     {
-
         if (typeof this[url] !== 'undefined') {
             let executeFunction = this[url];
             return executeFunction();

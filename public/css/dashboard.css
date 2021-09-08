@@ -136,7 +136,7 @@
 }
 
 .card-body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ 
     padding: 75px;
 
 }
@@ -161,4 +161,13 @@
 ul > .list-group-item {
   margin: 10px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.space-elements > * {
+  margin: 5px;
+}
+
+.small-caption {
+  color: slategray;
+  font-style: italic;
 }

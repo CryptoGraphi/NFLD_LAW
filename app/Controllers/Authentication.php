@@ -41,7 +41,6 @@ class Authentication extends BaseController
 
 
 			$fetchUsernameData = $userModel->lookupUser($input['email']);
-
 			// this is to prevent form re submissions 
 			if (!empty($fetchUsernameData)) {
 
@@ -100,8 +99,7 @@ class Authentication extends BaseController
 								if ($session->checkAuthenticationSession($userData['userSessionID'], $userData['userAccessToken'])) {
 									$_SESSION['SESSION_TOKEN_EXPIRY'] = $session->getSessionExpiry();
 									// set session cookie
-
-									// redirect to the login page 
+									$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = '';
 									header('refresh: 0; /dashboard/');
 								} else {
 									// session failed 
@@ -179,8 +177,9 @@ class Authentication extends BaseController
 
 						if ($result = $userModel->registerUser($dbQuery)) {
 							// goto login page an force user to login for the first time
-
-
+							$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Please Login for the first time";
+							echo "Please wait we are redirecting you!";
+							header('refresh: 2; /home/login/');
 						}
 					} else {
 						// password dont match required length;

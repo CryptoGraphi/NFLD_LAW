@@ -15,9 +15,9 @@
             <br/><br/><br/>
             <img class='img-fluid header-img' style='max-width: 100%;' src='/img/chess_cover.jpg' /> <br/><br/>
              <p class='header-p'>
-                 <h1> Why use our service</h1>
-                 <hr />
-
+                 <h1 style='position: relative; top: 5%;'> Why use our service</h1>
+                 <img src='/img/SVG/document_review.svg' class='img img-fluid' />
+ 
                 Writing your own will can feel daunting — that’s why we worked with the nation's top legal
                  experts to
                  create our interactive online will maker. Enter your information, and we'll create a last
@@ -25,14 +25,14 @@
 
      </div>
   <div class='col-sm' style='box-shadow: none;'>
-                <div class="well text-center">
+                <div class=" text-center">
                     <div class='row'>
                     <div class="col-md-6">
-                         <img class='img-fluid header-img' src='/img/suit.jpg' style='max-width: 100%; max-height: 100%;' />
+                         <img class='img-fluid header-img desktop-visible '  src='/img/suit.jpg' style='max-width: 100%; max-height: 100%;' />
                          
                     </div>
                     <div class="col-md-6">
-                         <img class='img-fluid header-img' src='/img/fam-1.jpg' style='max-width: 100%; max-height: 100%; vertical-align: text-top' />
+                         <img class='img-fluid header-img desktop-visible' src='/img/fam-1.jpg' style='max-width: 100%; max-height: 100%; vertical-align: text-top' />
                     </div>
 
                 </div>
@@ -91,39 +91,41 @@
 
 
 <br/><br/>
+
+
+</div>
 <div class='container'>
-        <div class='row'>
-            <div class='col-sm'>
-                <h1>How it works</h1>
-            </div>
+      
+        <div>
+        <h1>  Getting Started </h1>
+        <img class='img img-fluid' src='/img/undraw_posting_photo.svg' />
+
         </div>
         <div class='row'>
-            <div class='col-sm'>
-                <ul class="list-group space">
-                    <li class="list-group-item"> <h2>1: Fill out online</h2>
-                        <p style='color: rgb(20, 84, 148);'>
+
+        <ul class="list-group space hero-list">
+                <h1 class='p-4'> How to get started using our service </h1>
+                    <li class="list-group-item hero"> <h2 style='font-weight: bolder;'>1: Fill out online</h2>
+                        <p class='list-guide'>
                             Just follow the step-by-step instructions to fill out the necessary information for your
                             forms.
                         </p>
                     </li>
-                    <li class="list-group-item list-group-item-primary" style='background-color: rgba(203, 223, 253, 0.144);'>
-                        <h2> 2: Print out documents.</h2>
-                    <p style='color: rgb(24, 85, 146);'>The information you provided is turned into precise legal
+                    <li class="list-group space">
+                        <h2 style='font-weight: bolder;'> 2: Print out documents.</h2>
+                    <p class='list-guide'>The information you provided is turned into precise legal
                         language, and provided back to you as a
                         printable document.</p>
                     </li>
-                    <li class="list-group-item list-group-item-success" style='background-color: rgba(203, 223, 253, 0.144);'>
-                        <h2>3. Sign and keep safe</h2>
-                        <p style='color: rgb(23, 89, 155);'>
-                    Follow attached instructions to print, sign, and make your document official. Keep it somewhere safe, but accessible.
-                    This is so easy! I’ve been putting off making a will because it seemed too hard. This is very easy to understand and
-                    navigate, giving one ample opportunity to edit and change before finishing. Thank you, FreeWill.
-                    - R.W.</p>
+                    <li class="list-group-item" >
+                        <h2 style='font-weight: bolder;'>3. Sign and keep safe</h2>
+                        <p class='list-guide text-center'>
+                    Follow attached instructions to print, sign, and make your document official. Keep it somewhere safe, but accessible! </p>
                     </li>
 
-                    <li class='list-group-item list-group-primary' style='background-color:rgba(203, 223, 253, 0.144)'>
-                        <h2> 4. Need other services?</h2>
-                        <p style='color: rgb(23, 89, 155)'>
+                    <li class='list-group-item hero' >
+                        <h2 style='font-weight: bolder;'> 4. Need other services?</h2>
+                        <p class='list-guide'>
                             To customize your FreeWill and other Legal Estate Documents, please email freewilllawyer.com
                             or text / call 1709 660 6353.
 
@@ -133,9 +135,6 @@
                         </p>
                     </li>
                 </ul>
-            </div>
-            <div class='col-sm'>
-                
-            </div>
+           
         </div>
 </div>

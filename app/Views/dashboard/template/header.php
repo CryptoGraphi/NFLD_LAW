@@ -27,26 +27,34 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
         style=' width: 100% !important; background-color: transparent;'>
+       
+        <ul class='navbar-nav'>
+         
+       <li class='nav-item'> <button class="navbar-toggler" id='btn-menu-collapse' type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button></li></ul>
 
         <a class='nav-link' href=''
             style='text-decoration: none; color: black; font-weight:200; font-size: 20px;'>NFLDLAW<img class='img-fluid'
                 src='/img/Freewill-logos/Freewill-logos_black.png' style='max-width: 200px; max-height: 200px' /></a>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id='nav-section-topMenu'>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home </a>
+                <a class="nav-link" href="/dashboard/">Home </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/home/about/">Create Document</a>
+                <a class="nav-link" href="/dashboard/contracts/">Create Document</a>
             </li>
             <li class='nav-item'>
-                <a href='/home/login/' class='nav-link'> My Account</a>
+                <a href='/' class='nav-link'> My Account</a>
             </li>
             <li class='nav-item'>
                 <a class='nav-link' href='/home/register/'>Request Lawyer</a>
             </li>
 
             <li class='nav-item'>
-                <a  class='nav-link' href=''> Logout </a>
+                <a  class='nav-link' href='/Authentication/logout/'> Logout </a>
             </li>
             <li class='nav-item'>
                 <a href="https://www.facebook.com/nfldlawfirm"><i class="bi bi-facebook social"></i></a>
@@ -62,12 +70,21 @@
             </li>
 
         </ul>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
 
         </div>
     </nav>
+
+    <script>
+                let btnCollapse = document.getElementById('btn-menu-collapse');
+                let navMenu = document.getElementById('nav-section-topMenu');
+
+                btnCollapse.addEventListener('click', () => {
+
+                    if (navMenu.style.display === 'block') {
+                        navMenu.style.display = 'none';
+                    } else {
+                        navMenu.style.display = 'block';
+                    }
+                });
+            </script>

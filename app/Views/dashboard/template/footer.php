@@ -11,7 +11,7 @@
                          We are a young company always looking for new and creative ideas to help you with our products
                          in your everyday work.
                      </p>
-                     <p style='font-weight: bold;'>&copy; Free Will Lawyer Inc.</p>
+                     <p style='font-weight: bold;'>&copy; NFLD LAW freewillLawyer.com</p>
                  </div>
                  <div class="col-md-4 offset-md-1 footer-contact wow fadeInDown">
                      <h3>Contact</h3>

@@ -55,8 +55,9 @@
     public function destorySession()
     {
         session_destroy();
-        http_response_code(401);
-        header('refresh: 0; /');
+        http_response_code(401);     
+        header('refresh: 3; /');
+        die('You are being redirected please wait');
     }
 
  }
