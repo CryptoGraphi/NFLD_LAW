@@ -14,6 +14,8 @@ function generateProvinceList()
 
 }
 
+var_dump($_POST);
+
 ?>
 
 <div class='container' style='margin-top: 10%;'>
@@ -49,25 +51,16 @@ function generateProvinceList()
 
     <div class='row mt-4'>
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Get Started</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Executor </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Children</a>
-            </li>
-
-            <li class='nav-item'>
-                <a class='nav-link' href=''> Gifts </a>
-            </li>
-            <li class='nav-item'> <a class='nav-link' href=''> Remainder </a></li>
-            <li class='nav-item'> <a class='nav-link'> Final Details </a></li>
-            <li class='nav-item'> <a class='nav-link'> Signing </a></li>
+            <li id='nav-tab-started' class="nav-item"><a class="nav-link active" href="#">Get Started</a></li>
+            <li id='nav-tab-executor' class="nav-item"><a class="nav-link" href="#">Executor </a></li>
+            <li id='nav-tab-backupExecutor' class='nav-item'> <a class='nav-link' href='#'> Backup Executor </a></li>
+            <li  id='nav-tab-children' class="nav-item"><a class="nav-link" href="#">Children</a></li>
+            <li id='nav-tab-gifts' class='nav-item'><a class='nav-link' > Gifts </a></li>
+            <li class='nav-item' id='nav-tab-remainder'> <a class='nav-link'> Remainder </a></li>
+            <li class='nav-item' id='nav-tab-final'> <a class='nav-link'> Final Details </a></li>
+            <li class='nav-item' id='nav-tab-signing'> <a class='nav-link'> Signing </a></li>
         </ul>
     </div>
-
 
     <div class='row mt-4' style='margin: 0px; padding: 0px;'>
 
@@ -77,7 +70,7 @@ function generateProvinceList()
                 <small> Please fill out information to generate your document </small>
             </div>
             <div class="card-body">
-                <form method='post'>
+                <form method='post' action='/render/contract/lastwill/' id='document-content'>
                     <fieldset class='step hidden'>
                         <h3 class='text-bold text-center'> What is your marital status? </h3>
                         <small class='text-danger error-message' style='font-weight: bolder;'></small>
@@ -381,7 +374,7 @@ function generateProvinceList()
 
                     </fieldset>
 
-                    <fieldset class='step active'>
+                    <fieldset class='step hidden'>
                         <div class='row'>
                             <h2 class='text-center'>Gifts</h2>
                         </div>
@@ -390,19 +383,20 @@ function generateProvinceList()
                             <h4 class='text-center'>
                                 Do you want to leave any specific gifts in your will?
                             </h4>
-                            <span class='text-danger text-center'> Please select an option inorder to continue </span>
+                            <span class='text-danger text-center error-message'>  </span>
                             <div class='form-group' style='width: auto; margin: auto;'>
                                 <span> Yes </span>
-                                <input type='radio' class='form-input-check' name='form-gifts' value='true' />
+                                <input type='radio' class='form-input-check' id='form-gifts-input-true' name='form-gifts' value='true' />
                                 <span> No </span>
-                                <input type='radio' class='form-input-check' name='form-gifts' value='false' />
+                                <input type='radio' class='form-input-check' id='form-gifts-input-false' name='form-gifts' value='false' />
                             </div>
                         </div>
 
 
-                        <div class='row' hidden>
+                        <div class='row' id='form-gifts-amount' hidden>
                             <h4> Amount of gifts? </h4>
-                            <select class='form-select' id='form-gift-amount'>
+                            <small class='small-caption'> How many gifts to you want to add to your "Last Will" </small>
+                            <select class='form-select' id='form-gift-amount-select'>
                                 <option> Please select an option </option>
                                 <?php
                                     
@@ -413,14 +407,8 @@ function generateProvinceList()
                             </select>
                         </div>
 
-                        <div class='row'>
-                            <div class='form-gifts'>
-
-                            </div>
-                        </div>
-
-                        <!-- template section gift type  !-->
-                        <div class='row mt-4 gift-main-container' style='height: auto;' hidden>
+                           <!-- template section gift type  !-->
+                           <div class='row mt-4 gift-type-container' style='height: auto;' hidden>
                             <h4 class='text-center'> Gift </h4>
                             <small class='text-center' style='color: slategray; font-style: italic;'> Who will recive
                                 the gift? </small>
@@ -431,7 +419,7 @@ function generateProvinceList()
                                 <div class='form-group mt-2' style='width: auto; margin: auto;'>
                                     <span style='font-weight: bolder;'> Business or charity </span>
                                     <input type='radio' value='business' name='form-gift-type'
-                                        class='form-check-input' />
+                                        class='form-check-input'     />
                                 </div>
                             </div>
 
@@ -452,6 +440,14 @@ function generateProvinceList()
                             </div>
                         </div>
 
+                        <div class='row'>
+                            <div id='form-gifts-container'>
+                                            
+                            </div>
+                        </div>
+
+                     
+
 
 
                         <!-- gift container templates     !-->
@@ -459,74 +455,76 @@ function generateProvinceList()
 
 
                             <!--   container individual type !-->
-                            <div class='row space-elements' >
+                            <div class='row form-individual' >
                                 <h2 class='text-center'> Gift Details </h2>
                                 <small class='small-caption'> Individual </small>
                                 <div class='form-group'>
                                     <label> Gift Description</label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> Full name </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> City / Town </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> Province </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <select class='form-control'>
-                                        <option> Please select an option </option>
+                                        <option value=''> Please select an option </option>
                                         <?php echo generateProvinceList();   ?>
                                     </select>
-                                </div>
-
-                                <div class='form-group' style='position: relative; top: auto;'>
-                                    <input type='button' class='btn btn-danger mt-4 btn-delete-gift-pannel'
-                                        value='Delete this recipient' />
-
                                 </div>
                             </div>
 
                             <!-- CONTAINER CHARITY TYPE    !-->
-                            <div class='row space-elements' >
+                            <div class='row form-charity' >
                                 <h2 class='text-center'> Gift Details </h2>
                                 <small class='small-caption'> Charity </small>
                                  <div class='form-group'>
                                     <label> Gift Description</label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <small class='small-caption'>e.g. $500 donation </small>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> Gift Charity Name </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <small class='small-caption'> eg: CANADIAN BLOOD BANK </small>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> Charity organization number </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <input type='text' class='form-control'
                                         placeholder='Employer Identifcation number' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> City / Town </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <input type='text' class='form-control' />
                                 </div>
 
                                 <div class='form-group'>
                                     <label> Province </label>
+                                    <span class='text-danger text-center error-message'>  </span>
                                     <select class='form-control'>
-                                        <option> Please select an option </option>
+                                        <option value=''> Please select an option </option>
                                         <?php echo generateProvinceList();   ?>
                                     </select>
-                                    <input type='button' class='btn btn-danger mt-4 btn-delete-gift-pannel'
-                                        value='Delete this recipient' />
+                                   
                                 </div>
                             </div>
                         </div>
@@ -546,15 +544,16 @@ function generateProvinceList()
                             <p class='text-center'> Who will inherit the remainder of your estate after any gifts and
                                 debts are taken care of? </p>
 
-                            <div class='form-remainder-container'>
+                            <div id='form-remainder-container'>
                             </div>
 
 
-                            <div class='form-remainder-template'>
+                            <div class='form-remainder-template' hidden>
                                 <div class='form-template-type mt-2'>
 
                                     <h2 class='text-center'> Recipient Details </h2>
                                     <small class='small-caption'> Who will inherit your "estate" </small>
+                                    <small class='text-danger text-center error-message'></small>
 
                                     <div class='row'>
                                         <div class='col-sm iconTile'>
@@ -583,18 +582,21 @@ function generateProvinceList()
                                 <div class='form-template-individual m-2' >
                                     <div class='form-group'>
                                         <label> Full Name </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> City </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> Province </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <select class='form-control'>
-                                            <option> Please select an option </option>
+                                            <option value=''> Please select an option </option>
                                             <?php echo generateProvinceList();   ?>
                                         </select>
                                     </div>
@@ -602,7 +604,10 @@ function generateProvinceList()
 
                                     <div class='form-group'>
                                         <label> Share % </label>
-                                        <input type='number' min='0' maxlength='3' max='100' class='form-control' />
+                                        <small class='text-danger text-center error-message'></small>
+                                        <input type='number' min='0' maxlength=3 max='100' class='form-control' />
+
+                                        
                                     </div>
 
                                     <div class='form-group mt-3 remove-radius'
@@ -620,23 +625,28 @@ function generateProvinceList()
 
                                     <div class='form-group'>
                                         <label> Charity Name</label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> Charity Number </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> City / Town </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> Province </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <select class='form-control'>
-                                            <option> Please select an option </option>
+                                        <small class='text-danger text-center error-message'></small>
+                                            <option value=''> Please select an option </option>
                                             <?php echo generateProvinceList();   ?>
                                         </select>
                                     </div>
@@ -644,6 +654,7 @@ function generateProvinceList()
 
                                     <div class='form-group'>
                                         <label> Share % </label>
+                                        <small class='text-danger text-center error-message'></small>
                                         <input type='number' min='0' maxlength='3' max='100' class='form-control' />
                                     </div>
 
@@ -661,7 +672,7 @@ function generateProvinceList()
 
                         <div class='row mt-4'>
                             <div class='form-group' style='width: auto; margin: auto;'>
-                                <input type='button' class='btn started bi bi-plus-circle' value='Add Recipient' />
+                                <input type='button' class='btn started bi bi-plus-circle' id='btn-add-remainder' value='Add Recipient' />
                             </div>
                         </div>
                     </fieldset>
@@ -670,86 +681,87 @@ function generateProvinceList()
 
                     <fieldset class='step hidden'>
                         <div class='row'>
-                                    <h1> Total Failure Clause </h1>
+                                <h1 class='text-center'> Total Failure Clause </h1>
                                     
                         </div>
 
 
-                        <div class='row'>
+                        <div class='row text-center form-distro'>
                             <p> If your beneficiary passes away before you, do you want your estate to be divided equally among your parents/siblings? </p>
-
+                            <small class='text-danger error-message'></small>
                             <div class='form-group'>
                                 <span> Yes </span>
-                                <input type='radio' class='form-check-input' name='form-totalFailure' value='true' />
+                                <input type='radio' id='form-wipeout-distro-true' class='form-check-input' name='form-totalFailure' value='true' />
                                 <span> No </span>
-                                <input type='radio' class='form-check-input' name='form-totalFailure' value='false' />
+                                <input type='radio' id='form-wipeout-distro-false' class='form-check-input' name='form-totalFailure' value='false' />
                             </div>
+                        </div>
 
 
-                            <div class='row mt-4'>
+                            <div class='row mt-4 form-wipeout' id='form-wipeout-recipient'  hidden>
                                 <h3>Wipeout Beneficiary</h3>
+                              
                             <div class='form-group'>
                                         <label> Full Name </label>
+                                        <span class='text-danger error-message'></span>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> City </label>
+                                        <span class='text-danger error-message'></span>
                                         <input type='text' class='form-control' />
                                     </div>
 
                                     <div class='form-group'>
                                         <label> Province </label>
+                                        <span class='text-danger error-message'></span>
                                         <select class='form-control'>
-                                            <option> Please select an option </option>
+                                            <option value=''> Please select an option </option>
                                             <?php echo generateProvinceList();   ?>
                                         </select>
                                     </div>
                             </div>
-                        </div>
 
                     </fieldset>
 
 
 
                     <fieldset class='step hidden'>
-                        <div class='row'>
+                        <div class='row text-center'>
                             <h2> Additional Details </h2>
                             <p> Do you want to include any additional instructions? </p>
                         </div>
 
-                        <div class='row'>
+                        <div class='row text-center'>
                             <div class='form-group'>
+                            <small class='small-caption text-danger error-message'></small>
                                 <label> Yes </label>
-                                <input type='radio' class='input-check-input' name='form-provisions' value='yes' />
+                                <input type='radio' id='form-clause-radio-true' class='input-check-input' name='form-provisions' value='yes' />
                                 <label> No </label>
-                                <input type='radio' class='input-check-input' name='form-provisions' value='no' />
+                                <input type='radio' id='form-clause-radio-false' class='input-check-input' name='form-provisions' value='no' />
                             </div>
+                        </div>
 
-
-
-                            <div class='form-group'>
+                            <div class='form-group text-center' id='form-clause' hidden>
                                 <h4> Additional Clause </h4>
-                                <textarea class='form-control'>
-
-                                </textarea>
-
+                                <small class='small-caption text-danger error-message'></small>
+                                <textarea class='form-control'></textarea>
                                 <small class='small-caption'>
                                 e.g. I wish to forgive James Smith debt of $2,000 incurred on January 4, 2015, for the purchase of a vehicle.
                                 </small>
                             </div>
-                        </div>
 
                     </fieldset>
 
 
-                    <fieldset class='step hidden'>
-                        <div class='row'>
+                    <fieldset class='step active'>
+                        <div class='row text-center'>
                             <h3>Signing Details </h3>
 
                             <p> Where will you sign your Last Will? </p>
                         </div>
-                        <div class='row'>
+                        <div class='row text-center'>
                             <div class='form-group'>
                                 <label> City </label>
                                 <input type='text' class='form-control' />
@@ -764,9 +776,15 @@ function generateProvinceList()
                             </div>
 
                             <div class='form-group'>
-                                <input type='text' style='display: none' value="<?php  echo random_bytes(20)?>" name='junit_DATA'/>
-                                <input type='text' style='display: none' name='PID_TOKEN' value="<?php  echo random_bytes(20)?>" />
-                                <input type='hidden' name='data' value='<?php echo random_bytes(20)?>'/>
+                                <input type='text' style='display: none' id='SID_TOKEN' value="<?php  echo bin2hex(random_bytes(20)) ?>" name='junit_DATA'/>
+                                <input type='text' style='display: none' id='_PID_TOKEN' name='PID_TOKEN' value="<?php  echo bin2hex(random_bytes(20))?>" />
+                                <input type='hidden' name='__data__' id='__DATA__' value='<?php echo random_bytes(20)?>'/>
+                                
+                            </div>
+
+                            <div class='form-group mt-2'>
+                                <button class='btn started' id='submit-document'> Generate My Contract </button>
+                           
                             </div>
                         </div>
                     </fieldset>

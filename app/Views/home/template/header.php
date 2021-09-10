@@ -27,10 +27,18 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
         style=' width: 100% !important; background-color: transparent;'>
 
+                <ul class='navbar-nav'>
+         
+         <li class='nav-item'> <button class="navbar-toggler" id='btn-menu-collapse' type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+  
+          </button></li></ul>
         <a class='nav-link' href=''
             style='text-decoration: none; color: black; font-weight:200; font-size: 20px;'>NFLDLAW<img class='img-fluid'
                 src='/img/Freewill-logos/Freewill-logos_black.png' style='max-width: 200px; max-height: 200px' /></a>
-        <ul class="navbar-nav">
+
+        <ul class="navbar-nav" id='nav-section-topMenu'>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home </a>
             </li>
@@ -57,12 +65,21 @@
             </li>
 
         </ul>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
 
         </div>
     </nav>
+
+    <script>
+                let btnCollapse = document.getElementById('btn-menu-collapse');
+                let navMenu = document.getElementById('nav-section-topMenu');
+
+                btnCollapse.addEventListener('click', () => {
+
+                    if (navMenu.style.display === 'flex') {
+                        navMenu.style.display = 'none';
+                    } else {
+                        navMenu.style.display = 'flex';
+                    }
+                });
+            </script>

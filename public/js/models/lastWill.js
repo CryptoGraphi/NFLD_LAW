@@ -111,8 +111,88 @@ class lastwill extends baseModel {
             "delay": undefined,
             "age": undefined
         }
+        
+
+        /**
+         *  gifts object 
+         * 
+         * 
+         */
+
+        this.Model.gifts = {
+            gifts: undefined, // bool value true or false
+
+            individual: {
+                "description": [],
+                "name": [],
+                "city": [],
+                "province": [],
+            },
+
+            charity: {
+                "name": [],
+                "description": [],
+                "number": [],
+                "city": [],
+                "province": []
+            },
+        };
 
 
+        /**
+         *   remainder of estate object 
+         *  
+         */
+
+
+         this.Model.remainder = {
+            individual: {
+                "share": [],
+                "name": [],
+                "city": [],
+                "province": [],
+            },
+
+            charity: {
+                "name": [],
+                "share": [],
+                "number": [],
+                "city": [],
+                "province": []
+            },
+        };
+
+
+        /**
+         * 
+         *  wipeout form
+         * 
+         */
+
+        this.Model.wipeout = {
+            divideEstate : undefined,
+            name: undefined,
+            city: undefined,
+            province: undefined,
+        };
+
+
+        /**
+         * 
+         *  provisions 
+         * 
+         */
+
+        this.Model.provisions = {
+            additionalClause: undefined,
+            message: undefined,
+
+        };
+
+        this.Model.signing = {
+            city: undefined,
+            province: undefined
+        };
 
     }
 }
