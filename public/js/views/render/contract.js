@@ -1,0 +1,7 @@
+/**
+ * 
+ *  contract.js (view file)
+ * 
+ */
+
+

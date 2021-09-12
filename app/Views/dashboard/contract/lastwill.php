@@ -55,10 +55,10 @@ var_dump($_POST);
             <li id='nav-tab-executor' class="nav-item"><a class="nav-link" href="#">Executor </a></li>
             <li id='nav-tab-backupExecutor' class='nav-item'> <a class='nav-link' href='#'> Backup Executor </a></li>
             <li  id='nav-tab-children' class="nav-item"><a class="nav-link" href="#">Children</a></li>
-            <li id='nav-tab-gifts' class='nav-item'><a class='nav-link' > Gifts </a></li>
-            <li class='nav-item' id='nav-tab-remainder'> <a class='nav-link'> Remainder </a></li>
-            <li class='nav-item' id='nav-tab-final'> <a class='nav-link'> Final Details </a></li>
-            <li class='nav-item' id='nav-tab-signing'> <a class='nav-link'> Signing </a></li>
+            <li id='nav-tab-gifts' class='nav-item'><a class='nav-link' href='#'> Gifts </a></li>
+            <li class='nav-item' id='nav-tab-remainder'> <a class='nav-link' href='#'> Remainder </a></li>
+            <li class='nav-item' id='nav-tab-final'> <a class='nav-link' href='#'> Final Details </a></li>
+            <li class='nav-item' id='nav-tab-signing'> <a class='nav-link' href='#'> Signing </a></li>
         </ul>
     </div>
 
@@ -755,7 +755,7 @@ var_dump($_POST);
                     </fieldset>
 
 
-                    <fieldset class='step active'>
+                    <fieldset class='step hidden'>
                         <div class='row text-center'>
                             <h3>Signing Details </h3>
 

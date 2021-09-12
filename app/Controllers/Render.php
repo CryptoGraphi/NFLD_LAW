@@ -17,15 +17,17 @@ class Render extends BaseController
 		echo view('/dashboard/template/header');
 		switch($contractType) {
 			case "lastwill":
-				$contract = json_decode($_POST['__data__'], true);
+				$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_SANITIZE_STRING);
 
+				$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
 
 				$data = [
 					"contractData" => $contract,
 					"contractType" => $contractType,
 					"contractTitle" => "Last Will, and Testament",
-					"contractContent" => view('/render/template/contract_lastwill')
+					"contractContent" => view('/render/template/contract_lastwill', $contract)
 				];
+
 				echo view('/render/paymentPage', $data);
 			
 			break;

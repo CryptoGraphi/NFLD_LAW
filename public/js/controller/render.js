@@ -21,8 +21,7 @@
 
     contract()
     {
-
-        console.log('it works');
+        Routing.loadView('render/contract');
     }
  }
 
