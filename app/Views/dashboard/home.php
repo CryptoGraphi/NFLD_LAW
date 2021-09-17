@@ -113,6 +113,7 @@
       <td>
           <button class='btn btn-danger bi bi-x-circle-fill'>  Delete </button>
           <button class='btn btn-warning bi bi-gear-fill'> Modify </button>
+          <button class='btn btn-success'> Download </button>
       </td>
     </tr>
   </tbody>

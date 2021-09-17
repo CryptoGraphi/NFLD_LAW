@@ -5,7 +5,7 @@
         <div class='col-md-6'>
                     <img class='img-fluid' src='/img/SVG/Website Login.svg' />
         </div>
-        <div class='col-md-6'>            
+        <div class='col-md-6 <?php echo $_SESSION['AUTHENTICATION_CSS_CLASS'] ?>'>            
         <form method='post' action='/Authentication/login/'>
         <h2 class='text-center'>  Please Login <i class='fas fa-user-shield	'></i></h2>
             <div class="form-group m-2">

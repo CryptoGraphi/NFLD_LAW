@@ -16,11 +16,14 @@
     constructor()
     {
         super();
-        this.validateMethod();
+        this.validateMethod();        
+
     }
 
     contract()
-    {
+    {        
+        // load stripe library 
+        Routing.loadExternalModule('https://js.stripe.com/v3/');
         Routing.loadView('render/contract');
     }
  }

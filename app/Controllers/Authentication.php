@@ -100,11 +100,13 @@ class Authentication extends BaseController
 									$_SESSION['SESSION_TOKEN_EXPIRY'] = $session->getSessionExpiry();
 									// set session cookie
 									$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = '';
+									$_SESSION['AUTHENTICATION_CSS_CLASS'] = '';
 									header('refresh: 0; /dashboard/');
 								} else {
 									// session failed 
 									// inputs dont match possible bug in our code;
 									$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+									$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 									header('refresh: 0; /home/login/');
 									die();
 								}
@@ -112,6 +114,7 @@ class Authentication extends BaseController
 								// session has failled to create so probaly a db related error 
 								// inputs dont match possible bug in our code;
 								$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+								$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 								header('refresh: 0; /home/login/');
 								die();
 							}
@@ -120,6 +123,7 @@ class Authentication extends BaseController
 							// DB -> ERROR 
 							// inputs dont match possible bug in our code;
 							$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+							$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 							header('refresh: 0; /home/login/');
 							die();
 						}
@@ -129,18 +133,21 @@ class Authentication extends BaseController
 						// log the failed password attempt
 						// inputs dont match possible bug in our code;
 						$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+						$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 						header('refresh: 0; /home/login/');
 						die();
 					}
 				} else {
 					// inputs dont match possible bug in our code;
 					$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+					$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 					header('refresh: 0; /home/login/');
 					die();
 				}
 			} else {
 				// invalid username -> username doesnt exist 
 				$_SESSION['AUTHENTICATION_ERROR_MESSAGE'] = "Invalid username or password combo";
+				$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 				header('refresh: 0; /home/login/');
 				die();
 			}
@@ -184,6 +191,7 @@ class Authentication extends BaseController
 					} else {
 						// password dont match required length;
 						$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "passwords to short";
+						$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 						http_response_code(401);
 						header('refresh: 0; /home/register/');
 					}
@@ -191,12 +199,14 @@ class Authentication extends BaseController
 				} else {
 					/// password dont match trigger an error
 					$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "passwords dont match";
+					$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 					http_response_code(401);
 					header('refresh: 0; /home/register/');
 				}
 			} else {
 				// user already exists so tell user the username is already in use
 				$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "user Exists please choose differnt email";
+				$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 				http_response_code(401);
 				header('refresh: 0; /home/register/');
 			}
@@ -205,6 +215,7 @@ class Authentication extends BaseController
 		{
 			// trigger request method 
 			$_SESSION['REGISTRATION_ERROR_MESSAGE'] = "request method isnt valid";
+			$_SESSION['AUTHENTICATION_CSS_CLASS'] = 'apply-shake';
 			http_response_code(401);
 			header('refresh: 0; /home/register/');
 		}

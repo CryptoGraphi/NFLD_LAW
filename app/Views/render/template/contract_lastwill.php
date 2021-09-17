@@ -16,6 +16,7 @@ function parseProvince($province) {
 		return false;
 }
 
+
 ?>
 
 
@@ -689,6 +690,7 @@ function parseProvince($province) {
             <div class=" outputDocument affidavitOfExecution outputDocument">
                 
                 <div class=" firstFooter"></div>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <div class=" keepTogether"><br class="pageBreak">
                     <p style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Center;"
                         class="documentTitle"><span style="font-style:normal;font-weight:bold;">AFFIDAVIT OF
@@ -781,8 +783,9 @@ function parseProvince($province) {
                 </div>
             </div>
         </div>
-        <div class="LDCopyright">
+      
+    </div>
+</div>          <br/><br/><br/><br/><br/><br/>
+<div style='margin-top: 200px;'>
             <p>©2021 NFLD LAW (freewillLawyer)®</p>
         </div>
-    </div>
-</div>

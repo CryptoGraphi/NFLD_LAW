@@ -13,9 +13,6 @@ function generateProvinceList()
 
 
 }
-
-var_dump($_POST);
-
 ?>
 
 <div class='container' style='margin-top: 10%;'>
@@ -71,7 +68,7 @@ var_dump($_POST);
             </div>
             <div class="card-body">
                 <form method='post' action='/render/contract/lastwill/' id='document-content'>
-                    <fieldset class='step hidden'>
+                    <fieldset class='step active'>
                         <h3 class='text-bold text-center'> What is your marital status? </h3>
                         <small class='text-danger error-message' style='font-weight: bolder;'></small>
                         <div class='row'>

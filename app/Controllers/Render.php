@@ -3,9 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use Dompdf\Dompdf;
 
 class Render extends BaseController
 {
+	public function __construct() {
+		session_start();
+	}
 	public function index()
 	{
 		// init the functions of the class 
@@ -25,17 +29,41 @@ class Render extends BaseController
 					"contractData" => $contract,
 					"contractType" => $contractType,
 					"contractTitle" => "Last Will, and Testament",
-					"contractContent" => view('/render/template/contract_lastwill', $contract)
+					"contractContent" => view('/render/template/contract_lastwill', $contract),
+					"contractPayment" => 'true', // is a paid document
+					"contractPaymentStatus" => null,
 				];
 
-				echo view('/render/paymentPage', $data);
-			
-			break;
+				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
 
+				echo view('/render/paymentPage', $data);
+			break;
 		}
 
-
 		echo view('/dashboard/template/footer');
+	}
+
+
+	// get pdf based on if a our session has been set or not 
+	public function pdf()
+	{
+		$data = $_SESSION['DOCUMENT_RAW_DATA'];
+
+		
+		switch($data['contractType'])
+		{
+			case 'lastwill':
+				$dompdf = new Dompdf();
+				$dompdf->loadHtml($data['contractContent']);
+				$dompdf->setPaper('A4', 'landscape');
+				$dompdf->render();
+				$dompdf->stream();
+			break;
+
+			default:
+				// display error page not found 
+			break;
+		}
 	}
 }
 

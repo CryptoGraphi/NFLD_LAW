@@ -7,7 +7,7 @@
             <div class='col-md-6'>
                     <img class='img-fluid' src='/img/SVG/signup.svg' />
         </div>
-            <div class='col-md-4'>
+            <div class='col-md-4 <?php echo $_SESSION['AUTHENTICATION_CSS_CLASS'] ?>'>
         <form method='post' action='/Authentication/register/'>
 
 

@@ -66,6 +66,13 @@ class Route {
         document.head.appendChild(script);
     }
 
+    async loadExternalModule(url)
+    {
+        let script = document.createElement('script');
+        script.src =  url;
+        document.head.appendChild(script);
+    }
+
     // return the current path of window
     getCurrentRoute()
     {

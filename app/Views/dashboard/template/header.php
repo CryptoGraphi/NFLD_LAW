@@ -16,7 +16,7 @@
     <link rel='stylesheet' href='/css/index.css' />
     <script src='/js/router.js'></script>
     <script src='/js/app.js'></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>NFLDLAW - FreeWill Lawyer</title>
 </head>
 

@@ -8,12 +8,14 @@
  *
  */
 
-const initStripe = () => {
+export const initStripe = () => {
+  let stripe = Stripe(
+    "pk_test_51IoHyoHRqaEOzZ9RZq6i0d2ihbWG8yBH3PxhSvEofhmmSeQEjppK59csYsfl4zYGZzNUn9fRixEx6cIDiQv7Jw2600jPY1D52x"
+  );
   // Stripe API Key
-  var stripe = Stripe("_____YOUR_STRIPE_PUBLISHABLE_KEY___");
-  var elements = stripe.elements();
+  let elements = stripe.elements();
   // Custom Styling
-  var style = {
+  let style = {
     base: {
       color: "#32325d",
       lineHeight: "24px",
@@ -30,26 +32,50 @@ const initStripe = () => {
     },
   };
   // Create an instance of the card Element
-  var card = elements.create("card", { style: style });
-  // Add an instance of the card Element into the `card-element` <div>
-  card.mount("#card-element");
+  let cardNumber = elements.create("cardNumber", { style: style });
+  let cardCVC = elements.create("cardCvc", { style: style });
+  let cardExpiry = elements.create("cardExpiry", { style: style });
+
+  cardNumber.mount("#card-number");
+  cardCVC.mount("#card-cvc");
+  cardExpiry.mount("#card-expiry");
+
   // Handle real-time validation errors from the card Element.
-  card.addEventListener("change", function (event) {
-    var displayError = document.getElementById("card-errors");
+  cardNumber.addEventListener("change", function (event) {
+    let displayError = document.getElementById("card-errors");
     if (event.error) {
       displayError.textContent = event.error.message;
     } else {
       displayError.textContent = "";
     }
   });
+
+  cardCVC.addEventListener("change", function (event) {
+    let displayError = document.getElementById("card-errors");
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = "";
+    }
+  });
+
+  cardExpiry.addEventListener("change", function (event) {
+    let displayError = document.getElementById("card-errors");
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = "";
+    }
+  });
+
   // Handle form submission
-  var form = document.getElementById("payment-form");
+  let form = document.getElementById("payment-form");
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    stripe.createToken(card).then(function (result) {
+    stripe.createToken(cardNumber).then(function (result) {
       if (result.error) {
         // Inform the user if there was an error
-        var errorElement = document.getElementById("card-errors");
+        let errorElement = document.getElementById("card-errors");
         errorElement.textContent = result.error.message;
       } else {
         stripeTokenHandler(result.token);
@@ -59,9 +85,9 @@ const initStripe = () => {
   // Send Stripe Token to Server
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
-    var form = document.getElementById("payment-form");
+    let form = document.getElementById("payment-form");
     // Add Stripe Token to hidden input
-    var hiddenInput = document.createElement("input");
+    let hiddenInput = document.createElement("input");
     hiddenInput.setAttribute("type", "hidden");
     hiddenInput.setAttribute("name", "stripeToken");
     hiddenInput.setAttribute("value", token.id);
