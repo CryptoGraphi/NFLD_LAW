@@ -58,6 +58,7 @@ class DocumentStorage extends Model
 			'orderPurchaseID' => $orderID];
 	}
 
+	// this value will not set unless the key is equal to a long text ie default json object
 	public function modifyDocument($productKey, $data)
 	{
 		$document = $this->where(['documentProductKey' => $productKey])->first();

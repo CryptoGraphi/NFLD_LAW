@@ -151,6 +151,12 @@ body {
   border: none;
 }
 
+.list-group-underline > li {
+  margin-top: 15px;
+  border-bottom: 0.5px solid rgba(112, 128, 144, 0.13);
+  border-left: 0.5px solid rgba(112, 128, 144, 0.11);
+}
+
 .hero {
  height: 300px;
 box-sizing: border-box;;

@@ -31,6 +31,13 @@ class dashboard extends baseClass {
                 Routing.loadModel('lastWill');
                 Routing.loadView('contracts/lastwill');
            break;
+
+
+           case 'poa':
+                Routing.loadModel('poa');
+                Routing.loadView('contracts/poa');
+
+           break;
         }
     }
 }

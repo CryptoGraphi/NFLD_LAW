@@ -1,12 +1,13 @@
 
+
 <div class="realoutercontainer">
   <div class="outercontainer">
     <div class="outercontainer2">
       <div class="outercontainer3">
         <div class="outercontainer4">
-          <h1 class='text-danger'> Gateway: render error</h1>
-          <p style='font-weight: bold;'> We couldn't find that resource </p>
-          <img src='/img/SVG/undraw_Gifts_re_97j6.svg'  class='img-fluid'/>
+          <h2 class='text-danger'> Access Denied </h2>
+          <p class='font-weight: bold;'> You don't have premission to access the resource </p>
+          <img src='/img/SVG/401-error-unauthorized.svg'  class='img-fluid'/>
 
           <p class='mt-2'> Click <a href='/dashboard/'>here </a> to go back to safety </p>
           </div>

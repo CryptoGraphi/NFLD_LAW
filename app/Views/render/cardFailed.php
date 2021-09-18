@@ -4,11 +4,13 @@
     <div class="outercontainer2">
       <div class="outercontainer3">
         <div class="outercontainer4">
-          <h1 class='text-danger'>Payment Error</h1>
-          <p style='font-weight: bold;'> We couldn't get that resource. </p>
-          <p class='text-danger'> <?php echo $errorMessage;  ?> </p>
+          <h1 class='text-danger'>Payment Gateway Error          <i class='fa fa-credit-card' style='font-size: 25px;'></i></h1>
+          <p style='font-weight: bold;'> We couldn't complete your request. </p>
+          <img src='/img/SVG/undraw_cancel_u1it.svg' class='img-fluid' />
+          <p style='font-weight: bold;'> <?php echo $errorMessage;  ?> </p>
 
-          <p class='font-weight: bold'> Redirecting you! in  3 seconds!  </p>
+          <p style='font-weight: bold'> Redirecting you </p>
+
           </div>
       </div>
     </div>

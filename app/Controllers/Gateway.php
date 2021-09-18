@@ -27,11 +27,23 @@ class Gateway extends BaseController
 	public function proccess($documentName = null, $paymenttype = null)
 	{
 		// we need to reasi
+
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			echo view('/dashboard/template/header');
+			http_response_code(401);
+			die (view('/errors/html/error_403'));
+		}
+
+
 		if ($paymenttype === 'free') {
 
 			switch($documentName)
 			{
 				case 'lastwill':
+					if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+					{
+						$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+					}
 					echo view('/dashboard/template/header');
 					echo View('/gateway/confirmPage');
 					echo view('/dashboard/template/footer');
@@ -71,6 +83,10 @@ class Gateway extends BaseController
 							if ($charge->paid === true) {
 								// add the database stuff
 
+								if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+								{
+									$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+								}
 								$userModel = new Users();
 								$orderModel = new Orders();
 								$documentModel = new DocumentStorage();
@@ -122,6 +138,10 @@ class Gateway extends BaseController
 									if ($charge->paid === true) {
 										// add the database stuff
 		
+										if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+										{
+											$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+										}
 										$userModel = new Users();
 										$orderModel = new Orders();
 										$documentModel = new DocumentStorage();
@@ -172,7 +192,12 @@ class Gateway extends BaseController
 		
 									if ($charge->paid === true) {
 										// add the database stuff
-		
+
+	
+										if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+										{
+											$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+										}
 										$userModel = new Users();
 										$orderModel = new Orders();
 										$documentModel = new DocumentStorage();
@@ -211,7 +236,8 @@ class Gateway extends BaseController
 				// Since it's a decline, \Stripe\Exception\CardException will be caught
 				 $data = [
 					 'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
-					 'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+					 'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n',
+					 'errorRedirectLink' => '/render/contract/'.$documentName . '/'
 				 ];
 
 				 echo view('/dashboard/template/header');
@@ -219,11 +245,12 @@ class Gateway extends BaseController
 				 echo view('/dashboard/template/footer');
 
 				 http_response_code(402);
+				 header('refresh: 4; /render/contract/'.$documentName . '/');
 				 die();
 
 			  } catch (\Stripe\Exception\RateLimitException $e) {
 				$data = [
-					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorMessage' => "Sorry we couldn't proccess your request please try again later",
 					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
 				];
 
@@ -232,11 +259,12 @@ class Gateway extends BaseController
 				echo view('/dashboard/template/footer');
 
 				http_response_code(402);
+				header('refresh: 4; /render/contract/'.$documentName . '/');
 				die();
 				// Too many requests made to the API too quickly
 			  } catch (\Stripe\Exception\InvalidRequestException $e) {
 				$data = [
-					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorMessage' => "Sorry we couldn't proccess your request please try again later",
 					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
 				];
 
@@ -245,12 +273,13 @@ class Gateway extends BaseController
 				echo view('/dashboard/template/footer');
 
 				http_response_code(402);
+				header('refresh: 4; /render/contract/'.$documentName . '/');
 				die();
 				// Invalid parameters were supplied to Stripe's API
 				
 			  } catch (\Stripe\Exception\AuthenticationException $e) {
 				$data = [
-					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorMessage' => "Payment gateway: error, invalid!",
 					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
 				];
 
@@ -259,12 +288,13 @@ class Gateway extends BaseController
 				echo view('/dashboard/template/footer');
 
 				http_response_code(402);
+				header('refresh: 4; /render/contract/'.$documentName . '/');
 				die();
 				// Authentication with Stripe's API failed
 				// (maybe you changed API keys recently)
 			  } catch (\Stripe\Exception\ApiConnectionException $e) {
 				$data = [
-					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorMessage' => "Payment gateway error,  Please try again later!",
 					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
 				];
 
@@ -273,11 +303,12 @@ class Gateway extends BaseController
 				echo view('/dashboard/template/footer');
 
 				http_response_code(402);
+				header('refresh: 4; /render/contract/'.$documentName . '/');
 				die();
 				// Network communication with Stripe failed
 			  } catch (\Stripe\Exception\ApiErrorException $e) {
 				$data = [
-					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorMessage' => "Network error: please try again later",
 					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
 				];
 
@@ -286,6 +317,7 @@ class Gateway extends BaseController
 				echo view('/dashboard/template/footer');
 
 				http_response_code(402);
+				header('refresh: 4; /render/contract/'.$documentName . '/');
 				die();
 				// Display a very generic error to the user, and maybe send
 				// yourself an email
