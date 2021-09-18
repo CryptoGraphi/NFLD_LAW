@@ -21,6 +21,10 @@ class Render extends BaseController
 		echo view('/dashboard/template/header');
 		switch($contractType) {
 			case "lastwill":
+
+				if (empty($_POST['__data__'])) {
+					die( view('/render/paymentPage', $_SESSION['DOCUMENT_RAW_DATA']));
+				}
 				$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_SANITIZE_STRING);
 
 				$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
@@ -62,6 +66,10 @@ class Render extends BaseController
 
 			default:
 				// display error page not found 
+				http_response_code(403);
+				echo view('/dashboard/template/header');
+				die(view('/render/documentFailure'));
+				echo view('/dashboard/template/footer');
 			break;
 		}
 	}

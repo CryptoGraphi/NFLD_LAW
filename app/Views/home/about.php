@@ -11,7 +11,7 @@
 
             <div class='col-md-6'>
                 <br /> <br/>
-            <h3 style='text-align: center;font-weight: 400;'> What is <i  style='color: black; font-style: italic; margin-right: 20px;' class="bi bi-question-square"></i><b>FreeWillLawyer.com</b></h3>
+            <h3 style='text-align: center;font-weight: 400;'> What is <i  style='color: black; font-style: italic; margin-right: 20px;' class="bi bi-question-square"></i><b>freewilllawyer.com</b></h3>
                 
                 <p>
                 "FreeWill Lawyer" is Founded by Kenneth LeDrew, a Canadian & International Lawyer with 25 years legal

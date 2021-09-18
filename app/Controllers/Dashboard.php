@@ -96,8 +96,19 @@ class Dashboard extends BaseController
 				echo view('/dashboard/contract/'.$contractType, $data);
 			break;
 
+			case 'poa':
+					$data = [
+						'headerTitle' => 'Power of attorney'
+					];
+					echo view('/dashboard/contract/'.$contractType, $data);
+			break;
+			default:
+				echo view('/dashboard/template/documentSelection');
+			break;
+
 		}
 		
 		echo view('/dashboard/template/footer');
+		die();
 	}
 }

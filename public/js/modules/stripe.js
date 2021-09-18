@@ -71,7 +71,7 @@ export const initStripe = () => {
   // Handle form submission
   let form = document.getElementById("payment-form");
   form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  //  event.preventDefault(); this causes a form submission bug :()
     stripe.createToken(cardNumber).then(function (result) {
       if (result.error) {
         // Inform the user if there was an error

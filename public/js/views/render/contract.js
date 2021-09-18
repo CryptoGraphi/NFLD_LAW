@@ -61,7 +61,9 @@ closeModal.addEventListener('click', () => {
 
  btnFree.addEventListener('click', () => {
     paymentModel.style.display = 'block';
-    // insert htm
+    // insert html
+    
+
     paymentModalContent.action = generateActionURL('free');
 
     paymentModalContent.innerHTML = ` <div class="form-row">

@@ -7,14 +7,18 @@ use CodeIgniter\Model;
 class DocumentStorage extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'documentstorages';
-	protected $primaryKey           = 'id';
+	protected $table                = 'documentstorage';
+	protected $primaryKey           = 'documentID';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = [
+		'documentCustomerID',
+		'documentProductKey', 'documentType', 'documentData', 'documentLastModified',
+		'documentCreatedAt', 'orderPurchaseID'
+	];
 
 	// Dates
 	protected $useTimestamps        = false;
@@ -39,4 +43,35 @@ class DocumentStorage extends Model
 	protected $afterFind            = [];
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
+
+
+
+	public function generateDocumentData($customerID, $productKey, $documentType, $documentData, $orderID)
+	{
+		return $data = [
+			'documentCustomerID' => $customerID,
+			'documentProductKey' => $productKey,
+			'documentType' => $documentType,
+			'documentData' => $documentData,
+			'documentLastModified' => date('Y-m-d'),
+			'documentCreatedAt' => date('Y-m-d'), 
+			'orderPurchaseID' => $orderID];
+	}
+
+	public function modifyDocument($productKey, $data)
+	{
+		$document = $this->where(['documentProductKey' => $productKey])->first();
+
+		$dataObject = [
+			'documentLastModified' => date('Y-m-d'),
+			'documentData' => $data
+		];
+
+		return $this->update($document['documentID'], $dataObject);
+	}
+
+	public function addDocument($data)
+	{
+		return $this->insert($data);
+	}
 }

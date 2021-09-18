@@ -21,7 +21,11 @@ class home extends baseClass {
 
     index()
     {
-        
+        let btnRegister = document.getElementById('btnRegisterPage');
+
+        btnRegister.addEventListener('click', () => {
+            window.location.pathname = '/home/register';
+        });
     }
 
     login()

@@ -134,12 +134,13 @@
             <button id='requestForm' class='btn started'> Contact Legal Team </button>
         </div>
     </div>
+   
 
 
 
     <div class='col-lg'>
 
-        <div class='modal'>
+        <div class='modal' id='modal-request'>
             <div class="modal-content">
                 <div class="modal-header p-4 text-center">
                     <h4>Legal Request form  <i class='fa fa-legal'></i></h4>
@@ -200,6 +201,21 @@
 
 
     <!-- Modal content -->
+
+    <script>
+
+let dialogBtn = document.getElementById('requestForm');
+let container = document.getElementById('modal-request');
+
+dialogBtn.addEventListener('click', () => {
+if (container.style.display === 'none') {
+    container.style.display = 'block';
+} else {
+    container.style.display = 'none';
+}
+});
+
+</script>
 
 </div>
 </div>

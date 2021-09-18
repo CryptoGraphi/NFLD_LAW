@@ -6,9 +6,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Users;
+use App\Models\Orders;
+use App\Models\DocumentStorage;
 
 class Gateway extends BaseController
 {
+
+	public function __construct()
+	{
+		session_start();
+	}
 
 	public function index()
 	{
@@ -30,6 +38,10 @@ class Gateway extends BaseController
 				break;
 				default:
 					// redirect the user and display error 
+					http_response_code(403);
+					echo view('/dashboard/template/header');
+					die(view('/render/documentFailure'));
+					echo view('/dashboard/template/footer');
 				break;
 			}
 
@@ -52,11 +64,40 @@ class Gateway extends BaseController
 						$charge = \Stripe\Charge::create(array(
 							"amount" => 25000,
 							"currency" => "cad",
-							"customer" => $customer->id
+							"customer" => $customer->id,
+							"description" => 'document Purchase lastwill'
 						));
 
 							if ($charge->paid === true) {
 								// add the database stuff
+
+								$userModel = new Users();
+								$orderModel = new Orders();
+								$documentModel = new DocumentStorage();
+
+								$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+
+							 	$orderData = $orderModel->generateData($userData['userID'],
+								$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+								$paymenttype, 
+								$charge);
+
+								// save order data into the database 
+								$orderModel->addOrder($orderData);
+
+								$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+
+								$documentModelData = $documentModel->generateDocumentData(
+								$userData['userID'],
+								$orderData['orderProductKey'],
+								$orderData['orderProductType'],
+								$jsonRaw,
+								$orderData['orderPurchaseId']);
+
+
+
+								$documentModel->addDocument($documentModelData);
+								
 								echo view('/dashboard/template/header');
 								echo View('/gateway/confirmPage');
 								echo view('/dashboard/template/footer');
@@ -64,76 +105,192 @@ class Gateway extends BaseController
 						} else if ($paymenttype === 'custom')
 						{
 								// Create a Customer
-						$customer = \Stripe\Customer::create(array(
-							"email" => $_POST['email'],
-							"source" => $token,
-						));
-						// Save the customer id in your own database!
-						// Charge the Customer instead of the card
-						$charge = \Stripe\Charge::create(array(
-							"amount" => 25000,
-							"currency" => "cad",
-							"customer" => $customer->id
-						));
-
-							if ($charge->paid === true) {
-								// add the database stuff
-								echo view('/dashboard/template/header');
-								echo View('/gateway/confirmPage');
-								echo view('/dashboard/template/footer');
-							} 
+								$customer = \Stripe\Customer::create(array(
+									"email" => $_POST['email'],
+									"source" => $token,
+								));
+								// Save the customer id in your own database!
+								// Charge the Customer instead of the card
+								$charge = \Stripe\Charge::create(array(
+									"amount" => $_POST['amount'] . '00',
+									"currency" => "cad",
+									"customer" => $customer->id,
+									"description" => 'document Purchase lastwill'
+								));
+		
+		
+									if ($charge->paid === true) {
+										// add the database stuff
+		
+										$userModel = new Users();
+										$orderModel = new Orders();
+										$documentModel = new DocumentStorage();
+		
+										$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+		
+										 $orderData = $orderModel->generateData($userData['userID'],
+										$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+										$paymenttype, 
+										$charge);
+		
+										// save order data into the database 
+										$orderModel->addOrder($orderData);
+		
+										$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+		
+										$documentModelData = $documentModel->generateDocumentData(
+										$userData['userID'],
+										$orderData['orderProductKey'],
+										$orderData['orderProductType'],
+										$jsonRaw,
+										$orderData['orderPurchaseId']);
+		
+		
+		
+										$documentModel->addDocument($documentModelData);
+										
+										echo view('/dashboard/template/header');
+										echo View('/gateway/confirmPage');
+										echo view('/dashboard/template/footer');
+									} 
 
 						} else if ($paymenttype === 'donate') {
 								// Create a Customer
-						$customer = \Stripe\Customer::create(array(
-							"email" => $_POST['email'],
-							"source" => $token,
-						));
-						// Save the customer id in your own database!
-						// Charge the Customer instead of the card
-						$charge = \Stripe\Charge::create(array(
-							"amount" => 25000,
-							"currency" => "cad",
-							"customer" => $customer->id
-						));
-
-							if ($charge->paid === true) {
-								// add the database stuff
-								echo view('/dashboard/template/header');
-								echo View('/gateway/confirmPage');
-								echo view('/dashboard/template/footer');
-							} 
-						}
+								$customer = \Stripe\Customer::create(array(
+									"email" => $_POST['email'],
+									"source" => $token,
+								));
+								// Save the customer id in your own database!
+								// Charge the Customer instead of the card
+								$charge = \Stripe\Charge::create(array(
+									"amount" => 25000,
+									"currency" => "cad",
+									"customer" => $customer->id,
+									"description" => 'document Purchase lastwill (donatation)'
+								));
+		
+		
+									if ($charge->paid === true) {
+										// add the database stuff
+		
+										$userModel = new Users();
+										$orderModel = new Orders();
+										$documentModel = new DocumentStorage();
+		
+										$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+		
+										 $orderData = $orderModel->generateData($userData['userID'],
+										$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+										$paymenttype, 
+										$charge);
+		
+										// save order data into the database 
+										$orderModel->addOrder($orderData);
+		
+										$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+		
+										$documentModelData = $documentModel->generateDocumentData(
+										$userData['userID'],
+										$orderData['orderProductKey'],
+										$orderData['orderProductType'],
+										$jsonRaw,
+										$orderData['orderPurchaseId']);
+		
+		
+		
+										$documentModel->addDocument($documentModelData);
+										
+										echo view('/dashboard/template/header');
+										echo View('/gateway/confirmPage');
+										echo view('/dashboard/template/footer');
+									} 
+							}
 					break;
 				}
 			} catch(\Stripe\Exception\CardException $e) {
 				// Since it's a decline, \Stripe\Exception\CardException will be caught
-				echo 'Status is:' . $e->getHttpStatus() . '\n';
-				echo 'Type is:' . $e->getError()->type . '\n';
-				echo 'Code is:' . $e->getError()->code . '\n';
-				// param is '' in this case
-				echo 'Param is:' . $e->getError()->param . '\n';
-				echo 'Message is:' . $e->getError()->message . '\n';
+				 $data = [
+					 'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					 'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				 ];
+
+				 echo view('/dashboard/template/header');
+				 echo view('/render/cardFailed', $data);
+				 echo view('/dashboard/template/footer');
+
+				 http_response_code(402);
+				 die();
+
 			  } catch (\Stripe\Exception\RateLimitException $e) {
+				$data = [
+					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				];
+
+				echo view('/dashboard/template/header');
+				echo view('/render/cardFailed', $data);
+				echo view('/dashboard/template/footer');
+
+				http_response_code(402);
+				die();
 				// Too many requests made to the API too quickly
 			  } catch (\Stripe\Exception\InvalidRequestException $e) {
+				$data = [
+					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				];
+
+				echo view('/dashboard/template/header');
+				echo view('/render/cardFailed', $data);
+				echo view('/dashboard/template/footer');
+
+				http_response_code(402);
+				die();
 				// Invalid parameters were supplied to Stripe's API
-				echo "failed";
+				
 			  } catch (\Stripe\Exception\AuthenticationException $e) {
+				$data = [
+					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				];
+
+				echo view('/dashboard/template/header');
+				echo view('/render/cardFailed', $data);
+				echo view('/dashboard/template/footer');
+
+				http_response_code(402);
+				die();
 				// Authentication with Stripe's API failed
 				// (maybe you changed API keys recently)
 			  } catch (\Stripe\Exception\ApiConnectionException $e) {
+				$data = [
+					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				];
+
+				echo view('/dashboard/template/header');
+				echo view('/render/cardFailed', $data);
+				echo view('/dashboard/template/footer');
+
+				http_response_code(402);
+				die();
 				// Network communication with Stripe failed
 			  } catch (\Stripe\Exception\ApiErrorException $e) {
+				$data = [
+					'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",
+					'errorStripeMessage' => 'Message is:' . $e->getError()->message . '\n'
+				];
+
+				echo view('/dashboard/template/header');
+				echo view('/render/cardFailed', $data);
+				echo view('/dashboard/template/footer');
+
+				http_response_code(402);
+				die();
 				// Display a very generic error to the user, and maybe send
 				// yourself an email
 			  } 
 		}
 	}
-	// fetch the document once the user has 
-	private function fetchDocument($documentType)
-	{
-		
 
-	}
 }

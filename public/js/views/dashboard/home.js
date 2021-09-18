@@ -9,12 +9,9 @@
 
 
 
-let modelClose = document.getElementsByClassName('close');
-let modelContainer = document.getElementsByClassName('modal');
+let modelClose = document.getElementsByClassName('close')[0];
+let modelContainer = document.getElementsByClassName('modal')[0];
 
-for(let i = 0; i < modelClose.length; i++) {
-
-    modelClose[i].addEventListener('click', () => {
-         modelContainer[i].style.display = 'none';
-    });
-}
+modelClose.addEventListener('click', () => {
+    modelContainer.style.display = 'none';
+});

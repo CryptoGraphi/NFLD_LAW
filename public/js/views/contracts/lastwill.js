@@ -1166,7 +1166,7 @@ next.addEventListener('click', (e) => {
                 lastWill.provisions.additionalClause = 'false';
                 wizardModule.updateProgresBar(progress, 96);
                 wizardModule.changeWizardTitle('title_', 'Signing Details');
-                wizardModule.show('step', 96)
+                wizardModule.show('step', 12)
 
                 next.disabled = true;
             } else {

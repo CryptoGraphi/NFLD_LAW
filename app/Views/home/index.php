@@ -9,9 +9,9 @@
              It take(s) less than 20 minutes to write or update your legal will, for Free.
         </span>
         <br/><br/>
-            <button class='btn btn-primary started'> Get started</button>
+            <button class='btn btn-primary started' id='btnRegisterPage'> Get started</button>
 
-            
+         
             <br/><br/><br/>
             <img class='img-fluid header-img' style='max-width: 100%;' src='/img/chess_cover.jpg' /> <br/><br/>
              <p class='header-p'>
