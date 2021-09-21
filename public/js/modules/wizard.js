@@ -51,4 +51,19 @@ export class wizard {
         return false;
     }
 
+
+    // dynamically send error content messages to the selected pannel
+    setErrorMessage(...errorMessage)
+    {
+        let errorClass = document.getElementsByClassName('step')[this.getCurrentStep('step')];
+        let errorWrapper =  errorClass.querySelectorAll('.error-message');
+
+        for (let i = 0; i < errorWrapper.length; i++) {
+            if (errorMessage[i] != undefined) {
+                errorWrapper[i].innerText = errorMessage[i];
+            } else {
+                errorWrapper[i].innerText = '';
+            }
+        }
+    }
 }

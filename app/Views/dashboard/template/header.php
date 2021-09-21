@@ -26,7 +26,7 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
-        style=' width: 100% !important; background-color: transparent;'>
+        style=' width: 100% !important;'>
        
         <ul class='navbar-nav'>
          
@@ -47,7 +47,7 @@
                 <a class="nav-link" href="/dashboard/contracts/">Create Document</a>
             </li>
             <li class='nav-item'>
-                <a href='/' class='nav-link'> My Account</a>
+                <a href='/dashboard/account/' class='nav-link'> My Account</a>
             </li>
             <li class='nav-item'>
                 <a class='nav-link' href='/home/register/'>Request Lawyer</a>

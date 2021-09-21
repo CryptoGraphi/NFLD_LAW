@@ -3,7 +3,7 @@
 
 function generateProvinceList()
 {
-    $provinceName = ['Ontario', 'Quebec', 'Nove Soctia', 'New Brunswick', 'Manitoba', 'British Columbia', 
+    $provinceName = ['Ontario', 'Quebec', 'Nova Soctia', 'New Brunswick', 'Manitoba', 'British Columbia', 
     'Prince Edward Island', 'Saskatchewan', 'Alberta', 'NewFoundland and Labrador'];
     $provinceValue = ['ON', 'QC', 'NS', 'NB', 'MB', 'BC', 'PE', 'SK', 'AB', 'NL'];
 
@@ -67,9 +67,9 @@ function generateProvinceList()
             <div class="card-body">
 
                 <form method='post' action='/render/contract/poa/'>
-                    <fieldset class='step hidden'>
+                    <fieldset class='step active'>
                         <h2 class='text-center'>What type of Power of Attorney do you wish to create?</h2>
-                        <span class='error-message'></span>
+                        <p class='error-message text-danger text-center'></p>
                         <div class='row'>
                             <div class='col-sm iconTile'>
                                 <i class="fa fa-handshake-o icon"> </i>
@@ -108,7 +108,9 @@ function generateProvinceList()
 
                         <div class='form-group'>
                             <label for='form-govering-law'> Where do you live </label>
+                            <small class='error-message text-center text-danger'></small> 
                             <select class='form-select'>
+                                <option value=''> Please select an option </option>
                                 <?php echo generateProvinceList(); ?>
                             </select>
                         </div>
@@ -122,13 +124,13 @@ function generateProvinceList()
 
                         <div class='form-group'>
                             <label for='form-grantor-name'> Full Name:</label>
-                            <span class='error-message'></span>
+                            <span class='error-message text-danger text-center'></span>
                             <input type='text' class='form-control' name='form-grantor-name' />
                         </div>
 
                         <div class='form-group'>
                             <label for='form-grantor-address'>Address:</label>
-                            <span class='error-message'></span>
+                            <span class='error-message text-danger text-center'></span>
                             <input type='text' class='form-control' name='form-grantor-address' />
                         </div>
 
@@ -142,11 +144,13 @@ function generateProvinceList()
 
                         <div class='form-group'>
                             <label for='form-attorney-name'>Attorney's Name</label>
+                            <span class='error-message text-danger'></span>
                             <input type='text' class='form-control' name='form-attorney-details' />
                         </div>
 
                         <div class='form-group'>
                             <label for='form-attorney-address'> Attorney's Address </label>
+                            <span class='error-message text-danger'></span>
                             <input type='text' class='form-control' name='form-attorney-address' />
                         </div>
 
@@ -163,11 +167,13 @@ function generateProvinceList()
 
                         <div class='form-group'>
                             <label for='form-alt-attorney-name'>Attorney's Name</label>
+                            <span class='error-message text-danger'></span>
                             <input type='text' class='form-control' name='form-alt-attorney-details' />
                         </div>
 
                         <div class='form-group'>
                             <label for='form-attorney-address'> Attorney's Address </label>
+                            <span class='error-message text-danger'></span>
                             <input type='text' class='form-control' name='form-alt-attorney-address' />
                         </div>
                     </fieldset>
@@ -192,7 +198,7 @@ function generateProvinceList()
                     </fieldset>
 
 
-                    <fieldset class='step active'>
+                    <fieldset class='step hidden'>
                         <h2 class='text-center'> Attorney powers </h2>
                         <p> Do you want to grant specific powers? </p>
 
@@ -206,52 +212,333 @@ function generateProvinceList()
                         </div>
                         <ul class="list-group list-group-underline">
                             <li class="list-group-item">
-                                <div class='form-group'>                                    
-                                    <i class="fa fa-building" style='font-size: 28px; margin-right: 25px;' aria-hidden="true"></i>
+                                <div class='form-group'>
+                                    <i class="fa fa-building" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i>
                                     <label for='form-attorney-powrers-realestate'> Real Estate </label>
-                                     <input type='checkbox' class='input-type-check' />
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'> To sell, mortgage, exchange, lease or
+                                        otherwise
+                                        deal with real estate/land. </p>
                                 </div>
-                                <p class='small-caption text-center'> To sell, mortgage, exchange, lease or otherwise deal with real estate/land. </p>
+
                             </li>
 
                             <li class="list-group-item">
-                                
+
                                 <div class='form-group'>
-                                    <i class='fa fa-home' style='font-size: 28px; margin-right: 25px;' aria-hidden='true'></i>
+                                    <i class='fa fa-home' style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden='true'></i>
                                     <label for='form-attorney-powers-home'> Home Expenses</label>
                                     <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>Any expenditures needed so the Donor can stay
+                                        at
+                                        home as long as possible.</p>
                                 </div>
-                                <p class='small-caption text-center'>Any expenditures needed so the Donor can stay at home as long as possible.</p>
-                        </li>
+
+                            </li>
                             <li class="list-group-item">
                                 <div class='form-group'>
-                                    <i class='fa fa-users' style='font-size: 28px; margin-right: 25px;' aria-hidden='true'></i>
+                                    <i class='fa fa-users' style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden='true'></i>
                                     <label for='form-attorney-powers-family'> Family Expenses </label>
                                     <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>Any expenditures to cover education, medical
+                                        care,
+                                        etc. of yourself and family.</p>
                                 </div>
-                                <p class='small-caption text-center'>Any expenditures to cover education, medical care, etc. of yourself and family.</p>
-                        </li>
+
+                            </li>
                             <li class="list-group-item">
                                 <div class='form-group'>
-                                <i class="fa fa-university" style='font-size: 28px; margin-right: 25px;' aria-hidden="true"></i>
-                                <label for='form-attorney-taxes'> Tax Matters </label>
-                                <input type='checkbox' class='input-type-check' />
+                                    <i class="fa fa-university" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-taxes'> Tax Matters </label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>To take any action required to fulfill tax
+                                        obligations. </p>
                                 </div>
-                                <p class='small-caption text-center'>To take any action required to fulfill tax obligations. </p>
-                            
+
+
                             </li>
-                            <li class="list-group-item">Gifts for Family</li>
-                            <li class='list-group-item'> Gifts for Charity </li>
-                            <li class='list-group-item'> Business Investments </li>
-                            <li class='list-group-item'> Stocks and Bonds </li>
-                            <li class='list-group-item'>Employ Required Professionals </li>
+                            <li class="list-group-item">
+                                <div class='form-group'>
+                                    <i class="fa fa-gift" style='font-size: 28px; margin-right: 25px'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-powers-gifts-family'>Gifts for Family</label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>The power to provide gifts to family on special
+                                        occasions.</p>
+                                </div>
+
+
+                            </li>
+                            <li class='list-group-item'>
+                                <div class='form-group'>
+                                    <i class="fa fa-handshake-o" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-powers-gifts-charity'>Gifts for Charity</label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>The power to continue providing gifts to
+                                        charities
+                                        as you have in the past. </p>
+                                </div>
+
+
+                            </li>
+                            <li class='list-group-item'>
+                                <div class='form-group'>
+                                    <i class='fa fa-area-chart' style='font-size: 28px; margin-right: 25px'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-powers-business-investments'>Business Investments </label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>The power to vote as proxy and manage all
+                                        shares.
+                                    </p>
+                                </div>
+
+
+                            </li>
+                            <li class='list-group-item'>
+                                <div class='form-group'>
+                                    <i class="fa fa-line-chart" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-powers-stocks'>Stocks and Bonds</label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>The power to retain and re-invest assets and
+                                        investments </p>
+                                </div>
+                            </li>
+                            <li class='list-group-item'>
+                                <div class='form-group'>
+                                    <i class="fa fa-black-tie" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i>
+                                    <label for='form-attorney-powers-employ'>Employ Required Professionals</label>
+                                    <input type='checkbox' class='input-type-check' />
+                                    <p class='small-caption text-center'>The power to employ any professionals for the
+                                        care of you or your family. </p>
+                                </div>
+
+                            </li>
                         </ul>
 
                     </fieldset>
 
-                </form>
+
+                    <fieldset class='step hidden'>
+                        <div class='row'>
+                            <h1 class='text-center'>Limited Powers</h1>
+                            <p class='text-center'> Select Additional Limited Powers </p>
+                            <span class='small-caption text-center'> Select any options that apply </span>
+                        </div>
+
+                        <div class='row'>
+                            <ul class="list-group list-group-underline">
+                                <li class="list-group-item">
+                                    <div class='form-group'>
+                                        <label for='form-limitedPowers'> Sale of Specific Property </label>
+                                        <input type='checkbox' class='form-type-check' />
+                                        <p class='small-caption text-center'>To complete all matters and documents for
+                                            the sale of specific property.</p>
+                                    </div>
+                                </li>
+
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <label>Purchase of Specific Property</label>
+                                        <input type='checkbox' class='form-type-check' />
+                                        <p class='small-caption text-center'>To complete all matters and documents for
+                                            the purchase of specific property. </p>
+                                    </div>
+                                </li>
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <label>Collect Rent</label>
+                                        <input type='checkbox' class='form-type-check' />
+                                        <p class='small-caption text-center'>To manage and collect rent for specific
+                                            properties that you own.</p>
+                                    </div>
+
+                                </li>
+
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <label>Bank Accounts</label>
+                                        <input type='checkbox' class='form-type-check' />
+                                        <p class='small-caption text-center'> To have control over specific bank
+                                            accounts </p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+
+                        <div clas='row'>
+                            <h1 class='text-center'> Restrictions </h1>
+                            <p class='text-center'> Do you wish to put restrictions on your Attorney? </p>
+                        </div>
+
+                        <div class='row'>
+                            <div clas='form-group' style='margin: auto; width: auto'>
+                                <label> Yes </label>
+                                <input type='radio' class='form-type-check' value='true' name='form-restrictions' />
+                                <label> No </label>
+                                <input type='radio' class='form-type-check' value='false' name='form-restrictions' />
+                            </div>
+                        </div>
+
+
+                        <div class='row text-center' style='margin-top: 25px;'>
+                            <h4 class='text-center' style='font-size: 18px; font-weight: 400;'> Select the restrictions
+                                you wish to put on your Attorney: </h4>
+
+                            <ul class="list-group list-group-underline">
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <input type='checkbox' class='form-check-input' />
+                                        <label> I wish to live independently as long as possible and have my money spent
+                                            for that purpose. </label>
+                                    </div>
+                                </li>
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <input type='checkbox' class='form-check-input' />
+                                        <label> I restrict the types of investments my Attorney can make with my money
+                                            to only government issued savings bonds. </label>
+                                    </div>
+                                </li>
+                                <li class='list-group-item'>
+                                    <div class='form-group'>
+                                        <input type='checkbox' class='form-check-input' />
+                                        <label> I wish to create a customized restriction </label>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+                        <div class='row'>
+                            <h1 class='text-center' > Attorney Pay </h1>
+                            <p class='text-center'> How will my Attorney be paid financially?   </p>
+                        </div>
+
+                        <div class='col'>
+                        <div class='col-sm iconTile'>
+                               
+                                <div class='col-sm'>  
+                                     <i class="bi bi-wallet2" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i> <input type='radio' value='single'  class='form-check-input'
+                                        name='form-attorney-payment' /> 
+                                    <span for='form-relationshipStatus'> Out of pocket expenses </span>
+                                   
+                                </div>
+                            </div>
+
+                        <div class='col-sm iconTile'>
+                        <div class='col-sm'>                                
+                                
+                                <i class="bi bi-percent" style='font-size: 28px; margin-right: 25px'></i> 
+                                 <input type='radio' value='lawrate' class='form-check-input'name='form-attorney-payment' />
+                                 <span class='text-center'> Rate set by law </span>
+                              
+                                </div>
+                        
+                        </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+                        <div class='row'>
+                            <h1 class='text-center'> Financial Statements </h1>
+                            <p class='text-center'> Do you want your Attorney to prepare financial statements? </h1>
+                        </div>
+
+                        <div class='row'> 
+                            <div class='form-group' style='width: auto; margin: auto;'>
+                            <label> Yes </label>
+                            <input type='radio' value='true' class='form-check-input' />
+                            <label> No </label>
+                            <input type='radio' value='false' class='form-check-input' />
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class='form-group'>
+                                <label> How often should reports be sent </label>
+                                <select class='form-select'>
+                                    <option> Please select an option </option>
+                                    <option> Monthly </option>
+                                    <option> Semi Yearly </option>
+                                    <option> Yearly </option>
+                                </select>
+                            </div>
+                         
+                        </div>
+                
+                        <div class='row mt-2'>
+                            <h2 class='text-center' style='font-size: 20px;'> Who should reports be sent to </h2>
+                            <div class='form-group'>
+                                <label> Full Name </label>
+                                <input type='text' class='form-control' />
+                            </div>
+                            <div class='form-group'>
+                                <label> Address </label>
+                                <input type='text' class='form-control' />
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+                            <div class='row'>
+                                <h1 class='text-center'> Termination of the Power of Attorney </h1>
+                                <p class='text-center'> Do you wish to specify when this Power of Attorney will end? </p>
+                            </div>
+
+                            <div class='row'>
+                                <div class='form-group' style='margin: auto; width: auto;'>
+                                    <span> Yes </span>
+                                    <input type='radio' value='' />
+                                    <span> No </span>
+                                    <input type='radio' value='' />
+                                </div>
+                            </div>
+
+                            <div class='row mt-4'>
+                                <label class='text-center'> Date  </label>
+                                <input type='date' class='form-control mt-2' name='date' />
+                            </div>
+                    </fieldset>
+                    
+                    <fieldset class='step hidden'>
+                            <div class='row'>
+                                <h2 class='text-center'> Signing Details </h2>
+                                <small class='small-caption'> Where will you sign the document </small>
+                            </div>
+
+                            <div clas='row'>
+                                <div class='form-group'>
+                                    <label> Province </label>
+                                    <select class='form-select'>
+                                        <?php echo generateProvinceList(); ?>
+                                    </select>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label> City </label>
+                                    <input type='text' class='form-control' />
+                                </div>      
+                            </div>
+                    </fieldset>
 
             </div>
+            </form>
 
 
             <div class='card-footer'>

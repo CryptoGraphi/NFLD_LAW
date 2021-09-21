@@ -182,8 +182,6 @@
                                 
                                 <button type="submit" class="btn started" style='margin: 1% 40%;'>Submit</button>
                             </form>
-
-
                         </li>
                     </ul>
 

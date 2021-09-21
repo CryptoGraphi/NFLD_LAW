@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container" style='margin-top: -20px;'  >
     <div class='row'>
      <div class="col-sm" id='motto' style='box-shadow: none;' id='top-content'>
         
@@ -13,7 +13,7 @@
 
          
             <br/><br/><br/>
-            <img class='img-fluid header-img' style='max-width: 100%;' src='/img/chess_cover.jpg' /> <br/><br/>
+            <img class='img-fluid header-img apply-fade' style='max-width: 100%;' src='/img/chess_cover.jpg' /> <br/><br/>
              <p class='header-p'>
                  <h1 style='position: relative; top: 5%;'> Why use our service</h1>
                  <img src='/img/SVG/document_review.svg' class='img img-fluid' />
@@ -28,11 +28,11 @@
                 <div class=" text-center">
                     <div class='row'>
                     <div class="col-md-6">
-                         <img class='img-fluid header-img desktop-visible '  src='/img/suit.jpg' style='max-width: 100%; max-height: 100%;' />
+                         <img class='img-fluid header-img desktop-visible apply-fade'  src='/img/suit.jpg' style='max-width: 100%; max-height: 100%;' />
                          
                     </div>
                     <div class="col-md-6">
-                         <img class='img-fluid header-img desktop-visible' src='/img/fam-1.jpg' style='max-width: 100%; max-height: 100%; vertical-align: text-top' />
+                         <img class='img-fluid header-img desktop-visible apply-fade' src='/img/fam-1.jpg' style='max-width: 100%; max-height: 100%; vertical-align: text-top' />
                     </div>
 
                 </div>

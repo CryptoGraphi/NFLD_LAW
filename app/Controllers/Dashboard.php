@@ -111,4 +111,9 @@ class Dashboard extends BaseController
 		echo view('/dashboard/template/footer');
 		die();
 	}
+
+	public function account()
+	{
+		return view('dashboard/template/header') . view('dashboard/account') . view('dashboard/template/footer');
+	}
 }
