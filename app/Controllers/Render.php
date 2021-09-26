@@ -86,6 +86,21 @@ class Render extends BaseController
 	}
 
 
+	// fetch the document via the documet key 
+	// the user to download 
+
+
+	public function fetchContract($PRODUCT = null)
+	{
+
+	}
+
+
+	public function deleteContract($productKey = null) {
+		
+	}
+
+
 	// get pdf based on if a our session has been set or not 
 	public function pdf()
 	{

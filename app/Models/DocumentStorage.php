@@ -71,6 +71,17 @@ class DocumentStorage extends Model
 		return $this->update($document['documentID'], $dataObject);
 	}
 
+	public function lookupDocuments($id)
+	{
+		return $this->where(['documentCustomerID' => $id]);
+	}
+
+	public function fetchDocument($key)
+	{
+		return $this->where(['documentProductKey' => $key])->first();
+	}
+
+
 	public function addDocument($data)
 	{
 		return $this->insert($data);

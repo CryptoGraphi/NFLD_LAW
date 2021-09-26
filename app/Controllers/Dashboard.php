@@ -122,7 +122,7 @@ class Dashboard extends BaseController
 		die();
 	}
 
-	public function account()
+	public function account($request = null, $data = null)
 	{
 		return view('dashboard/template/header') . view('dashboard/account') . view('dashboard/template/footer');
 	}
