@@ -16,7 +16,7 @@
                  <div class="col-md-4 offset-md-1 footer-contact wow fadeInDown">
                      <h3>Contact</h3>
                      <p><i class="fas fa-map-marker-alt"></i> Corner Brook,Newfoundland, Canada</p>
-                     <p><i class="fas fa-phone"></i> Phone: 1(709)-660-6353</p>
+                     <p><i class="fas fa-phone"></i> Phone: X-XXX-XXX-XXX</p>
                  </div>
                  <div class="col-md-4 footer-links wow fadeInUp">
                      <div class="row">

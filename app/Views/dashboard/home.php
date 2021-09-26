@@ -55,25 +55,6 @@
                     <ul class='navbar-nav'>
                         <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/lastwill/'>Last Will and Testament </a></li>
                         <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/poa/'> Power of Attoreny</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/livingWill/'> Living Will</a> </li>
-                    </ul>
-                </div>
-                <div class='col-md padd' style='margin: 10px;'>
-                    <h2> <i class="bi bi-briefcase" style='margin: 10px;'></i>Business </h2>
-                    <hr />
-                    <ul class='navbar-nav'>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/partnership/'>Partnership Agreement  </a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/llc/'> LLC Operating Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/confidentiality/'> Confidentiality Agreement</a> </li>
-                    </ul>
-                </div>
-                <div class='col-md padd' style='margin: 10px;'>
-                    <h2> <i class="bi bi-people-fill" style=' margin: 10px;'></i>Family </h2>
-                    <hr />
-                    <ul class='navbar-nav'>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/prenup/'>Prenuptial Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/seperation/'> Separation Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/cohabitation/'> Cohabitation Agreement</a> </li>
                     </ul>
                 </div>
 
@@ -151,10 +132,10 @@
                         <li class="list-group-item">
                             <h5> Please fill out request form </h5>
 
-                            <form class='form-requestForm' method='post' action=''>
+                            <form class='form-requestForm' method='post' action='/dashboard/request/'>
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" placeholder="Enter email">
+                                    <input type="email" name='email' class="form-control" placeholder="Enter email">
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with
                                         anyone else.</small>
                                 </div>
@@ -177,7 +158,7 @@
 
                                 <div class='form-group'>
                                     <label for='breifDescription'> Brief Description</label>
-                                    <textarea  class='form-control' placeholder='Put your message here'></textarea>
+                                    <textarea  class='form-control' name='message' placeholder='Put your message here'></textarea>
                                 </div>
                                 
                                 <button type="submit" class="btn started" style='margin: 1% 40%;'>Submit</button>
@@ -200,20 +181,6 @@
 
     <!-- Modal content -->
 
-    <script>
-
-let dialogBtn = document.getElementById('requestForm');
-let container = document.getElementById('modal-request');
-
-dialogBtn.addEventListener('click', () => {
-if (container.style.display === 'none') {
-    container.style.display = 'block';
-} else {
-    container.style.display = 'none';
-}
-});
-
-</script>
 
 </div>
 </div>

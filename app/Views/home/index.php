@@ -1,6 +1,6 @@
 <div class="container" style='margin-top: -20px;'  >
     <div class='row'>
-     <div class="col-sm" id='motto' style='box-shadow: none;' id='top-content'>
+     <div class="col-sm mt-4" id='motto' style='box-shadow: none;' id='top-content'>
         
          <h1> Everyone Should Have A Will!</h1>
          <hr />
@@ -48,7 +48,7 @@
 <div class='container'>
     <div class='row'>
         <div class='col-sm'>
-            <h1> Our Services</h1>
+            <h1 id='services'> Our Services</h1>
 
             <h3 style='text-align: center; color: rgb(56, 56, 56); font-weight: 400;'><i class="bi bi-book" style='margin: 10px;'></i>Legal
                 Documents, Forms, and Contracts</h3>
@@ -60,31 +60,10 @@
             <h2> <i class="bi bi-file-earmark-font" style='margin: 5px;'></i> Wills & Estates</h2>
             <hr/>
             <ul class='navbar-nav'>
-                <li class='nav-item'>  <a class='nav-link' href='Wgeneration'>Last Will and Testament </a></li>
-                <li class='nav-item'>  <a class='nav-link' href='Wgeneration'> Power of Attoreny</a></li>
-                <li class='nav-item'>   <a class='nav-link' href='Wgeneration'> Living Will</a> </li>
+                <li class='nav-item'>  <a class='nav-link' href='/home/lastwill/'>Last Will and Testament </a></li>
+                <li class='nav-item'>  <a class='nav-link' href='/home/poa/'> Power of Attoreny</a></li>
         </ul>
-        </div>
-         <div class='col-md padd' style='margin: 10px;'>
-             <h2> <i class="bi bi-briefcase" style='margin: 10px;'></i>Business </h2>
-             <hr/>
-              <ul class='navbar-nav'>
-                  <li class='nav-item'> <a class='nav-link' href=''>Last Will and Testament </a></li>
-                  <li class='nav-item'> <a class='nav-link' href=''> Power of Attoreny</a></li>
-                  <li class='nav-item'> <a class='nav-link' href=''> Living Will</a> </li>
-              </ul>
-         </div>
-          <div class='col-md padd' style='margin: 10px;'>
-              <h2> <i class="bi bi-people-fill" style=' margin: 10px;'></i>Family </h2>
-              <hr/>
-               <ul class='navbar-nav'>
-                   <li class='nav-item'> <a class='nav-link' href=''>Last Will and Testament </a></li>
-                   <li class='nav-item'> <a class='nav-link' href=''> Power of Attoreny</a></li>
-                   <li class='nav-item'> <a class='nav-link' href=''> Living Will</a> </li>
-               </ul>
-          </div>
-
-          
+</div>    
         </div>
     </div>
 </div>
@@ -104,7 +83,7 @@
         <div class='row'>
 
         <ul class="list-group space hero-list">
-                <h1 class='p-4'> How to get started using our service </h1>
+                <h1 class='p-4' id='howitworks'> How to get started using our service </h1>
                     <li class="list-group-item hero"> <h2 style='font-weight: bolder;'>1: Fill out online</h2>
                         <p class='list-guide'>
                             Just follow the step-by-step instructions to fill out the necessary information for your

@@ -2,7 +2,7 @@
 
 
 function parseProvince($province) {
-	$provinceName = ['Ontario', 'Quebec', 'Nove Soctia', 'New Brunswick', 'Manitoba', 'British Columbia', 
+	$provinceName = ['Ontario', 'Quebec', 'Nova Soctia', 'New Brunswick', 'Manitoba', 'British Columbia', 
     'Prince Edward Island', 'Saskatchewan', 'Alberta', 'NewFoundland and Labrador'];
     $provinceValue = ['ON', 'QC', 'NS', 'NB', 'MB', 'BC', 'PE', 'SK', 'AB', 'NL'];
 

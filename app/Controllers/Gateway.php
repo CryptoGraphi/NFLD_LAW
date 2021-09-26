@@ -231,6 +231,175 @@ class Gateway extends BaseController
 									} 
 							}
 					break;
+
+					case 'poa':
+							if ($paymenttype === 'paid') {
+								// Create a Customer
+							$customer = \Stripe\Customer::create(array(
+								"email" => $_POST['email'],
+								"source" => $token,
+							));
+							// Save the customer id in your own database!
+							// Charge the Customer instead of the card
+							$charge = \Stripe\Charge::create(array(
+								"amount" => 25000,
+								"currency" => "cad",
+								"customer" => $customer->id,
+								"description" => 'document Purchase lastwill'
+							));
+	
+								if ($charge->paid === true) {
+									// add the database stuff
+	
+									if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+									{
+										$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+									}
+									$userModel = new Users();
+									$orderModel = new Orders();
+									$documentModel = new DocumentStorage();
+	
+									$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+	
+									 $orderData = $orderModel->generateData($userData['userID'],
+									$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+									$paymenttype, 
+									$charge);
+	
+									// save order data into the database 
+									$orderModel->addOrder($orderData);
+	
+									$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+	
+									$documentModelData = $documentModel->generateDocumentData(
+									$userData['userID'],
+									$orderData['orderProductKey'],
+									$orderData['orderProductType'],
+									$jsonRaw,
+									$orderData['orderPurchaseId']);
+	
+	
+	
+									$documentModel->addDocument($documentModelData);
+									
+									echo view('/dashboard/template/header');
+									echo View('/gateway/confirmPage');
+									echo view('/dashboard/template/footer');
+								} 
+							} else if ($paymenttype === 'custom')
+							{
+									// Create a Customer
+									$customer = \Stripe\Customer::create(array(
+										"email" => $_POST['email'],
+										"source" => $token,
+									));
+									// Save the customer id in your own database!
+									// Charge the Customer instead of the card
+									$charge = \Stripe\Charge::create(array(
+										"amount" => $_POST['amount'] . '00',
+										"currency" => "cad",
+										"customer" => $customer->id,
+										"description" => 'document Purchase lastwill'
+									));
+			
+			
+										if ($charge->paid === true) {
+											// add the database stuff
+			
+											if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+											{
+												$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+											}
+											$userModel = new Users();
+											$orderModel = new Orders();
+											$documentModel = new DocumentStorage();
+			
+											$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+			
+											 $orderData = $orderModel->generateData($userData['userID'],
+											$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+											$paymenttype, 
+											$charge);
+			
+											// save order data into the database 
+											$orderModel->addOrder($orderData);
+			
+											$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+			
+											$documentModelData = $documentModel->generateDocumentData(
+											$userData['userID'],
+											$orderData['orderProductKey'],
+											$orderData['orderProductType'],
+											$jsonRaw,
+											$orderData['orderPurchaseId']);
+			
+			
+			
+											$documentModel->addDocument($documentModelData);
+											
+											echo view('/dashboard/template/header');
+											echo View('/gateway/confirmPage');
+											echo view('/dashboard/template/footer');
+										} 
+	
+							} else if ($paymenttype === 'donate') {
+									// Create a Customer
+									$customer = \Stripe\Customer::create(array(
+										"email" => $_POST['email'],
+										"source" => $token,
+									));
+									// Save the customer id in your own database!
+									// Charge the Customer instead of the card
+									$charge = \Stripe\Charge::create(array(
+										"amount" => 25000,
+										"currency" => "cad",
+										"customer" => $customer->id,
+										"description" => 'document Purchase lastwill (donatation)'
+									));
+			
+			
+										if ($charge->paid === true) {
+											// add the database stuff
+	
+		
+											if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $documentName)
+											{
+												$_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+											}
+											$userModel = new Users();
+											$orderModel = new Orders();
+											$documentModel = new DocumentStorage();
+			
+											$userData = $userModel->lookupBySessionID($_SESSION['SESSION_AUTH_HANDSHAKE']);
+			
+											 $orderData = $orderModel->generateData($userData['userID'],
+											$_SESSION['DOCUMENT_RAW_DATA']['contractType'], 
+											$paymenttype, 
+											$charge);
+			
+											// save order data into the database 
+											$orderModel->addOrder($orderData);
+			
+											$jsonRaw = json_encode($_SESSION['DOCUMENT_RAW_DATA']['contractData']);
+			
+											$documentModelData = $documentModel->generateDocumentData(
+											$userData['userID'],
+											$orderData['orderProductKey'],
+											$orderData['orderProductType'],
+											$jsonRaw,
+											$orderData['orderPurchaseId']);
+			
+			
+			
+											$documentModel->addDocument($documentModelData);
+											
+											echo view('/dashboard/template/header');
+											echo View('/gateway/confirmPage');
+											echo view('/dashboard/template/footer');
+										} 
+								}
+
+					break;
 				}
 			} catch(\Stripe\Exception\CardException $e) {
 				// Since it's a decline, \Stripe\Exception\CardException will be caught

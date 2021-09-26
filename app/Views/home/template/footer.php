@@ -16,7 +16,7 @@
                  <div class="col-md-4 offset-md-1 footer-contact wow fadeInDown">
                      <h3>Contact</h3>
                      <p><i class="fas fa-map-marker-alt"></i> Corner Brook,Newfoundland, Canada</p>
-                     <p><i class="fas fa-phone"></i> Phone: 1(709)-660-6353</p>
+                     <p><i class="fas fa-phone"></i> Phone: X-XXX-XXX-XXX</p>
                  </div>
                  <div class="col-md-4 footer-links wow fadeInUp">
                      <div class="row">
@@ -28,9 +28,9 @@
                          <div class="col-md-6 ">
                               <ul class='navbar-nav'>
 
-                                <li class='nav-item'> <p><a class="scroll-link nav-link" href="#top-content">Home</a></p></li>
+                                <li class='nav-item'> <p><a class="scroll-link nav-link" href="/">Home</a></p></li>
                                 <li class='nav-item'> <p><a class="scroll-link nav-link" href="#services">Our Services</a></p> </li>
-                                <li class='nav-item'> <p><a class="scroll-link nav-link" href="#howItworks">How it works</a></p> </li>
+                                <li class='nav-item'> <p><a class="scroll-link nav-link" href="#howitworks">How it works</a></p> </li>
                               </ul>
 
                          </div>

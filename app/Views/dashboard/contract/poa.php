@@ -48,13 +48,13 @@ function generateProvinceList()
     </div>
 
     <div class='row mt-4'>
-        <ul class="nav nav-tabs">
-            <li id='nav-tab-started' class="nav-item"><a class="nav-link active" href="#">Get Started</a></li>
-            <li id='nav-tab-agent' class="nav-item"><a class="nav-link" href="#">Agent </a></li>
-            <li id='nav-tab-powers' class='nav-item'> <a class='nav-link' href='#'> Powers </a></li>
-            <li id='nav-tab-restrictions' class="nav-item"><a class="nav-link" href="#">Restrictions</a></li>
-            <li id='nav-tab-misc' class='nav-item'><a class='nav-link' href='#'> Misc. </a></li>
-            <li class='nav-item' id='nav-tab-signing'> <a class='nav-link' href='#'> Signing </a></li>
+        <ul class="nav nav-tabs navigation">
+            <li id='nav-tab-started' class="nav-item"><a class="nav-link active">Get Started</a></li>
+            <li id='nav-tab-agent' class="nav-item"><a class="nav-link" >Attorney </a></li>
+            <li id='nav-tab-powers' class='nav-item'> <a class='nav-link'> Powers </a></li>
+            <li id='nav-tab-restrictions' class="nav-item"><a class="nav-link">Restrictions</a></li>
+            <li id='nav-tab-misc' class='nav-item'><a class='nav-link'> Misc. </a></li>
+            <li class='nav-item' id='nav-tab-signing'> <a class='nav-link'> Signing </a></li>
         </ul>
     </div>
 
@@ -66,7 +66,7 @@ function generateProvinceList()
             </div>
             <div class="card-body">
 
-                <form method='post' action='/render/contract/poa/'>
+                <form method='post'  id='contract-form' action='/render/contract/poa/'>
                     <fieldset class='step active'>
                         <h2 class='text-center'>What type of Power of Attorney do you wish to create?</h2>
                         <p class='error-message text-danger text-center'></p>
@@ -108,7 +108,7 @@ function generateProvinceList()
 
                         <div class='form-group'>
                             <label for='form-govering-law'> Where do you live </label>
-                            <small class='error-message text-center text-danger'></small> 
+                            <small class='error-message text-center text-danger'></small>
                             <select class='form-select'>
                                 <option value=''> Please select an option </option>
                                 <?php echo generateProvinceList(); ?>
@@ -186,7 +186,12 @@ function generateProvinceList()
                             for you in all areas, and to do any act or thing that you could do if personally present.
                         </p>
 
+                        <div class='row'>
+                            <span class='text-danger error-message'></span>
+                        </div>
+
                         <div class='form-group'>
+
                             <span> Yes </span>
                             <input type='radio' name='form-attorney-powers-authority' class='form-check-input'
                                 value='true' />
@@ -199,17 +204,9 @@ function generateProvinceList()
 
 
                     <fieldset class='step hidden'>
-                        <h2 class='text-center'> Attorney powers </h2>
-                        <p> Do you want to grant specific powers? </p>
+                        <h2 class='text-center'> Attorney Powers </h2>
+                        <p class='text-center'> Select any powers you would like to grant to your attorney </p>
 
-                        <div class='form-group'>
-                            <span> Yes </span>
-                            <input type='radio' name='form-attorney-powers-specific' class='form-check-input'
-                                value='true' />
-                            <span> No </span>
-                            <input type='radio' name='form-attorney-powers-specific' class='form-check-input'
-                                value='false' />
-                        </div>
                         <ul class="list-group list-group-underline">
                             <li class="list-group-item">
                                 <div class='form-group'>
@@ -379,19 +376,22 @@ function generateProvinceList()
                         <div clas='row'>
                             <h1 class='text-center'> Restrictions </h1>
                             <p class='text-center'> Do you wish to put restrictions on your Attorney? </p>
+                            <span class='text-danger error-message'></span>
                         </div>
 
                         <div class='row'>
                             <div clas='form-group' style='margin: auto; width: auto'>
                                 <label> Yes </label>
-                                <input type='radio' class='form-type-check' value='true' name='form-restrictions' />
+                                <input type='radio' class='form-type-check' id='form-restrictions-true' value='true'
+                                    name='form-restrictions' />
                                 <label> No </label>
-                                <input type='radio' class='form-type-check' value='false' name='form-restrictions' />
+                                <input type='radio' class='form-type-check' id='form-restrictions-false' value='false'
+                                    name='form-restrictions' />
                             </div>
                         </div>
 
 
-                        <div class='row text-center' style='margin-top: 25px;'>
+                        <div class='row text-center' id='form-restrictions-pannel' style='margin-top: 25px;' hidden>
                             <h4 class='text-center' style='font-size: 18px; font-weight: 400;'> Select the restrictions
                                 you wish to put on your Attorney: </h4>
 
@@ -410,12 +410,6 @@ function generateProvinceList()
                                             to only government issued savings bonds. </label>
                                     </div>
                                 </li>
-                                <li class='list-group-item'>
-                                    <div class='form-group'>
-                                        <input type='checkbox' class='form-check-input' />
-                                        <label> I wish to create a customized restriction </label>
-                                    </div>
-                                </li>
 
                             </ul>
                         </div>
@@ -424,32 +418,34 @@ function generateProvinceList()
 
                     <fieldset class='step hidden'>
                         <div class='row'>
-                            <h1 class='text-center' > Attorney Pay </h1>
-                            <p class='text-center'> How will my Attorney be paid financially?   </p>
+                            <h1 class='text-center'> Attorney Pay </h1>
+                            <p class='text-center'> How will my Attorney be paid financially? </p>
+                            <small class='text-center text-danger error-message'></small>
                         </div>
 
                         <div class='col'>
-                        <div class='col-sm iconTile'>
-                               
-                                <div class='col-sm'>  
-                                     <i class="bi bi-wallet2" style='font-size: 28px; margin-right: 25px;'
-                                        aria-hidden="true"></i> <input type='radio' value='single'  class='form-check-input'
-                                        name='form-attorney-payment' /> 
+                            <div class='col-sm iconTile'>
+
+                                <div class='col-sm'>
+                                    <i class="bi bi-wallet2" style='font-size: 28px; margin-right: 25px;'
+                                        aria-hidden="true"></i> <input type='radio' value='single'
+                                        class='form-check-input' name='form-attorney-payment' />
                                     <span for='form-relationshipStatus'> Out of pocket expenses </span>
-                                   
+
                                 </div>
                             </div>
 
-                        <div class='col-sm iconTile'>
-                        <div class='col-sm'>                                
-                                
-                                <i class="bi bi-percent" style='font-size: 28px; margin-right: 25px'></i> 
-                                 <input type='radio' value='lawrate' class='form-check-input'name='form-attorney-payment' />
-                                 <span class='text-center'> Rate set by law </span>
-                              
+                            <div class='col-sm iconTile'>
+                                <div class='col-sm'>
+
+                                    <i class="bi bi-percent" style='font-size: 28px; margin-right: 25px'></i>
+                                    <input type='radio' value='lawrate' class='form-check-input'
+                                        name='form-attorney-payment' />
+                                    <span class='text-center'> Rate set by law </span>
+
                                 </div>
-                        
-                        </div>
+
+                            </div>
                         </div>
                     </fieldset>
 
@@ -457,84 +453,103 @@ function generateProvinceList()
                         <div class='row'>
                             <h1 class='text-center'> Financial Statements </h1>
                             <p class='text-center'> Do you want your Attorney to prepare financial statements? </h1>
-                        </div>
-
-                        <div class='row'> 
-                            <div class='form-group' style='width: auto; margin: auto;'>
-                            <label> Yes </label>
-                            <input type='radio' value='true' class='form-check-input' />
-                            <label> No </label>
-                            <input type='radio' value='false' class='form-check-input' />
-                            </div>
+                            <p class='text-danger text-center error-message'></p>
                         </div>
 
                         <div class='row'>
+                            <div class='form-group' style='width: auto; margin: auto;'>
+                                <label> Yes </label>
+                                <input type='radio' id='form-financial-reports-true'  name='accountant-form' value='true' class='form-check-input' />
+                                <label> No </label>
+                                <input type='radio' id='form-financial-reports-false' name='accountant-form' value='false' class='form-check-input' />
+                            </div>
+
+                            <div id='form-accountant-wrapper' hidden>
+
+                                <div class='row'>
+                                    
+                                    <div class='form-group mt-4 '>
+                                        <label> How often should reports be sent </label>
+                                        <p class='text-center text-danger error-message'></p>
+                                        <select class='form-select'>
+                                            <option value=''> Please select an option </option>
+                                            <option value='monthly'> Monthly </option>
+                                            <option value='semi-yearly'> Semi Yearly </option>
+                                            <option value='yearly'> Yearly </option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class='row mt-2'>
+                                    <h2 class='text-center' style='font-size: 20px;'> Who should reports be sent to</h2>
+                                    <p class='text-center text-danger error-message'></p>
+                                    <div class='form-group'>
+                                        <label> Full Name </label>
+                                        <input type='text' class='form-control' />
+                                    </div>
+                                    <div class='form-group'>
+                                        <label> Address </label>
+                                        <input type='text' class='form-control' />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+                        <div class='row'>
+                            <h1 class='text-center'> Termination of the Power of Attorney </h1>
+                            <p class='text-center'> Do you wish to specify when this Power of Attorney will end? </p>
+                        </div>
+
+                        <div class='row'>
+                            <span class='text-center text-danger error-message'></span>
+                            <div class='form-group' style='margin: auto; width: auto;'>
+                                <span> Yes </span>
+                                <input type='radio'  id='poa-termination-true' name='form-termination-date' value='' />
+                                <span> No </span>
+                                <input type='radio' id='poa-termination-false' name='form-termination-date' value='' />
+                            </div>
+                        </div>
+
+                        <div class='row mt-4' id='poa-date-pannel' hidden>
+                            <label class='text-center'> Date of Termination</label>
+                            <small class='text-center text-danger error-message'></small>
+                            <input type='date' class='form-control mt-2' name='date' />
+                        </div>
+                    </fieldset>
+
+                    <fieldset class='step hidden'>
+                        <div class='row'>
+                            <h2 class='text-center'> Signing Details </h2>
+                            <small class='small-caption'> Where will you sign the document </small>
+                        </div>
+
+                        <div clas='row'>
                             <div class='form-group'>
-                                <label> How often should reports be sent </label>
+                                <label> Province </label>
+                                <span class='text-danger text-center error-message'></span>
                                 <select class='form-select'>
-                                    <option> Please select an option </option>
-                                    <option> Monthly </option>
-                                    <option> Semi Yearly </option>
-                                    <option> Yearly </option>
+                                    <option value=''></option>
+                                    <?php echo generateProvinceList(); ?>
                                 </select>
                             </div>
-                         
-                        </div>
-                
-                        <div class='row mt-2'>
-                            <h2 class='text-center' style='font-size: 20px;'> Who should reports be sent to </h2>
+
                             <div class='form-group'>
-                                <label> Full Name </label>
+                                <label> City </label>
+                                <span class='text-danger text-center error-message'></span>
                                 <input type='text' class='form-control' />
                             </div>
-                            <div class='form-group'>
-                                <label> Address </label>
-                                <input type='text' class='form-control' />
+
+                            <div class='form-group mt-4' style='width: auto; margin: auto;'>
+                                <button class='btn started'>Generate Document</button>
                             </div>
+
+
+                            <input type='hidden' name='_data_' value='' id='_data_' />
                         </div>
-
-                    </fieldset>
-
-                    <fieldset class='step hidden'>
-                            <div class='row'>
-                                <h1 class='text-center'> Termination of the Power of Attorney </h1>
-                                <p class='text-center'> Do you wish to specify when this Power of Attorney will end? </p>
-                            </div>
-
-                            <div class='row'>
-                                <div class='form-group' style='margin: auto; width: auto;'>
-                                    <span> Yes </span>
-                                    <input type='radio' value='' />
-                                    <span> No </span>
-                                    <input type='radio' value='' />
-                                </div>
-                            </div>
-
-                            <div class='row mt-4'>
-                                <label class='text-center'> Date  </label>
-                                <input type='date' class='form-control mt-2' name='date' />
-                            </div>
-                    </fieldset>
-                    
-                    <fieldset class='step hidden'>
-                            <div class='row'>
-                                <h2 class='text-center'> Signing Details </h2>
-                                <small class='small-caption'> Where will you sign the document </small>
-                            </div>
-
-                            <div clas='row'>
-                                <div class='form-group'>
-                                    <label> Province </label>
-                                    <select class='form-select'>
-                                        <?php echo generateProvinceList(); ?>
-                                    </select>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label> City </label>
-                                    <input type='text' class='form-control' />
-                                </div>      
-                            </div>
                     </fieldset>
 
             </div>

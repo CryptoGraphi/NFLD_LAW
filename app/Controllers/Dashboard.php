@@ -102,6 +102,16 @@ class Dashboard extends BaseController
 					];
 					echo view('/dashboard/contract/'.$contractType, $data);
 			break;
+
+			case 'livingwill':
+				$data = [
+					'headerTitle' => 'Living Will',
+					'headerDesc' => 'A Living Will states your preferred medical treatments in case you’re unable to.
+					Live with the knowledge that your most important decisions are taken care of.'
+				];
+
+				echo view('/dashboard/contract/'. $contractType, $data);
+			break;
 			default:
 				echo view('/dashboard/template/documentSelection');
 			break;
@@ -115,5 +125,35 @@ class Dashboard extends BaseController
 	public function account()
 	{
 		return view('dashboard/template/header') . view('dashboard/account') . view('dashboard/template/footer');
+	}
+
+	// SEND EMAIL TO THE PERSON
+
+	public function request()
+	{
+
+		if (!empty($_POST)) {
+			$post = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+
+			$email = \Config\Services::email();
+			$email->setFrom($post['email'], $post['firstname'] . $post['lastname']);
+			$email->setTo('myemail@example.com');
+			$email->setCC('myemail@example.com');
+			$email->setBCC('myemail@example.com');
+
+			$email->setSubject('A request has been issued from'. $post['firstname'] . "   " . $post['lastname']);
+			$email->setMessage($post['message']);
+
+			echo view('dashboard/template/header');
+			echo view('dashboard/request/request');
+
+		$email->send();
+		} else {
+			// trigger errror  
+			echo view('dashboard/template/header');
+			echo view('/errors/html/error_403');
+		}
+		
+		
 	}
 }

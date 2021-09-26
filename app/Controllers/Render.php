@@ -24,7 +24,11 @@ class Render extends BaseController
 			case "lastwill":
 
 				if (empty($_POST['__data__'])) {
-					die(view('/render/paymentPage', $_SESSION['DOCUMENT_RAW_DATA']));
+					$error = [
+						"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
+					];
+					
+					die(view('/render/paymentPage', $error));
 				}
 				$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_SANITIZE_STRING);
 
@@ -40,8 +44,41 @@ class Render extends BaseController
 				];
 
 				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-
 				echo view('/render/paymentPage', $data);
+			break;
+
+
+			case "poa":
+
+					if (empty($_POST['_data_'])) {
+						$error = [
+							"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
+						];
+
+						die(view('/render/paymentPage', $error));
+					}
+
+					$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_SANITIZE_STRING);
+
+					$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+
+					$data = [
+						"contractData" => $contract,
+						"contractType" => $contractType,
+						"contractTitle" => "Power of Attorney",
+						"contractContent" => view('render/template/contract_poa', $contract),
+						"contractPayment" => 'true',
+						"contractPaymentStatus" => null,
+					];
+
+					$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+					
+					
+
+					var_dump($_POST);
+					echo view('/render/paymentPage', $data);
+
 				break;
 		}
 
@@ -69,7 +106,15 @@ class Render extends BaseController
 					$dompdf->setPaper('A4', 'landscape');
 					$dompdf->render();
 					$dompdf->stream();
-					break;
+				break;
+
+				case 'poa':
+					$dompdf = new Dompdf();
+					$dompdf->loadHtml($data['contractContent']);
+					$dompdf->setPaper('A4', 'landscape');
+					$dompdf->render();
+					$dompdf->stream();
+				break;
 
 				default:
 					// display error page not found 

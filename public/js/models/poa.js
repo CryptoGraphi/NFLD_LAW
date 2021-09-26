@@ -46,14 +46,76 @@
         } 
 
 
-        // alt attorney data
+        // alt attorney object
 
         this.Model.altAttorney = {
             "name": undefined,
             "address": undefined,
         }
 
+
+        // attorney powers object
+
+
+        this.Model.powers = {
+            "generalAuthority": undefined,
+            "realestate": undefined,
+            "homeExpenses": undefined,
+            "familyExpenses": undefined,
+            "taxMatters": undefined,
+            "familyGifts": undefined,
+            "charityGifts": undefined,
+            "businessInvestments": undefined,
+            "stocks": undefined,
+            "employProfessionals": undefined,
+        }
+
+
+        // limited powers object
+
+        this.Model.limited = {
+            "propertySale": undefined,
+            "propertyPurchase": undefined,
+            "propertyPaymentCollection": undefined,
+            "bankAccount": undefined,
+        }
+
+
+        // restriction object 
+
+        this.Model.restrictions = {
+            "setRestrictions": undefined,
+            "independent": undefined,
+            "investments": undefined,
+            
+        }
+
+
+        // payment object 
+        this.Model.payment = {
+            "outOfPocket": undefined,
+            "lawRate": undefined,
+        }
         
+
+        this.Model.financialReports = {
+            "sendReports": undefined,
+            "frequency": undefined,
+            "name": undefined,
+            "address": undefined,
+
+        }
+
+
+        this.Model.attorneyTermination = {
+            "specifyDate": undefined,
+            "date": undefined,
+        }
+
+        this.Model.signingDetails = {
+            "province": undefined,
+            "city": undefined,
+        }
 
     }
  }

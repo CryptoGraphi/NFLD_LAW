@@ -40,7 +40,7 @@
 
         <ul class="navbar-nav" id='nav-section-topMenu'>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home </a>
+                <a class="nav-link" href="/">Home </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/home/about/">About Us</a>
@@ -52,12 +52,12 @@
                 <a href='/home/register/'><button class='btn btn-transparent started'>Get Started</button></a>
             </li>
             <li class='nav-item'>
-                <a href="https://www.facebook.com/nfldlawfirm"><i class="bi bi-facebook social"></i></a>
+                <a href="/"><i class="bi bi-facebook social"></i></a>
 
 
             </li>
             <li class='nav-item'>
-                <a href="https://twitter.com/nfldlaw"><i class="bi bi-twitter social"></i></a>
+                <a href="/"><i class="bi bi-twitter social"></i></a>
             </li>
 
             <li class='nav-item'>

@@ -234,3 +234,12 @@ ul > .list-group-item {
   .StripePaymentButton:hover {
     background-color: #19da93;
   }
+
+
+  /* ui gradients  */
+
+
+  .icon-success {
+    color: rgb(13, 155, 44);
+    text-shadow: 0.5px 0.5px 0.5px rgb(61, 65, 43);
+  }

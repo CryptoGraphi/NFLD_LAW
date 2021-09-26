@@ -23,28 +23,8 @@
                     <ul class='navbar-nav'>
                         <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/lastwill/'>Last Will and Testament </a></li>
                         <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/poa/'> Power of Attoreny</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/livingWill/'> Living Will</a> </li>
                     </ul>
                 </div>
-                <div class='col-md padd' style='margin: 10px;'>
-                    <h2> <i class="bi bi-briefcase" style='margin: 10px;'></i>Business </h2>
-                    <hr />
-                    <ul class='navbar-nav'>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/partnership/'>Partnership Agreement  </a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/llc/'> LLC Operating Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/confidentiality/'> Confidentiality Agreement</a> </li>
-                    </ul>
-                </div>
-                <div class='col-md padd' style='margin: 10px;'>
-                    <h2> <i class="bi bi-people-fill" style=' margin: 10px;'></i>Family </h2>
-                    <hr />
-                    <ul class='navbar-nav'>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/prenup/'>Prenuptial Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/seperation/'> Separation Agreement</a></li>
-                        <li class='nav-item'> <a class='nav-link' href='/dashboard/contracts/cohabitation/'> Cohabitation Agreement</a> </li>
-                    </ul>
-                </div>
-
             </div>
 
 

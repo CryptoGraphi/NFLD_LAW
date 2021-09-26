@@ -21,7 +21,6 @@
 </head>
 
 <body>
-    <!-- header end -->
 
 
 
@@ -49,20 +48,17 @@
             <li class='nav-item'>
                 <a href='/dashboard/account/' class='nav-link'> My Account</a>
             </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='/home/register/'>Request Lawyer</a>
-            </li>
 
             <li class='nav-item'>
                 <a  class='nav-link' href='/Authentication/logout/'> Logout </a>
             </li>
             <li class='nav-item'>
-                <a href="https://www.facebook.com/nfldlawfirm"><i class="bi bi-facebook social"></i></a>
+                <a href="/"><i class="bi bi-facebook social"></i></a>
 
 
             </li>
             <li class='nav-item'>
-                <a href="https://twitter.com/nfldlaw"><i class="bi bi-twitter social"></i></a>
+                <a href="/"><i class="bi bi-twitter social"></i></a>
             </li>
 
             <li class='nav-item'>
