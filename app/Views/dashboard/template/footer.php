@@ -43,8 +43,8 @@
          <div class="container">
              <div class="row">
                  <div class="col footer-social">
-                     <a href="https://www.facebook.com/nfldlawfirm"><i class="bi bi-facebook social"></i></a>
-                     <a href="https://twitter.com/nfldlaw"><i class="bi bi-twitter social"></i></a>
+                     <a href=""><i class="bi bi-facebook social"></i></a>
+                     <a href=""><i class="bi bi-twitter social"></i></a>
                      <a href=''><i class="bi bi-telephone-forward social"></i></a>
 					 <a href=''><i class="bi bi-whatsapp social"></i> </a>
                  </div>
