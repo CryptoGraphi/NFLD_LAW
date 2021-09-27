@@ -45,7 +45,7 @@
     }
 
     public function verifyPassword($password, $dbHash, $salt) {
-        $hashed_password = hash('whirlpool', $password.$salt);
+        $hashed_password = hash('sha256', $password.$salt);
 
         if ($hashed_password === $dbHash) {
             return true;

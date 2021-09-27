@@ -86,17 +86,49 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>
-          <button class='btn btn-danger bi bi-x-circle-fill'>  Delete </button>
-          <button class='btn btn-warning bi bi-gear-fill'> Modify </button>
-          <button class='btn btn-success'> Download </button>
-      </td>
-    </tr>
+    
+
+    <?php
+
+        if (!empty($userDocuments))
+        {
+
+            foreach($userDocuments as $nodes)
+            {
+                // generate the table 
+                // we need to display to user and also to get the key link inorder to modify / delete the documents 
+                // from database if needed
+    
+                echo "<tr>";
+                echo "<th scope='row'>". $nodes['documentID'] . "</th>";
+                echo "<td>" . $nodes['documentType'] . "</td>";
+                echo "<td>" . $nodes['documentCreatedAt'] . "</td>";
+                echo "<td>" . $nodes['documentLastModified'] . "</td>";
+                echo "<td>
+                <a class='btn btn-primary' href='/render/fetchContract/". $nodes['documentProductKey'] ."'> download  </a>
+                <a class='btn btn-danger' href='/render/deleteContract/". $nodes['documentProductKey'] ."'> Delete </a></td>";
+    
+                echo "<tr/>";
+            }
+
+
+        }  else {
+
+            // display empty message to the user 
+
+            echo "<tr>";
+            echo "<td></td>";
+            echo "<td></td>";
+            echo "<td><b>no documents to display so empty :( </b></td>";
+            echo "<td> </td>";
+            echo "<td></td>";
+            echo "<tr/>";
+
+        }
+
+    ?>
+  
+
   </tbody>
 </table>
     </div>

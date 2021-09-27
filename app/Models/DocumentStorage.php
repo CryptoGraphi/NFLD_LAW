@@ -73,12 +73,16 @@ class DocumentStorage extends Model
 
 	public function lookupDocuments($id)
 	{
-		return $this->where(['documentCustomerID' => $id]);
+		return $this->where(['documentCustomerID' => $id])->findAll();
 	}
 
 	public function fetchDocument($key)
 	{
 		return $this->where(['documentProductKey' => $key])->first();
+	}
+
+	public function deleteDocument($key) {
+		$this->delete($key);
 	}
 
 

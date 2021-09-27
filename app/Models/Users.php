@@ -58,6 +58,11 @@ class Users extends Model
 		return $this->update($id, $data);
 	}
 
+	public function updateUserData($id, $data)
+	{
+		return $this->update($id, $data);
+	}
+
 	public function lookupBySessionID($sessionID)
 	{
 		return $this->where(['userAccessToken' => $sessionID])->first();

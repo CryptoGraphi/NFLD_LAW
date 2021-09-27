@@ -60,8 +60,8 @@
             <h2> <i class="bi bi-file-earmark-font" style='margin: 5px;'></i> Wills & Estates</h2>
             <hr/>
             <ul class='navbar-nav'>
-                <li class='nav-item'>  <a class='nav-link' href='/home/lastwill/'>Last Will and Testament </a></li>
-                <li class='nav-item'>  <a class='nav-link' href='/home/poa/'> Power of Attoreny</a></li>
+                <li class='nav-item'>  <a class='nav-link' href='/home/register/'>Last Will and Testament </a></li>
+                <li class='nav-item'>  <a class='nav-link' href='/home/register/'> Power of Attoreny</a></li>
         </ul>
 </div>    
         </div>

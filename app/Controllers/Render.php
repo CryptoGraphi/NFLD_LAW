@@ -3,14 +3,80 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Users;
+use App\Models\DocumentStorage;
 use Dompdf\Dompdf;
+use sessionManager;
+use documentEnforcer;
+
 
 class Render extends BaseController
 {
+
 	public function __construct()
 	{
+
+		// this is a code snippet to add to any controller that we want to be authenticated be accessing 
+		helper('sessionManager');
+
 		session_start();
+
+		$accessToken = $_SESSION['SESSION_AUTH_HANDSHAKE'];
+		$sessionToken = $_SESSION['SESSION_TOKEN'];
+		$sessionID = $_SESSION['SESSION_ID'];
+		$userModel = new Users();
+
+		// do some prechecks 
+
+		// check if our sessions id matches the cookie
+
+		if (!isset($sessionID) && !isset($_COOKIE['USER_SESSION_ID'])) {
+			// REDIRECT THE USER SESSION HAS EXPIRED 
+			header('refresh: 2; /home/login/');
+			die('Session has expired, logging you out');
+			session_destroy();
+		}
+
+		if (!empty($accessToken && !empty($sessionToken) && !empty($sessionID))) {
+			$userData = $userModel->lookupBySessionID($accessToken);
+			$session = new sessionManager($_SESSION['SESSION_AUTH_HANDSHAKE'], $_SESSION['SESSION_TOKEN']);
+
+			// check if our data is empty 
+			if (empty($userData)) {
+				header('refresh: 2; /home/login/');
+				die('Session has expired, logging you out');
+				session_destroy();
+			}
+			// call our class to do its thang!
+			if ($session->checkAuthenticationSession($userData['userSessionID'], $userData['userAccessToken'])) {
+				// this will record our session
+				$_SESSION['SESSION_MANAGER_AUTH_TOKEN'] = $session->sessionManagerToken();
+
+				// check if our session is expired 
+
+				if ($session->verifySessionActive($_SESSION['SESSION_TOKEN_EXPIRY'])) {
+					$_SESSION['EXPIRED'] = FALSE;
+				} else {
+					$_SESSION['EXPIRED'] = true;
+				}
+				// redirect to the login page 
+			} else {
+				// session failed 
+				// inputs dont match possible bug in our code;
+
+				header('refresh: 3; /home/login/');
+				die('Session has expired, logging you out');
+				session_destroy();
+			}
+		} else {
+			/// NOT ACTIVE SESSION REDIRECT THE USER 
+			header('refresh: 3; /home/login/');
+			die('Session has expired, logging you out');
+			session_destroy();
+		}
 	}
+
+
 	public function index()
 	{
 		// init the functions of the class 
@@ -27,7 +93,7 @@ class Render extends BaseController
 					$error = [
 						"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
 					];
-					
+
 					die(view('/render/paymentPage', $error));
 				}
 				$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_SANITIZE_STRING);
@@ -45,39 +111,35 @@ class Render extends BaseController
 
 				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
 				echo view('/render/paymentPage', $data);
-			break;
+				break;
 
 
 			case "poa":
 
-					if (empty($_POST['_data_'])) {
-						$error = [
-							"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
-						];
-
-						die(view('/render/paymentPage', $error));
-					}
-
-					$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_SANITIZE_STRING);
-
-					$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-
-					$data = [
-						"contractData" => $contract,
-						"contractType" => $contractType,
-						"contractTitle" => "Power of Attorney",
-						"contractContent" => view('render/template/contract_poa', $contract),
-						"contractPayment" => 'true',
-						"contractPaymentStatus" => null,
+				if (empty($_POST['_data_'])) {
+					$error = [
+						"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
 					];
 
-					$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-					
-					
+					die(view('/render/paymentPage', $error));
+				}
 
-					var_dump($_POST);
-					echo view('/render/paymentPage', $data);
+				$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_SANITIZE_STRING);
+
+				$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+
+				$data = [
+					"contractData" => $contract,
+					"contractType" => $contractType,
+					"contractTitle" => "Power of Attorney",
+					"contractContent" => view('render/template/contract_poa', $contract),
+					"contractPayment" => 'true',
+					"contractPaymentStatus" => null,
+				];
+
+				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+				echo view('/render/paymentPage', $data);
 
 				break;
 		}
@@ -92,12 +154,110 @@ class Render extends BaseController
 
 	public function fetchContract($PRODUCT = null)
 	{
+		helper('documentEnforcer');
+		$accessToken = $_SESSION['SESSION_AUTH_HANDSHAKE'];
+		$userModel = new Users();
+		$documentData = new DocumentStorage();
+		$userData = $userModel->lookupBySessionID($accessToken);
+		$userID = $userData['userID'];
+		$documentData = $documentData->lookupDocuments($userID);
 
+		// load our document Enforcer class
+		$documentEnforcer = new documentEnforcer($documentData);
+
+		if ($documentEnforcer->verifyObjectData($documentData) === true) {
+			// proccess to filter the document 
+			if ($blob = $documentEnforcer->verifyDocumentKey($documentData, $PRODUCT)) {
+				// send it for proccessing 
+				$this->output($blob);
+			} else {
+				// document not found 
+				return $this->display404Error();
+			}
+		} else {
+			// 404
+			return $this->display404Error();
+		}
+	}
+	// return our error for the program if 
+	// document where not even sent
+	private function display404Error()
+	{
+		http_response_code(404);
+		return view('/errors/html/error_404');
 	}
 
 
-	public function deleteContract($productKey = null) {
-		
+	private function display400Error()
+	{
+		http_response_code(400);
+		die('bad request');
+	}
+
+	// display document 
+
+	private function output($data)
+	{
+
+		if ($data['documentType'] === 'lastwill') {
+			$dompdf = new Dompdf();
+			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_SANITIZE_STRING);
+
+			$dompdf->loadHtml(view('/render/template/contract_lastwill', $contractData));
+			$dompdf->setPaper('A4', 'landscape');
+			$dompdf->render();
+			$dompdf->stream();
+		} else if ($data['documentType'] === 'poa') {
+			$dompdf = new Dompdf();
+			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_SANITIZE_STRING);
+
+			$dompdf->loadHtml(view('/render/template/contract_poa', $contractData));
+			$dompdf->setPaper('A4', 'landscape');
+			$dompdf->render();
+			$dompdf->stream();
+		} else {
+			// something went wrong error display
+			return $this->display400Error();
+		}
+	}
+
+	// delete contracts
+	// delete the table entry 
+	// but we will keep the purchase entry for our records 
+
+	public function deleteContract($productKey = null)
+	{
+		helper('documentEnforcer');
+		$accessToken = $_SESSION['SESSION_AUTH_HANDSHAKE'];
+		$userModel = new Users();
+		$documentData = new DocumentStorage();
+		$userData = $userModel->lookupBySessionID($accessToken);
+		$userID = $userData['userID'];
+		$data = $documentData->lookupDocuments($userID);
+
+		// load our document Enforcer class
+		$documentEnforcer = new documentEnforcer($data);
+
+		if ($documentEnforcer->verifyObjectData($data) === true) {
+			// proccess to filter the document 
+			if ($blob = $documentEnforcer->verifyDocumentKey($data, $productKey)) {
+				// send it for proccessing 
+				// show the success page 
+				echo view('/dashboard/template/header');
+
+				if ($documentData->deleteDocument((int) $blob['documentID']) === true) {
+					die(view('/dashboard/accounts/failed'));
+				} else {
+					die(view('/render/delete_success'));
+				}
+			} else {
+				// document not found 
+				return $this->display404Error();
+			}
+		} else {
+			// 404
+			return $this->display404Error();
+		}
 	}
 
 
@@ -110,7 +270,7 @@ class Render extends BaseController
 		// check to see if the payment gateway set our flag in our document inordr 
 		// to let us access the resource
 
-		
+
 		if ($data['contractPaymentStatus'] === true) {
 
 
@@ -121,7 +281,7 @@ class Render extends BaseController
 					$dompdf->setPaper('A4', 'landscape');
 					$dompdf->render();
 					$dompdf->stream();
-				break;
+					break;
 
 				case 'poa':
 					$dompdf = new Dompdf();
@@ -129,7 +289,7 @@ class Render extends BaseController
 					$dompdf->setPaper('A4', 'landscape');
 					$dompdf->render();
 					$dompdf->stream();
-				break;
+					break;
 
 				default:
 					// display error page not found 
