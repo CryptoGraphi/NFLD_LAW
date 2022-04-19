@@ -21,7 +21,7 @@
     <li> Vanilla JS </li>
     <li> CSS </li>
     <li> HTML </li>
-    <li> Code Ignightor </li>
+    <li> Code Ignitor </li>
   </ul>
   </section>
 
