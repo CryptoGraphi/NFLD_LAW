@@ -2,12 +2,12 @@
     <div class='row  loginPannel p-4'>
             <h2 class='text-center'> Register </h2>
             <small class='text-center' style='font-weight: bold;'> Please fill out required information to use our service </small>
-            <h4 class='text-danger'> <?php  echo $_SESSION['REGISTRATION_ERROR_MESSAGE']; ?> </h4>
+            <h4 class='text-danger'> </h4>
 
             <div class='col-md-6'>
                     <img class='img-fluid' src='/img/SVG/signup.svg' />
         </div>
-            <div class='col-md-4 <?php echo $_SESSION['AUTHENTICATION_CSS_CLASS'] ?>'>
+            <div class='col-md-4'>
         <form method='post' action='/Authentication/register/'>
 
 

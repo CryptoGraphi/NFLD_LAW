@@ -7,7 +7,7 @@
  *  purpose: to provide password hashing and encryption services to the database 
  * 
  * 
- *  our: defualt algorith will be 
+ *  our: default algorithm will be sha256 
  * 
  */
 

@@ -174,13 +174,13 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 
 
 .hero:nth-child(even)
 {
-  background-color: #3a67fab9;
+  background-color: #0f246b98;
 
 }
 
 
 .hero:nth-child(odd){
-  background-color: #fc4040c0;
+  background-color: #690d0d85;
 
 }
 

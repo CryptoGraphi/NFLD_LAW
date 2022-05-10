@@ -13,7 +13,6 @@ class Home extends BaseController
 		echo view('/home/template/header');
 		echo view('/home/index');
 		echo view('/home/template/footer');
-		die();
 	}
 
 	public function about()
@@ -25,7 +24,7 @@ class Home extends BaseController
 
 	public function login()
 	{
-		
+		session_start();
 		echo view('/home/template/header');
 		echo view('/home/login');
 		echo view('/home/template/footer');

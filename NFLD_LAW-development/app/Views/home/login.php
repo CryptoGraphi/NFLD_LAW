@@ -1,11 +1,11 @@
 <div class='container'>
     <div class='row loginPannel p-4'>
-            <h4 class='text-danger'> <?php   echo $_SESSION['AUTHENTICATION_ERROR_MESSAGE']; ?>  </h4> 
+            <h4 class='text-danger'> <?php  ?>  </h4> 
      
         <div class='col-md-6'>
                     <img class='img-fluid' src='/img/SVG/Website Login.svg' />
         </div>
-        <div class='col-md-6 <?php echo $_SESSION['AUTHENTICATION_CSS_CLASS'] ?>'>            
+        <div class='col-md-6 <?php  ?>'>            
         <form method='post' action='/Authentication/login/'>
         <h2 class='text-center'>  Please Login <i class='fas fa-user-shield	'></i></h2>
             <div class="form-group m-2">
