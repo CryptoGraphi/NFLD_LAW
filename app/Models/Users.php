@@ -8,14 +8,13 @@ class Users extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'users';
-	protected $primaryKey           = 'userID';
+	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['userEmail', 'userPassword', 'userLastLogin', 'userLoginAttempts',
-	'userAccessToken', 'userSessionID', 'userSalt', 'userLoginActive'];
+	protected $allowedFields        = ['email', 'password', 'salt', 'token', 'created_at', 'updated_at', 'deleted_at'];
 
 	// Dates
 	protected $useTimestamps        = false;
@@ -26,9 +25,9 @@ class Users extends Model
 
 	// Validation
 	protected $validationRules      = [
-		'userEmail' => 'required|valid_email|is_unique[users.userEmail]',
-		'userPassword' => 'required|min_length[8]',
-		'userSalt' => 'required'
+		'email' => 'required|valid_email|is_unique[users.email]',
+		'password' => 'required|min_length[8]',
+		'salt' => 'required'
 	];
 	protected $validationMessages   = [];
 	protected $skipValidation       = false;
@@ -46,44 +45,55 @@ class Users extends Model
 	protected $afterDelete          = [];
 
 
-	// lookup username in data to see if the user exists or not
-	public function lookupUser($username)
+
+	/**
+	 *   @function: exists
+	 *  
+	 *  @purpose: inorder to check if the user exists in the database 
+	 *
+	 */
+
+	public function exists($email)
 	{
-		return $this->where(['userEmail' => $username])->first();
+		return $this->where('email', $email)->first();
 	}
 
-	// changes the key value of the user inorder to login to the session
-	public function issueHandshake($id, $data)
+
+	
+
+
+	/**
+	 *  @function: updateToken 
+	 * 
+	 *  @purpose: inorder to update the token of the user in the system 
+	 * 
+	 */
+
+	public function updateToken($id, $value)
 	{
-		return $this->update($id, $data);
+		return $this->where('id', $id)->set('token', $value)->update();
 	}
 
-	public function updateUserData($id, $data)
-	{
-		return $this->update($id, $data);
-	}
-
-	public function lookupBySessionID($sessionID)
-	{
-		return $this->where(['userAccessToken' => $sessionID])->first();
-	}
-
-	// change the logout values of the particular user 
-	public function logout() {
-
-	}
-
-	// register a user into the database 
-	public function registerUser($data)
-	{
-		return $this->insert($data);
-
-	}
-
-	// remove the user for users to delete their account 
-	public function removeUser($id)
-	{
-
-	}
+	/**
+	 * 
+	 *  @function: create 
+	 * 
+	 *  @purpose: in order to create a new user in the system. 
+	 *  
+	 */
+	
+	 public function create($email, $password, $salt)
+	 {
+		// create a new user account in the system  with the given email and password 
+		return $this->save([
+			'email' => $email,
+			'password' => $password,
+			'salt' => $salt,
+			'token' => hash('sha512', $email . time() . $salt),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+			'deleted_at' => null
+		]);
+	 }
 
 }

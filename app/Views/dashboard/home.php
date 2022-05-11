@@ -1,33 +1,30 @@
 <div class='container'>
 
     <div class='row'>
+        
+        <div class='col-md-12 mb-4 mt-4'>
+            <h1> Getting Started </h1>
+            <small class='small-caption'>  Getting starting started is easy </small>
 
-    <div class='col-md-12 mb-4 mt-4'>
-        <h1> Getting Started </h1>
-        <small class='small-caption'>  Getting starting started is easy </small>
-
-        <p class='small-caption'>
-        Just follow the step-by-step instructions to fill out the necessary information for your
-                            forms.
-        </p>
-
-        <p style='font-weight: bold;'>&copy; NFLD LAW freewillLawyer.com</p>
-
-</div>
+            <p class='small-caption'>
+            Just follow the step-by-step instructions to fill out the necessary information for your
+                                forms.
+            </p>
+        </div>
 
   
         
     
-        <div class='col-sm iconTile'>
+        <div class='col-sm'>
            <img src='/img/SVG/document_choose.svg' class='img-fluid' />
             <span> Choose your document </span>
         </div>    
         
-        <div class='col-sm iconTile'>
+        <div class='col-sm '>
             <img src='/img/SVG/fill_form.svg' class='img-fluid' />
             <span> Answer a few simple questions</span>
         </div>
-        <div class='col-sm iconTile'>
+        <div class='col-sm '>
             <img src='/img/SVG/clock.svg' class='img-fluid'/>
             <span> It take(s) just 5 minute(s) </span>
         </div>

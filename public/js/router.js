@@ -36,7 +36,7 @@ class Route {
         script.src = ROUTE_PATH_CONTROLLER + filename + ".js";
         script.type = 'module';
         document.head.appendChild(script);
-            return true;
+        return true;
     }
 
 
@@ -79,6 +79,11 @@ class Route {
         let $url = window.location.pathname;
         let splitUrl = $url.split('/');
 
+        // this will add a bases case i did not think of when i was first
+        // writting this code
+        if (splitUrl[1] === 'index.php') {
+            return splitUrl[2];
+        }
         return splitUrl[1];
     }
     // load our prerequisites class we need so core classes 
