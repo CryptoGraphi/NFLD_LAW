@@ -3,7 +3,7 @@
             <h4 class='text-danger'> <?php  ?>  </h4> 
      
         <div class='col-md-6'>
-                    <img class='img-fluid' src='/img/SVG/Website Login.svg' />
+                    <img class='img-fluid' src='/img/SVG/lawyer2.svg' />
         </div>
         <div class='col-md-6 <?php  ?>'>            
         <form method='post' action='/Authentication/login/'>

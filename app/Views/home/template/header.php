@@ -24,8 +24,7 @@
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light"
-        style=' width: 100% !important; background-color: transparent;'>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
                 <ul class='navbar-nav'>
          
@@ -34,12 +33,13 @@
               <span class="navbar-toggler-icon"></span>
   
           </button></li></ul>
-        <a class='nav-link' href=''
-            style='text-decoration: none; color: black; font-weight:200; font-size: 20px;'>NFLDLAW<img class='img-fluid'
-                src='/img/Freewill-logos/Freewill-logos_black.png' style='max-width: 200px; max-height: 200px' /></a>
+        <a class='nav-link' href=''>
+        <span class='text-bold'> NFLD LEGAL </span>    
+        <img class='img-fluid'src='/img/Freewill-logos/Freewill-logos_black.png' style='max-height: 150px' />
+    </a>
 
         <ul class="navbar-nav" id='nav-section-topMenu'>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/">Home </a>
             </li>
             <li class="nav-item">
@@ -50,18 +50,6 @@
             </li>
             <li>
                 <a href='/home/register/'><button class='btn btn-transparent started'>Get Started</button></a>
-            </li>
-            <li class='nav-item'>
-                <a href="/"><i class="bi bi-facebook social"></i></a>
-
-
-            </li>
-            <li class='nav-item'>
-                <a href="/"><i class="bi bi-twitter social"></i></a>
-            </li>
-
-            <li class='nav-item'>
-                 <a href=''><i class="bi bi-whatsapp social"></i> </a>
             </li>
 
         </ul>

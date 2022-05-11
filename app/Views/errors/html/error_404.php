@@ -9,7 +9,6 @@
     <style>
     body {
         font-weight: bolder;
-		background: url('/img/SVG/404_page.svg') rgba(158, 190, 248, 0.137) 5vw 5vh no-repeat fixed;
 	
     }
 
@@ -29,11 +28,8 @@
             <div class='col-md'>
                 <div class='col-sm'>
 				<img class='img-fluid' src='/img/Freewill-logos/Freewill-logos_black.png' style='align-content: start; max-width: 300px; max-height: 300px' />
-				<h1 class='m-4' style='font-style: italic;'>404 - File Not Found</h1>
-                    <small class='text-center m-4' style='font-size: 24px;  font-style: italic;'> Sorry we cant find the
-                        resource <br/>you are looking for </small><br/><br/>
+				<h1 class='mt-4' style='font-style: italic;'>404 - File Not Found</h1>
 					<span class='mt-4'> To go back to home page <a href='/'> Click here </a> </span>
-					 <img class='img-fluid' src='' />
                 </div>
             </div>
         </div>
