@@ -59,9 +59,6 @@ class Users extends Model
 	}
 
 
-	
-
-
 	/**
 	 *  @function: updateToken 
 	 * 
@@ -71,7 +68,8 @@ class Users extends Model
 
 	public function updateToken($id, $value)
 	{
-		return $this->where('id', $id)->set('token', $value)->update();
+		// also update the updated_at field
+		return $this->update($id, ['token' => $value, 'updated_at' => date('Y-m-d H:i:s')]);
 	}
 
 	/**

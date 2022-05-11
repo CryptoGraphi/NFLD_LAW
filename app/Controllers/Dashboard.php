@@ -3,10 +3,12 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Services\Auth\Auth;
 use App\Models\Users;
 use App\Models\DocumentStorage;
 use account;
 use accounts;
+use FontLib\Table\Type\head;
 use sessionManager;
 
 class Dashboard extends BaseController
@@ -14,22 +16,22 @@ class Dashboard extends BaseController
 
 	public function __construct()
 	{
-		// add the authentication class here. 
-	}
+		// check if the sessions are set. 
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		// add the authentication middleware to the controller in question
 
+		if (!Auth::isLoggedIn()) {
+			return Auth::deny();
+			exit;
+		}
+	}
 
 	public function index()
 	{
-		echo view('/dashboard/template/header');
-	
-
-		$data = [
-			'userID' => '',
-			'userDocuments' => ''
-		];
-
-		echo view('/dashboard/home.php');
-		echo view('/dashboard/template/footer');
+		
+		return view('/dashboard/template/header') . view('/dashboard/home.php') . view('/dashboard/template/footer');
 	}
 
 

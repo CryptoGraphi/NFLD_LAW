@@ -22,7 +22,8 @@ class Authentication extends BaseController
 
 	public function index()
 	{
-
+		// nothing to do here
+		exit;
 	}
 
 	/**
@@ -58,7 +59,7 @@ class Authentication extends BaseController
 	 *  
 	 *  @function: register
 	 * 
-	 *  @purpose: inorder to register the user inside of the system 
+	 *  @purpose: in order to register the user inside of the system 
 	 */
 
 	public function register()
@@ -92,6 +93,9 @@ class Authentication extends BaseController
 	public function logout()
 	{
 		// logout the user and clear the sessions and cookies.
-		return Auth::logout();
+		if (Auth::logout()) {
+			return redirect()->to('/home/login');
+			exit;
+		}
 	}
 }

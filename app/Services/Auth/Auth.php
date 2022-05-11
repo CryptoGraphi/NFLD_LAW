@@ -61,6 +61,8 @@
                     // set the sessions varibles and also set the token for the user in the table
                     // generate our handshake 
                     $token = hash('sha512', $userModel->email . time() .  $userModel->salt);
+                    // update the token for the user
+                    $userModel->updateToken($userModel->where('email', $email)->first()['id'], $token);
                     // set the sessions variables
                     $_SESSION['token'] = $token;
                     $_SESSION['time'] = time();
@@ -84,7 +86,14 @@
     public static function deny()
     {
         // deny the user access to the system 
-        return false;
+        // delete all sessions 
+        session_destroy();
+        // delete all cookies 
+        setcookie('token', '', time() - 3600);
+
+        header('HTTP/1.0 403 Forbidden');
+		header('location: /home/login');
+        exit;
     }
 
     /**
@@ -159,6 +168,7 @@
         // validate that the user is logged in and has a valid token
         //  check if the sessions are set
         //  token, and time
+
         if (isset($_SESSION['token']) && isset($_SESSION['time'])) {
 
             $token = empty($_SESSION['token']) ? false : $_SESSION['token'];
@@ -173,19 +183,16 @@
 
             if ($userModel->where('token', $token)->first()) {
                 // sessions should be only valid for 1 hour
-                if ($time + 3600 > time()) {
-                    // the token is valid
-                    // destroy the sessions
-                    $userID = $userModel->where('token', $token)->first()['id'];
-                    session_destroy();
-                    $userModel->where('token', $token)->updateToken($userID, hash('sha512', $userModel->email . time() .  $userModel->salt));
+                if (time() - $time > 3600) {
+                    // the session is expired
+                    // destroy the session
+                    self::deny();
                     return false;
-
                 }
-                // the request was valid so return true to the user
                     return true;
             }
         }
+
         return false;
      }
 
@@ -204,7 +211,7 @@
          if (isset($_SESSION['token']) && isset($_SESSION['time'])) {
             $token = empty($_SESSION['token']) ? false : $_SESSION['token'];
             $time = empty($_SESSION['time']) ? false : $_SESSION['time'];
-            $tokenMatch = $userModel->where('token', $token)->exists();
+            $tokenMatch = $userModel->where('token', $token)->first();
             // was the token valid in the first place
             if ($tokenMatch) {
                 // destroy the sessions and reset the token
@@ -215,7 +222,7 @@
         }
         // the user is not logged in
             session_destroy();
-            return false;
+            return true;
       }
  }
 
