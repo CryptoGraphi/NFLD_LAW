@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
+-- test account for testing the db functions  -- 
 insert into users (id, email, password, salt, token, updated_at, created_at, deleted_at)
 values (
     'oliver.shwaba@gmail.com',
