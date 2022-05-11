@@ -7,12 +7,6 @@
   </p>
  </section>
  
- <section>
-  <center>
-    <img src='https://user-images.githubusercontent.com/73624670/164025568-0b110c07-55eb-4ab2-92d9-5e5fc503ac10.png'  width='300px' height='300px' />
-  </center>
-  </section>
- 
  
  <section>
   <h1> Tech Stack </h1>
