@@ -10,7 +10,7 @@
 
 export const initStripe = () => {
   let stripe = Stripe(
-    "pk_test_51IoHyoHRqaEOzZ9RZq6i0d2ihbWG8yBH3PxhSvEofhmmSeQEjppK59csYsfl4zYGZzNUn9fRixEx6cIDiQv7Jw2600jPY1D52x"
+    "pk_test_51IoHyoHRqaEOzZ9RkB21rKk33uHUnL0BtSQd45MbrFw79RGenWuiIHpngwKxV89lswkhjEEGzSIu5J8EmBoVje0D00SPGNqMLa"
   );
   // Stripe API Key
   let elements = stripe.elements();
@@ -71,13 +71,14 @@ export const initStripe = () => {
   // Handle form submission
   let form = document.getElementById("payment-form");
   form.addEventListener("submit", function (event) {
-  //  event.preventDefault(); this causes a form submission bug :()
+  event.preventDefault();
     stripe.createToken(cardNumber).then(function (result) {
       if (result.error) {
         // Inform the user if there was an error
         let errorElement = document.getElementById("card-errors");
         errorElement.textContent = result.error.message;
       } else {
+        console.log(result.token);
         stripeTokenHandler(result.token);
       }
     });

@@ -52,18 +52,6 @@
             <li class='nav-item'>
                 <a  class='nav-link' href='/Authentication/logout/'> Logout </a>
             </li>
-            <li class='nav-item'>
-                <a href="/"><i class="bi bi-facebook social"></i></a>
-
-
-            </li>
-            <li class='nav-item'>
-                <a href="/"><i class="bi bi-twitter social"></i></a>
-            </li>
-
-            <li class='nav-item'>
-                 <a href=''><i class="bi bi-whatsapp social"></i> </a>
-            </li>
 
         </ul>
         <div class="collapse navbar-collapse" id="navbarNav">

@@ -5,8 +5,12 @@
  * 
  */
 
-import { wizard} from '../../modules/wizard.js';
-import {ModelLastwill } from '../../models/lastWill.js';
+import {
+    wizard
+} from '../../modules/wizard.js';
+import {
+    ModelLastwill
+} from '../../models/lastWill.js';
 
 const wizardModule = new wizard();
 let modelObject = new ModelLastwill();
@@ -33,7 +37,7 @@ let tabExecutor = document.getElementById('nav-tab-executor');
 let tabAltExecutor = document.getElementById('nav-tab-backupExecutor');
 let tabChildren = document.getElementById('nav-tab-children');
 let tabGifts = document.getElementById('nav-tab-gifts');
-let tabRemainder= document.getElementById('nav-tab-remainder');
+let tabRemainder = document.getElementById('nav-tab-remainder');
 let tabFinal = document.getElementById('nav-tab-final');
 let tabSigning = document.getElementById('nav-tab-signing');
 
@@ -57,7 +61,7 @@ tabAltExecutor.addEventListener('click', () => {
 });
 
 
-tabChildren.addEventListener('click', ()=> {
+tabChildren.addEventListener('click', () => {
     wizardModule.changeWizardTitle('title_', 'Children');
     wizardModule.show('step', 5);
 });
@@ -79,9 +83,9 @@ tabFinal.addEventListener('click', () => {
 });
 
 
-tabSigning.addEventListener('click', () => {    
+tabSigning.addEventListener('click', () => {
     wizardModule.changeWizardTitle('title_', "Signing");
-    wizardModule.show('step',12);
+    wizardModule.show('step', 12);
 });
 
 
@@ -691,21 +695,21 @@ const verifyRemainderForm = (domElement) => {
                 "city": [],
                 "province": []
             },
+        }
+
+        return false;
     }
 
-    return false;
-}
 
+    if (trigger === false) {
+        return resetAllInputs();
+    }
 
-if (trigger === false ) {
-    return resetAllInputs();
-}
-
-if (verifyShareAmount() === true ) {
-    return true;
-} else {
-    return resetAllInputs();
-}
+    if (verifyShareAmount() === true) {
+        return true;
+    } else {
+        return resetAllInputs();
+    }
 
 };
 
@@ -737,7 +741,7 @@ const verifyWipeoutForm = (domElement) => {
     let trigger = '';
     let lastWill = modelObject.getObject().wipeout;
 
-    if (inputs[0].value.length !== 0 ) {
+    if (inputs[0].value.length !== 0) {
         errorMessage[0].innerHTML = '';
         lastWill.name = inputs[0].value;
     } else {
@@ -745,7 +749,7 @@ const verifyWipeoutForm = (domElement) => {
         errorMessage[0].innerHTML = 'Please enter this field is it required';
     }
 
-    if(inputs[1].value.length !== 0) {
+    if (inputs[1].value.length !== 0) {
         errorMessage[1].innerHTML = '';
         lastWill.city = inputs[1].value;
     } else {
@@ -763,12 +767,12 @@ const verifyWipeoutForm = (domElement) => {
     }
 
 
-// reset data if cases or not met 
+    // reset data if cases or not met 
     const resetModel = () => {
         let lastWill = modelObject.getObject();
 
         lastWill.wipeout = {
-            divideEstate : undefined,
+            divideEstate: undefined,
             name: undefined,
             city: undefined,
             province: undefined,
@@ -777,7 +781,7 @@ const verifyWipeoutForm = (domElement) => {
     }
 
 
-    if (trigger === false ) {
+    if (trigger === false) {
         return resetModel();
     }
     return true;
@@ -1131,32 +1135,32 @@ next.addEventListener('click', (e) => {
                 lastWill.wipeout.divideEstate = 'true';
                 wizardModule.changeWizardTitle('title_', 'Additional details');
                 wizardModule.show('step', 11);
-            }  else if (distroFormInput[1].checked === true) {
+            } else if (distroFormInput[1].checked === true) {
                 errorMessage.innerHTML = '';
                 if (verifyWipeoutForm(wipeoutFormContainer) === true) {
                     lastWill.wipeout.divideEstate = 'false';
                     wizardModule.changeWizardTitle('title_', 'Additional details');
                     wizardModule.show('step', 11);
-                    wizardModule.updateProgresBar(progress,77);
+                    wizardModule.updateProgresBar(progress, 77);
                 }
-               
-            }  else {
-              errorMessage.innerHTML = "Please select an option inorder to continue";
+
+            } else {
+                errorMessage.innerHTML = "Please select an option inorder to continue";
             }
-        break;
-        // provisions pannel
+            break;
+            // provisions pannel
         case 11:
             let provisions = formPannel[11];
             errorMessage = provisions.querySelector('.error-message');
 
-            if(additionalClauseTrue.checked === true) {
+            if (additionalClauseTrue.checked === true) {
                 errorMessage.innerHTML = '';
                 if (verifyAdditionalClause(additionalClauseContainer) === true) {
                     wizardModule.changeWizardTitle('title_', 'Signing Details ');
                     wizardModule.show('step', 12);
                     wizardModule.updateProgresBar(progress, 84);
                     next.disabled = true;
-                } 
+                }
             } else if (additionalClauseFalse.checked === true) {
                 errorMessage.innerHTML = '';
                 lastWill.provisions.additionalClause = 'false';
@@ -1171,8 +1175,8 @@ next.addEventListener('click', (e) => {
             // signing details 
             case 12:
                 let signing = formPannel[12];
-            break;
-        break;
+                break;
+                break;
 
     }
 
@@ -1271,4 +1275,4 @@ documentContainer.addEventListener('submit', () => {
 
     JSON_DATA.value = JSON.stringify(lastWill);
 
-} )
+})

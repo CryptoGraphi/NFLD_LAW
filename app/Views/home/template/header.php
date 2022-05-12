@@ -12,7 +12,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
-    <link rel="shortcut icon" href="/img/Freewill-logos/Freewill-logos_black.png" />
+    <link rel="shortcut icon" href="/img/Freewill-logos/Freewill-logos_black.webp" />
     <link rel='stylesheet' href='/css/index.css' />
     <script src='/js/router.js'></script>
 
@@ -35,7 +35,7 @@
           </button></li></ul>
         <a class='nav-link' href=''>
         <span class='text-bold'> NFLD LEGAL </span>    
-        <img class='img-fluid'src='/img/Freewill-logos/Freewill-logos_black.png' style='max-height: 150px' />
+        <img class='img-fluid'src='/img/Freewill-logos/Freewill-logos_black.webp' style='max-height: 150px' />
     </a>
 
         <ul class="navbar-nav" id='nav-section-topMenu'>

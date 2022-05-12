@@ -607,7 +607,7 @@ $mainPageCounter = 0;
         </div>
     </div>
     <div class="LDCopyright">
-        <p>©2021 NFLD LAW (freewilllawyer.com)</p>
+        <p>©2021 NFLD LEGAL </p>
     </div>
 </div>
 </div>

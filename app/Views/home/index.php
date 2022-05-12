@@ -14,14 +14,14 @@
 
         <div class='d-flex flex-row mt-2 intro-hero-images'>
             <div class='col m-1'>
-                <img src='/img/redcoat_man.jpg' class='img-fluid frame' />
+                <img src='/img/redcoat_man.webp' class='img-fluid frame' />
             </div>
             <div class='col m-1'>    
-                <img src='/img/kid_glasses.jpg' class='img-fluid shadow-lg'/>
+                <img src='/img/kid_glasses.webp' class='img-fluid shadow-lg'/>
             </div>
 
             <div class='col m-1'>
-                <img src='/img/kid_bike.jpg' class='img-fluid shadow-lg'  />
+                <img src='/img/kid_bike.webp' class='img-fluid shadow-lg'  />
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
 
 
 <!-- SERVICES SECTION   -->
-<div class='container bg-white p-4 shadow-lg mt-5 rounded service'>
+<div class='container bg-white shadow-lg mt-5 rounded service'>
     <div class='row'>
         <div class='col-sm p-4 hero'>
             <h1 id='services'> Our Services</h1>
@@ -72,17 +72,17 @@
     </div>
 </div>
 
-<div class='container bg-white p-5 mt-5'>
+<div class='container bg-white p-5 mt-5 shadow-lg'>
 
     <div class="mt-4 mb-4">
         <h1 style='font-size:3rem;'> Getting Started </h1>
     </div>
 
 
-    <div class='row'>
+    <div class='row m-0 p-0'>
 
-        <ul class="list-group space hero-list">
-            <li class="list-group space hero">
+        <ul class="list-group space hero-list m-0 p-0">
+            <li class="list-group space hero m-0">
                 <h1 class='p-4' id='howitworks' style='font-size: 2rem;'> How to get started using our service </h1>
             </li>
 

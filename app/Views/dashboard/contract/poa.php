@@ -15,29 +15,35 @@ function generateProvinceList()
 }
 ?>
 
-<div class='container' style='margin-top: 10%;'>
+<div class='container bg-white p-5 shadow-lg' style='margin-top: 10%;'>
 
     <div class='row'>
-        <h1 class='text-center'> <?php echo $headerTitle; ?> </h1>
-        <small style='color: slategray; font-style: italic;' class='mt-4'> Please go though our interactive wizard to
-            generate your <b> "Personalized" </b> legal contract </small>
+        <h1> <?php echo $headerTitle; ?> </h1>
+        <hr />
+        <p class='mt-4'> Please go though our interactive wizard to
+            generate your <b> "Personalized" </b> legal contract </p>
     </div>
 
     <div class='row mt-4'>
-        <div class='col-sm iconTile'>
-            <img src='/img/SVG/document_choose.svg' class='img-fluid' />
-            <span> Choose your document </span>
+        <div class='col-md-12 mb-4 mt-4'>
+            <h1 style='font-size: 26px;'> Getting Started </h1>
+            <hr/>
+            <p class='mt-2'>Just follow the step-by-step instructions to fill out the necessary information for your forms.</p>
         </div>
 
-        <div class='col-sm iconTile'>
-            <img src='/img/SVG/fill_form.svg' class='img-fluid' />
-            <span> Answer a few simple questions</span>
-        </div>
-        <div class='col-sm iconTile'>
-            <img src='/img/SVG/clock.svg' class='img-fluid' />
-            <span> It take(s) just 5 minute(s) </span>
+        <div class='col-sm dashboard-tile'>
+        <img src='/img/SVG/lawyer.svg' class='img-fluid' />
+            <p class='text-bold dashboard-hero'> Choose your document </p>
         </div>
 
+        <div class='col-sm dashboard-tile'>
+            <img src='/img/SVG/question.svg' class='img-fluid' />
+            <p class='text-bold dashboard-hero dashboard-hero-m'> Answer a few simple questions</p>
+        </div>
+        <div class='col-sm dashboard-tile'>
+            <img src='/img/SVG/time.svg' class='img-fluid'/>
+            <p class='text-bold dashboard-hero'> It take(s) just 5 minute(s) </p>
+        </div>
     </div>
 
     <div class='row mt-4'>
@@ -563,8 +569,7 @@ function generateProvinceList()
                     <button class='btn started btn-lg' style='padding-right: 5%; padding-left: 5%;' id='btn-next'> Next
                     </button>
                 </div>
-                <small style='color: slategray; font-style: italic; text-align: center'>&copy NFLD LAW
-                    (freeWillLawyer)</small>
+                <small style='color: slategray; font-style: italic; text-align: center'>&copy NFLD LEGAL </small>
 
 
             </div>

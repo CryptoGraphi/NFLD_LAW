@@ -1,6 +1,6 @@
-<div class='container-fluid p-4'>
+<div class='container p-4'>
 
-    <div class='row mt-4 dashboard-row shadow-lg'>
+    <div class='row mt-4 bg-white shadow-lg p-4 rounded-lg'>
 
         <div class='col-md-12 mb-4 mt-4'>
             <h1> Getting Started </h1>
@@ -23,10 +23,10 @@
         </div>
     </div>
 
-    <div class='row mt-4 bg-white shadow-lg rounded-lg border'>
+    <div class='row mt-4 shadow-lg rounded-lg border'>
 
-        <div class='container mt-4'>
-            <div class='row'>
+        <div class='container'>
+            <div class='row hero'>
 
                 <div class='col-sm text-center'>
                     <h3 class='mt-4'>
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class='row'>
+            <div class='row p-4'>
                 <div class='col-md padd' style='margin: 10px;'>
                     <h2> <i class="fa fa-institution" style='margin: 5px;'></i> Wills & Estates </h2>
                     <hr />
@@ -53,7 +53,7 @@
     </div>
 
 
-    <div class='row mt-4 text-center bg-white p-4 w-75 mx-auto shadow-lg'>
+    <div class='row mt-4 text-center bg-white p-5 shadow-lg'>
             <h1 class='text-bold' style='color: rgba(18, 75, 161, 0.856); font-weight: 700'>Your current contracts </h1>
             <hr/>
             <p style='color: black; font-weight: 600; font-style: italic;'> View your current legal contract and forms </p>

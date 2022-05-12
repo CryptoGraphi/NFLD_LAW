@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Users;
 use App\Services\Auth\Auth;
+use App\Controllers\Contracts;
 use App\Models\DocumentStorage;
 use Dompdf\Dompdf;
 use sessionManager;
@@ -43,65 +44,16 @@ class Render extends BaseController
 
 	public function contract($contractType = null)
 	{
-		$header = view('/dashboard/template/header');
-		$footer = view('/dashboard/template/footer');
-
-		// check if the request type is a valid request 
-		if (empty($_POST['__data__'])) {
-			$error = [
-				"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
-			];
-
-			die($header . view('/render/paymentPage', $error) . $footer);
-		}
-
-		// check the contract type. 
-		if ($contractType === 'lastwill') {
-			// check if the request contains the post data. 
-			$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
-
-			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-			// set the data for the contract. 
-			$data = [
-				"contractData" => $contract,
-				"contractType" => $contractType,
-				"contractTitle" => "Last Will, and Testament",
-				"contractContent" => view('/render/template/contract_lastwill', $contract),
-				"contractPayment" => 'true', // is a paid document
-				"contractPaymentStatus" => null, // check if payment went though before verifying anything in our rending
-			];
-
-			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-			return $header . view('/render/paymentPage', $data) . $footer;
-			break;
-
-
-		} else if ($contractType === 'poa') {
-		
-			$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_DEFAULT);
-
-			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-			// set the data for the contract
-			$data = [
-				"contractData" => $contract,
-				"contractType" => $contractType,
-				"contractTitle" => "Power of Attorney",
-				"contractContent" => view('render/template/contract_poa', $contract),
-				"contractPayment" => 'true',
-				"contractPaymentStatus" => null,
-			];
-
-			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-			return $header.  view('/render/paymentPage', $data) . $footer;
-
-		}
+		return Contracts::create($contractType);
 	}
-
-
-	// fetch the document via the documet key 
-	// the user to download 
+	
+	/**
+	 * 
+	 *   @method: fetchContract 
+	 * 
+	 *  @purpose: inorder to fetch the contract from the database
+	 * 
+	 */
 
 
 	public function fetchContract($PRODUCT = null)
@@ -131,13 +83,28 @@ class Render extends BaseController
 			return $this->display404Error();
 		}
 	}
-	// return our error for the program if 
-	// document where not even sent
+	
+
+	/**
+	 * 
+	 *  @method: display404Error 
+	 * 
+	 *  @purpose: inorder to trigger a 404 error within the system 
+	 * 
+	 */
+
 	private function display404Error()
 	{
 		http_response_code(404);
 		return view('/errors/html/error_404');
 	}
+
+	/** 
+	 * 
+	 *  @method: display404Error 
+	 * 
+	 *  @purpose: inorder to display a 404 error within the system if a edgecase is met. 
+	*/
 
 
 	private function display400Error()
@@ -146,7 +113,13 @@ class Render extends BaseController
 		die('bad request');
 	}
 
-	// display document 
+	/**
+	 * 
+	 * @method: output
+	 * 
+	 * @purpose: inorder to preform the render on the said document with in the system. 
+	 * 
+	 */
 
 	private function output($data)
 	{
@@ -173,9 +146,13 @@ class Render extends BaseController
 		}
 	}
 
-	// delete contracts
-	// delete the table entry 
-	// but we will keep the purchase entry for our records 
+	/**
+	 * 
+	 *  @method: deleteContract 
+	 * 
+	 * 	@purpose: inorder to deleteContracts within the system 
+	 * 
+	 */
 
 	public function deleteContract($productKey = null)
 	{
@@ -212,19 +189,23 @@ class Render extends BaseController
 		}
 	}
 
+	/**
+	 *  
+	 *  @method: pdf
+	 * 
+	 *  @purpose: to get a pdf based on if our document session has been met or not. 
+	 * 
+	 */
 
-	// get pdf based on if a our session has been set or not 
+
+
 	public function pdf()
 	{
 		$data = $_SESSION['DOCUMENT_RAW_DATA'];
-
-
-		// check to see if the payment gateway set our flag in our document inordr 
+		
+		// check to see if the payment gateway set our flag in our document inorder  
 		// to let us access the resource
-
-
 		if ($data['contractPaymentStatus'] === true) {
-
 
 			switch ($data['contractType']) {
 				case 'lastwill':

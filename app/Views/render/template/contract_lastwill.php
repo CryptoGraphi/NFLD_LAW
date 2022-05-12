@@ -355,8 +355,8 @@ if ($wipeout['divideEstate'] === 'true') {
                             guardian to care for them, I appoint the following individual to be their guardian (the
                             'Guardian'): </span><span style="color:#000000;"><br></span>
                         <ol start="1" style="list-style:lower-alpha;">
-                            <li style="margin-bottom:0.0pt;" value="1"><span>I appoint 
-                                    <? // echo guardian['name'] ?> of 
+                            <li style="margin-bottom:0.0pt;" value="1"><span>I appoint
+                                    <? // echo guardian['name'] ?> of
                                     <?//echo $guardian['city']; ?>,
                                     <? // parseProvince($guardian['province']); ?> to be
                                     the sole Guardian of all my minor and dependent children until they are at least 18
@@ -385,11 +385,11 @@ if ($wipeout['divideEstate'] === 'true') {
                             <?php
 
 /* if ($Inheritance['delay'] === 'false') {
-    echo "18";
+echo "18";
 } else if ($Inheritance['delay'] === 'true') {
-    echo $Inheritance['age'];
+echo $Inheritance['age'];
 } else {
-    echo "18";
+echo "18";
 } */
 ?>.</span><span style="color:#000000;"><br></span>
                     </li>
@@ -598,12 +598,12 @@ if ($wipeout['divideEstate'] === 'true') {
 					<?php
 
 /*if ($provisions['addinalClause'] === 'true') {
-    echo ' <li class="lh" style="text-align:Left;list-style:none;"><span
-                            style="font-style:normal;font-weight:bold;text-decoration:underline;">Additional
-                            Provisions</span><span style="color:#000000;"><br></span></li>';
+echo ' <li class="lh" style="text-align:Left;list-style:none;"><span
+style="font-style:normal;font-weight:bold;text-decoration:underline;">Additional
+Provisions</span><span style="color:#000000;"><br></span></li>';
 
-    echo ' <li style="margin-bottom:18.0pt;" value="24"><span>' . $provisions['message'] . '</span><span
-                            style="color:#000000;"><br></span></li>';*/
+echo ' <li style="margin-bottom:18.0pt;" value="24"><span>' . $provisions['message'] . '</span><span
+style="color:#000000;"><br></span></li>';*/
 ?>
 
 
@@ -775,5 +775,5 @@ if ($wipeout['divideEstate'] === 'true') {
     </div>
 </div>          <br/><br/><br/><br/><br/><br/>
 <div style='margin-top: 200px;'>
-            <p>©2021 NFLD LAW (freewillLawyer)®</p>
+            <p>©2021 NFLD LEGAL®</p>
         </div>

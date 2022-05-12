@@ -170,7 +170,7 @@ btnCustom.addEventListener('click', () => {
     initStripe();
 });
 
-btnFullPrice.addEventListener('click', () => {
+btnFullPrice.addEventListener('click', (e) => {
     paymentModel.style.display = 'block';
     // insert html
     paymentModalContent.action = generateActionURL('paid');
@@ -208,7 +208,8 @@ btnFullPrice.addEventListener('click', () => {
 </div>
 <div class='form-group m-2'>
         <button class='StripePaymentButton' >Submit Payment</button>
-</div>`;
+</div>`;  
+initStripe();
 
-    initStripe();
+  
 });
