@@ -20,12 +20,6 @@ class Authentication extends BaseController
 
 	}
 
-	public function index()
-	{
-		// nothing to do here
-		exit;
-	}
-
 	/**
 	 * 
 	 *  @function: login	

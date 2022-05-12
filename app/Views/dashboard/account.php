@@ -12,9 +12,7 @@
                         <h4> Reset User Password </h4>
                         <div class='form-group'>
 
-                        
-
-                        <form method='post' action='/dashboard/accountRequest/passwordChange'>
+                        <form method='post' action='/users/changePassword/'>
                             <label> Current Password </label>
                             <input type='password' name='currentPassword' class='form-control' />
                             <label> Password </label>

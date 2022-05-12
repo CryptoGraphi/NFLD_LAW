@@ -5,12 +5,8 @@
  * 
  */
 
-import {
-    wizard
-} from '../../modules/wizard.js';
-import {
-    ModelLastwill
-} from '../../models/lastWill.js';
+import { wizard} from '../../modules/wizard.js';
+import {ModelLastwill } from '../../models/lastWill.js';
 
 const wizardModule = new wizard();
 let modelObject = new ModelLastwill();

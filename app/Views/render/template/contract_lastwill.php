@@ -1,21 +1,18 @@
 <?php
 
-
-function parseProvince($province) {
-	$provinceName = ['Ontario', 'Quebec', 'Nova Soctia', 'New Brunswick', 'Manitoba', 'British Columbia', 
-    'Prince Edward Island', 'Saskatchewan', 'Alberta', 'NewFoundland and Labrador'];
+function parseProvince($province)
+{
+    $provinceName = ['Ontario', 'Quebec', 'Nova Soctia', 'New Brunswick', 'Manitoba', 'British Columbia',
+        'Prince Edward Island', 'Saskatchewan', 'Alberta', 'NewFoundland and Labrador'];
     $provinceValue = ['ON', 'QC', 'NS', 'NB', 'MB', 'BC', 'PE', 'SK', 'AB', 'NL'];
 
-	for ($i = 0; $i < count($provinceName); $i++)
-	{
-		if ($provinceValue[$i] === $province)
-		{
-			return $provinceName[$i];
-		}
-	}
-		return false;
+    for ($i = 0; $i < count($provinceName); $i++) {
+        if ($provinceValue[$i] === $province) {
+            return $provinceName[$i];
+        }
+    }
+    return false;
 }
-
 
 ?>
 
@@ -28,12 +25,12 @@ function parseProvince($province) {
                 <p
                     style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Center;">
                     <span style="font-style:normal;font-weight:bold;">LAST WILL AND TESTAMENT OF
-                        <?php echo $person['name'];  ?></span>
+                        <?php echo $person['name']; ?></span>
                 </p>
                 <p
                     style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;margin-left:12.0pt;">
-                    I, <?php  echo $person['name']; ?>, presently of <?php  echo $person['city'] ?>,
-                    <?php echo parseProvince($person['province']);  ?>, declare that this is my Last Will and Testament.
+                    I, <?php echo $person['name']; ?>, presently of <?php echo $person['city'] ?>,
+                    <?php echo parseProvince($person['province']); ?>, declare that this is my Last Will and Testament.
                 </p>
                 <ol start="1"
                     style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;list-style:decimal;">
@@ -54,16 +51,16 @@ function parseProvince($province) {
                             Status</span><span style="color:#000000;"><br></span>
                     </li>
                     <li style="margin-bottom:18.0pt;" value="2"><span>
-                            <?php 
-							if ($person['relationship'] === 'married') {
-								echo " I am married to ". $person['spouse'] . " ( my 'spouse')";
-							} else if ($person['relationship'] === 'commonLaw') {
-								echo "I am in a common law relationship with " . $person['spouse'] . " (my 'partner')";
+                            <?php
+if ($person['relationship'] === 'married') {
+    echo " I am married to " . $person['spouse'] . " ( my 'spouse')";
+} else if ($person['relationship'] === 'commonLaw') {
+    echo "I am in a common law relationship with " . $person['spouse'] . " (my 'partner')";
 
-							} else if ($person['relationship'] === 'single') {
-								echo "	I am not married or in a common law relationship.";
-							}
-						?>
+} else if ($person['relationship'] === 'single') {
+    echo "	I am not married or in a common law relationship.";
+}
+?>
 
                         </span><span style="color:#000000;"><br></span>
                     </li>
@@ -74,37 +71,35 @@ function parseProvince($province) {
                     <li style="margin-bottom:18.0pt;" value="3">
                         <span>
                             <?php
-						if ($person['children'] === 'true') {
-							echo	'I have the following living children:';
-						}
-						else if ($person['children'] === 'false') {
-							echo "I do not have any living children";
-						}
+if ($person['children'] === 'true') {
+    echo 'I have the following living children:';
+} else if ($person['children'] === 'false') {
+    echo "I do not have any living children";
+}
 
-						?>
+?>
                         </span>
 
 
                         <?php
-					if ($person['children'] === 'true') {
-						echo'
+if ($person['children'] === 'true') {
+    echo '
 							<span style="color:#000000;"><br></span>
                         <ul style="list-style:disc;">
 
 						';
-					
-						if (!empty($children['name']) && !empty($children['dependent'])) {
-							for($i = 0; $i < sizeof($children['name']); $i++) {
-								echo '<li style="margin-bottom:0.0pt;" value="'. $i .'"><span> '. $children['name'][$i]  .'</span><span
-								style="color:#000000;"><br></span></li>';
-							}
-						
-						
-						echo '</ul>';
 
-					}
-				}
-						?>
+    if (!empty($children['name']) && !empty($children['dependent'])) {
+        for ($i = 0; $i < sizeof($children['name']); $i++) {
+            echo '<li style="margin-bottom:0.0pt;" value="' . $i . '"><span> ' . $children['name'][$i] . '</span><span
+								style="color:#000000;"><br></span></li>';
+        }
+
+        echo '</ul>';
+
+    }
+}
+?>
                     </li>
                     <li style="margin-bottom:18.0pt;" value="4"><span>The term 'child' or 'children' as used in this
                             Will includes the above listed children and any children of mine that are subsequently born
@@ -128,14 +123,14 @@ function parseProvince($province) {
                             style="font-style:normal;font-weight:bold;text-decoration:underline;">Appointment</span><span
                             style="color:#000000;"><br></span>
                     </li>
-                    <li style="margin-bottom:18.0pt;" value="6"><span>I appoint <?php  echo $executor['name'] ?>
-                            <?php  echo $executor['city']; ?> of
+                    <li style="margin-bottom:18.0pt;" value="6"><span>I appoint <?php echo $executor['name'] ?>
+                            <?php echo $executor['city']; ?> of
                             , <?php echo parseProvince($executor['province']); ?> as the sole Executor of this Will, but if
-                            <?php echo $executor['name'];  ?> should predecease me, or should refuse or be unable to act
+                            <?php echo $executor['name']; ?> should predecease me, or should refuse or be unable to act
                             or
-                            continue to act as my Executor, then I appoint <?php echo $altExecutor['name']  ?> of
+                            continue to act as my Executor, then I appoint <?php echo $altExecutor['name'] ?> of
                             <?php echo $altExecutor['city']; ?>, <?php echo parseProvince($altExecutor['province']); ?> to be the sole
-                            Executor of this Will in the place of <?php echo $executor['name'];  ?></span><span
+                            Executor of this Will in the place of <?php echo $executor['name']; ?></span><span
                             style="color:#000000;"><br></span>
                     </li>
                     <li style="margin-bottom:18.0pt;" value="7"><span>No bond or other security of any kind will be
@@ -161,7 +156,7 @@ function parseProvince($province) {
                             <li style="margin-bottom:18.0pt;" value="2"><span>To take all legal actions to have the
                                     probate of my Will completed as quickly and simply as possible, and as free as
                                     possible from any court supervision, under the laws of the Province of
-                                    <?php echo parseProvince($person['province']);  ?>;</span><span style="color:#000000;"><br></span>
+                                    <?php echo parseProvince($person['province']); ?>;</span><span style="color:#000000;"><br></span>
                             </li>
                             <li style="margin-bottom:18.0pt;" value="3"><span>To retain, exchange, insure, repair,
                                     improve, sell or dispose of any and all personal property belonging to my estate as
@@ -224,47 +219,44 @@ function parseProvince($province) {
                     </li>
 
 
-                    <?php 
+                    <?php
 
-						if ($gifts['gifts']  === 'true') {
-							echo '<li style="margin-bottom:18.0pt;" value="10"><span>To receive a specific bequest under this Will a
+if ($gifts['gifts'] === 'true') {
+    echo '<li style="margin-bottom:18.0pt;" value="10"><span>To receive a specific bequest under this Will a
                             beneficiary must survive me for thirty (30) days. Any item that fails to pass to a
                             beneficiary will return to my estate to be included in the residue of my estate. All
                             property given under this Will is subject to any encumbrances or liens attached to the
                             property. My specific bequests are as follows:</span><span
                             style="color:#000000;"><br></span>
                         <ol start="1" style="list-style:lower-alpha;">';
-						
-						// run 2 loops to get the fit
 
-						if (!empty($gifts['charity']['name']))  {
-							for ($i = 0; $i < count($gifts['charity']['name']); $i++)
-							{
-								
-								echo '
-                            <li style="margin-bottom:0.0pt;" ><span>I leave to '. $gifts['charity']['name'][$i] .' of
-                                    '. $gifts['charity']['city'][$i] .' , '. parseProvince($gifts['charity']['province'][$i]) .'  , with the charitable registration number:
-                                    '. $gifts['charity']['number'][$i] .', for their own use absolutely, the following: '. $gifts['charity']['description'][$i] .'</span><span
+    // run 2 loops to get the fit
+
+    if (!empty($gifts['charity']['name'])) {
+        for ($i = 0; $i < count($gifts['charity']['name']); $i++) {
+
+            echo '
+                            <li style="margin-bottom:0.0pt;" ><span>I leave to ' . $gifts['charity']['name'][$i] . ' of
+                                    ' . $gifts['charity']['city'][$i] . ' , ' . parseProvince($gifts['charity']['province'][$i]) . '  , with the charitable registration number:
+                                    ' . $gifts['charity']['number'][$i] . ', for their own use absolutely, the following: ' . $gifts['charity']['description'][$i] . '</span><span
                                     style="color:#000000;"><br></span>
                             </li>';
-							}
-						}
+        }
+    }
 
-						if (!empty($gifts['individual']['name'])) {
+    if (!empty($gifts['individual']['name'])) {
 
-							for ($i = 0; $i < count($gifts['individual']['name']); $i++)
-							{
-								echo '<li style="margin-bottom:0.0pt;"><span>I leave to '. $gifts['individual']['name'][$i] .' of '. $gifts['individual']['city'][$i] .', '. parseProvince($gifts['individual']['province'][$i]) .', if they shall survive me, for their own use absolutely, the following: ' . $gifts['individual']['description'][$i].'</span><span style="color:#000000;"><br></span>
+        for ($i = 0; $i < count($gifts['individual']['name']); $i++) {
+            echo '<li style="margin-bottom:0.0pt;"><span>I leave to ' . $gifts['individual']['name'][$i] . ' of ' . $gifts['individual']['city'][$i] . ', ' . parseProvince($gifts['individual']['province'][$i]) . ', if they shall survive me, for their own use absolutely, the following: ' . $gifts['individual']['description'][$i] . '</span><span style="color:#000000;"><br></span>
 								</li>';
-							}
-						}
+        }
+    }
 
-						
-                        echo '</ol></li>';
+    echo '</ol></li>';
 
-						} 
+}
 
-					?>
+?>
 
 
                     <li class="lh" style="text-align:Left;list-style:none;"><span
@@ -287,27 +279,24 @@ function parseProvince($province) {
                             Allocations"):</span><span style="color:#000000;"><br></span>
                         <ol start="1" style="list-style:lower-alpha;">
 
-                            <?php 
+                            <?php
 
-					
-							if (!empty($remainder['individual']['name'])) {
+if (!empty($remainder['individual']['name'])) {
 
-								for ($i = 0; $i < count($remainder['individual']['name']); $i++)
-								{
-									echo '   <li style="margin-bottom:0.0pt;"><span>'. $remainder['individual']['name'][$i] .' of '. $remainder['individual']['city'][$i] .', '.  parseProvince($remainder['individual']['province'][$i]) .', will
-                                    receive '. $remainder['individual']['share'][$i] .' shares of the residue of my estate.</span><span
+    for ($i = 0; $i < count($remainder['individual']['name']); $i++) {
+        echo '   <li style="margin-bottom:0.0pt;"><span>' . $remainder['individual']['name'][$i] . ' of ' . $remainder['individual']['city'][$i] . ', ' . parseProvince($remainder['individual']['province'][$i]) . ', will
+                                    receive ' . $remainder['individual']['share'][$i] . ' shares of the residue of my estate.</span><span
                                     style="color:#000000;"><br></span></li>';
-								}
-							}
+    }
+}
 
-							if (!empty($remainder['charity']['name'])) {
+if (!empty($remainder['charity']['name'])) {
 
-								for ($i = 0; $i < count($remainder['charity']['name']); $i++)
-								{
-									echo '<li style="margin-bottom:0.0pt;"><span>'. $remainder['chairty']['name'][$i] .' of '. $remainder['charity']['city'][$i] .', '. parseProvince($remainder['charity']['province'][$i]) .', with the charitable registration number: '. $remainder['charity']['number'][$i] .', will receive '.$remainder['charity']['share'][$i]  .' shares of the residue of my estate.</span><span style="color:#000000;"><br></span></li>';
-								}
-							}
-						?>
+    for ($i = 0; $i < count($remainder['charity']['name']); $i++) {
+        echo '<li style="margin-bottom:0.0pt;"><span>' . $remainder['chairty']['name'][$i] . ' of ' . $remainder['charity']['city'][$i] . ', ' . parseProvince($remainder['charity']['province'][$i]) . ', with the charitable registration number: ' . $remainder['charity']['number'][$i] . ', will receive ' . $remainder['charity']['share'][$i] . ' shares of the residue of my estate.</span><span style="color:#000000;"><br></span></li>';
+    }
+}
+?>
 
                         </ol>
                     </li>
@@ -330,10 +319,10 @@ function parseProvince($province) {
                         <ol start="1" style="list-style:lower-alpha;">
 
 
-						<?php 
-						
-							if ($wipeout['divideEstate'] ==='true')  {
-							echo '<li><span>100 shares to be divided equally between my parents and siblings, or the
+						<?php
+
+if ($wipeout['divideEstate'] === 'true') {
+    echo '<li><span>100 shares to be divided equally between my parents and siblings, or the
 								survivors thereof, for their own use absolutely, if all or any of them is then
 								alive. If any of these beneficiaries shall die before becoming entitled, in
 								accordance with the terms of this Will, to receive the whole of his or her share of
@@ -342,14 +331,13 @@ function parseProvince($province) {
 								distribution. </span><span style="color:#000000;"><br></span>
 						</li>';
 
-							} else if ($wipeout['divideEstate'] === 'false')
-							{
-								echo '<li style="margin-bottom:0.0pt;"><span>100 shares to this '. $wipeout['name'] .' of '. $wipeout['city'] .', '. parseProvince($wipeout['province']) .' for their own use absolutely, if they are alive.</span><span style="color:#000000;"><br></span>
+} else if ($wipeout['divideEstate'] === 'false') {
+    echo '<li style="margin-bottom:0.0pt;"><span>100 shares to this ' . $wipeout['name'] . ' of ' . $wipeout['city'] . ', ' . parseProvince($wipeout['province']) . ' for their own use absolutely, if they are alive.</span><span style="color:#000000;"><br></span>
 								</li>';
-							}
-						
-						?>
-                            
+}
+
+?>
+
                         </ol>
                     </li>
 
@@ -367,8 +355,10 @@ function parseProvince($province) {
                             guardian to care for them, I appoint the following individual to be their guardian (the
                             'Guardian'): </span><span style="color:#000000;"><br></span>
                         <ol start="1" style="list-style:lower-alpha;">
-                            <li style="margin-bottom:0.0pt;" value="1"><span>I appoint <?php echo  $guardian['name']  ?> of <?php echo $guardian['city'];  ?>,
-                                    <?php echo parseProvince($guardian['province']);  ?> to be
+                            <li style="margin-bottom:0.0pt;" value="1"><span>I appoint 
+                                    <? // echo guardian['name'] ?> of 
+                                    <?//echo $guardian['city']; ?>,
+                                    <? // parseProvince($guardian['province']); ?> to be
                                     the sole Guardian of all my minor and dependent children until they are at least 18
                                     years of age.</span><span style="color:#000000;"><br></span>
                             </li>
@@ -392,16 +382,16 @@ function parseProvince($province) {
                             Will are to be held in a separate trust by the Trustee until that minor beneficiary reaches
                             the designated age. Any property left by me to any minor beneficiary in this Will shall be
                             given to my Executor(s) to be managed until that minor beneficiary reaches the age of
-                            <?php  
+                            <?php
 
-							if ($Inheritance['delay'] === 'false') {
-								echo "18";
-							} else if ($Inheritance['delay'] === 'true') {
-								echo $Inheritance['age']; 
-							} else {
-								echo "18";
-							}
-							?>.</span><span style="color:#000000;"><br></span>
+/* if ($Inheritance['delay'] === 'false') {
+    echo "18";
+} else if ($Inheritance['delay'] === 'true') {
+    echo $Inheritance['age'];
+} else {
+    echo "18";
+} */
+?>.</span><span style="color:#000000;"><br></span>
                     </li>
                     <li class="lh" style="text-align:Left;list-style:none;"><span
                             style="font-style:normal;font-weight:bold;text-decoration:underline;">Trust
@@ -605,19 +595,17 @@ function parseProvince($province) {
                             style="color:#000000;"><br></span>
                     </li>
 
-					<?php 
+					<?php
 
-						if ($provisions['addinalClause'] === 'true') {
-							echo ' <li class="lh" style="text-align:Left;list-style:none;"><span
+/*if ($provisions['addinalClause'] === 'true') {
+    echo ' <li class="lh" style="text-align:Left;list-style:none;"><span
                             style="font-style:normal;font-weight:bold;text-decoration:underline;">Additional
                             Provisions</span><span style="color:#000000;"><br></span></li>';
 
+    echo ' <li style="margin-bottom:18.0pt;" value="24"><span>' . $provisions['message'] . '</span><span
+                            style="color:#000000;"><br></span></li>';*/
+?>
 
-							echo ' <li style="margin-bottom:18.0pt;" value="24"><span>'. $provisions['message'] .'</span><span
-                            style="color:#000000;"><br></span></li>';
-						}
-					?>
-                   
 
                     <li class="lh" style="text-align:Left;list-style:none;"><span
                             style="font-style:normal;font-weight:bold;text-decoration:underline;">No Contest
@@ -642,7 +630,7 @@ function parseProvince($province) {
                     <p
                         style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
                         IN WITNESS WHEREOF, I have signed my name on this the ________ day of ________________,
-                        ________, at __________________________, <?php echo parseProvince($person['province']);  ?>, declaring and
+                        ________, at __________________________, <?php echo parseProvince($person['province']); ?>, declaring and
                         publishing this instrument
                         as my Last Will, in the presence of the undersigned witnesses, who witnessed and subscribed this
                         Last Will at my request, and in my presence.<br><br>_____________________________<br><?php echo $person['name']; ?>
@@ -652,7 +640,7 @@ function parseProvince($province) {
                         style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
                         SIGNED AND DECLARED by <?php echo $person['name']; ?> on the ________ day of ________________, ________ to be the
                         Testator's Last Will, in our presence, at __________________________,
-                        <?php echo parseProvince($person['province']);  ?>, who at the
+                        <?php echo parseProvince($person['province']); ?>, who at the
                         Testator's request and in the presence of the Testator and of each other, all being present at
                         the same time, have signed our names as witnesses.
                     </p>
@@ -688,7 +676,7 @@ function parseProvince($province) {
                 </div>
             </div>
             <div class=" outputDocument affidavitOfExecution outputDocument">
-                
+
                 <div class=" firstFooter"></div>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <div class=" keepTogether"><br class="pageBreak">
@@ -698,11 +686,11 @@ function parseProvince($province) {
                     </p>
                     <p
                         style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
-                        CANADA<br><br>PROVINCE OF <?php echo parseProvince($person['province']);  ?><br><br>TO WIT:
+                        CANADA<br><br>PROVINCE OF <?php echo parseProvince($person['province']); ?><br><br>TO WIT:
                     </p>
                     <p
                         style="line-height:18.0pt;font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
-                        I, ________________, of ____________, <?php echo parseProvince($person['province']);  ?>, <span
+                        I, ________________, of ____________, <?php echo parseProvince($person['province']); ?>, <span
                             style="font-style:normal;font-weight:bold;">MAKE OATH AND SAY THAT:</span>
                     </p>
                     <ol start="1"
@@ -712,7 +700,7 @@ function parseProvince($province) {
                                 Instrument"), duly sign the Instrument.</span><span style="color:#000000;"><br></span>
                         </li>
                         <li style="margin-bottom:18.0pt;" value="2"><span>The Instrument was signed at
-                                __________________________, <?php echo parseProvince($person['province']);  ?>.</span><span
+                                __________________________, <?php echo parseProvince($person['province']); ?>.</span><span
                                 style="color:#000000;"><br></span>
                         </li>
                         <li style="margin-bottom:18.0pt;" value="3"><span>That I am the subscribing witness to the
@@ -723,7 +711,7 @@ function parseProvince($province) {
                         </li>
                         <li style="margin-bottom:0.0pt;" value="5"><span>That I believe the person named in the
                                 instrument, whose signature I witnessed, <?php echo $person['name']; ?>, is at least the age of majority in
-                                <?php echo parseProvince($person['province']);  ?>.</span><span style="color:#000000;"><br></span>
+                                <?php echo parseProvince($person['province']); ?>.</span><span style="color:#000000;"><br></span>
                         </li>
                     </ol>
                     <p
@@ -742,7 +730,7 @@ function parseProvince($province) {
                                 <td style="text-align:Left;vertical-align:Middle;padding:2.0pt;width:48%;">
                                     <p
                                         style="font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
-                                        SWORN BEFORE ME at _____________, <?php echo parseProvince($person['province']);  ?> this
+                                        SWORN BEFORE ME at _____________, <?php echo parseProvince($person['province']); ?> this
                                         ________ day of
                                         ________________, ________.
                                     </p>
@@ -763,7 +751,7 @@ function parseProvince($province) {
                                     <p
                                         style="font-size:12.0pt;line-height:18.0pt;font-family:Times New Roman;color:#000000;text-align:Left;">
                                         <br>________________________<br>A Commissioner for Oaths/Notary Public in and
-                                        for the Province of <?php echo parseProvince($person['province']);  ?><br>My Commission
+                                        for the Province of <?php echo parseProvince($person['province']); ?><br>My Commission
                                         expires: ____________
                                     </p>
                                 </td>
@@ -783,7 +771,7 @@ function parseProvince($province) {
                 </div>
             </div>
         </div>
-      
+
     </div>
 </div>          <br/><br/><br/><br/><br/><br/>
 <div style='margin-top: 200px;'>

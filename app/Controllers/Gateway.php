@@ -18,8 +18,10 @@ class Gateway extends BaseController
 	// this is authentication code 
 	public function __construct()
 	{
-
-	
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		
 	}
 
 	public function index()

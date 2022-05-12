@@ -12,7 +12,7 @@
 <div class='container'>
     <div class='row text-center mt-3'>
         <h4> To download and print your <?php echo $contractTitle ?>, you must select a licence. </h4>
-        <h5 class='text-danger'> <?php echo  $FormSubmissionError; ?> </h5>
+        <h5 class='text-danger'> <?//$FormSubmissionError; ?> </h5>
             </h4>
             <div class='col-sm-4' style='width: 50%; height: 50%; margin: auto;'>
                 <img src='/img/SVG/document_review.svg' class='img-fluid'>
