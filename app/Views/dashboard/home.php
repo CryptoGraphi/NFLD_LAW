@@ -1,29 +1,29 @@
-<div class='container'>
+<div class='container-fluid p-4'>
 
-    <div class='row mt-4'>
+    <div class='row mt-4 dashboard-row shadow-lg'>
 
         <div class='col-md-12 mb-4 mt-4'>
             <h1> Getting Started </h1>
+            <hr/>
             <p class='mt-2'>Just follow the step-by-step instructions to fill out the necessary information for your forms.</p>
         </div>
 
-        <div class='col-sm'>
+        <div class='col-sm dashboard-tile'>
            <img src='/img/SVG/lawyer.svg' class='img-fluid' />
-            <p class='text-bold'> Choose your document </p>
+            <p class='text-bold dashboard-hero'> Choose your document </p>
         </div>
 
-        <div class='col-sm '>
+        <div class='col-sm dashboard-tile'>
             <img src='/img/SVG/question.svg' class='img-fluid' />
-            <p class='text-bold'> Answer a few simple questions</p>
+            <p class='text-bold dashboard-hero dashboard-hero-m'> Answer a few simple questions</p>
         </div>
-        <div class='col-sm '>
+        <div class='col-sm dashboard-tile'>
             <img src='/img/SVG/time.svg' class='img-fluid'/>
-            <p class='text-bold'> It take(s) just 5 minute(s) </p>
+            <p class='text-bold dashboard-hero'> It take(s) just 5 minute(s) </p>
         </div>
-
     </div>
 
-    <div class='row'>
+    <div class='row mt-4 bg-white shadow-lg rounded-lg border'>
 
         <div class='container mt-4'>
             <div class='row'>
@@ -53,14 +53,16 @@
     </div>
 
 
-    <div class='row mt-4 text-center'>
-            <h1>Your current contracts </h1>
-            <p style='color: slategray; font-style: italic;'> View your current legal contract and forms </p>
+    <div class='row mt-4 text-center bg-white p-4 w-75 mx-auto shadow-lg'>
+            <h1 class='text-bold' style='color: rgba(18, 75, 161, 0.856); font-weight: 700'>Your current contracts </h1>
+            <hr/>
+            <p style='color: black; font-weight: 600; font-style: italic;'> View your current legal contract and forms </p>
             <div class='col-sm-6 mx-auto'>
-                <img src='/img/SVG/documents.svg' height='300px' width="auto" class='mx-auto' />
+                <img src='/img/SVG/documents.svg' class='img-fluid mx-auto' />
             </div>
+        <div class='table-responsive'>
 
-        <table class="table table-striped mt-4">
+        <table class="table table-striped mt-4 table-responsive">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -112,6 +114,7 @@ if (!empty($userDocuments)) {
 
         </tbody>
         </table>
+        </div>
     </div>
 
 

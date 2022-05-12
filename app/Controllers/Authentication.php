@@ -82,6 +82,7 @@ class Authentication extends BaseController
 		return view('/home/template/header') . view('/home/register', $loginStatus) . view('/home/template/footer');
 
 	}
+	
 	/**
 	 * 
 	 *   @function: logout

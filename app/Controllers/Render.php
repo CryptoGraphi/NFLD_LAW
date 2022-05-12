@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Users;
+use App\Services\Auth\Auth;
 use App\Models\DocumentStorage;
 use Dompdf\Dompdf;
 use sessionManager;
@@ -18,15 +19,20 @@ class Render extends BaseController
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
+
+		// make sure the user is logged in inorder to access the page 
+		// if not, redirect to the login page
+		if (!Auth::isLoggedIn()['status']) {
+			return Auth::deny();
+		}
+
 	}
 
 	public function index()
 	{
 		// init the functions of the class 
 	}
-
-
-
+	
 	/**
 	 * 
 	 *  @method: contract 
@@ -37,67 +43,60 @@ class Render extends BaseController
 
 	public function contract($contractType = null)
 	{
+		$header = view('/dashboard/template/header');
+		$footer = view('/dashboard/template/footer');
 
-		echo view('/dashboard/template/header');
-		switch ($contractType) {
-			case "lastwill":
+		// check if the request type is a valid request 
+		if (empty($_POST['__data__'])) {
+			$error = [
+				"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
+			];
 
-				if (empty($_POST['__data__'])) {
-					$error = [
-						"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
-					];
-
-					die(view('/render/paymentPage', $error));
-				}
-				$contract = json_decode($_POST['__data__'], true);
-
-				$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-				$data = [
-					"contractData" => $contract,
-					"contractType" => $contractType,
-					"contractTitle" => "Last Will, and Testament",
-					"contractContent" => view('/render/template/contract_lastwill', $contract),
-					"contractPayment" => 'true', // is a paid document
-					"contractPaymentStatus" => null, // check if payment went though before verifying anything in our rending
-				];
-
-				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-				echo view('/render/paymentPage', $data);
-				break;
-
-
-			case "poa":
-
-				if (empty($_POST['_data_'])) {
-					$error = [
-						"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
-					];
-
-					die(view('/render/paymentPage', $error));
-				}
-
-				$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_SANITIZE_STRING);
-
-				$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-
-				$data = [
-					"contractData" => $contract,
-					"contractType" => $contractType,
-					"contractTitle" => "Power of Attorney",
-					"contractContent" => view('render/template/contract_poa', $contract),
-					"contractPayment" => 'true',
-					"contractPaymentStatus" => null,
-				];
-
-				$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-				echo view('/render/paymentPage', $data);
-
-				break;
+			die($header . view('/render/paymentPage', $error) . $footer);
 		}
 
-		echo view('/dashboard/template/footer');
+		// check the contract type. 
+		if ($contractType === 'lastwill') {
+			// check if the request contains the post data. 
+			$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
+
+			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+			// set the data for the contract. 
+			$data = [
+				"contractData" => $contract,
+				"contractType" => $contractType,
+				"contractTitle" => "Last Will, and Testament",
+				"contractContent" => view('/render/template/contract_lastwill', $contract),
+				"contractPayment" => 'true', // is a paid document
+				"contractPaymentStatus" => null, // check if payment went though before verifying anything in our rending
+			];
+
+			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+			return $header . view('/render/paymentPage', $data) . $footer;
+			break;
+
+
+		} else if ($contractType === 'poa') {
+		
+			$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_DEFAULT);
+
+			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+			// set the data for the contract
+			$data = [
+				"contractData" => $contract,
+				"contractType" => $contractType,
+				"contractTitle" => "Power of Attorney",
+				"contractContent" => view('render/template/contract_poa', $contract),
+				"contractPayment" => 'true',
+				"contractPaymentStatus" => null,
+			];
+
+			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+			return $header.  view('/render/paymentPage', $data) . $footer;
+
+		}
 	}
 
 
@@ -154,7 +153,7 @@ class Render extends BaseController
 
 		if ($data['documentType'] === 'lastwill') {
 			$dompdf = new Dompdf();
-			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_SANITIZE_STRING);
+			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_DEFAULT);
 
 			$dompdf->loadHtml(view('/render/template/contract_lastwill', $contractData));
 			$dompdf->setPaper('A4', 'landscape');
@@ -162,7 +161,7 @@ class Render extends BaseController
 			$dompdf->stream();
 		} else if ($data['documentType'] === 'poa') {
 			$dompdf = new Dompdf();
-			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_SANITIZE_STRING);
+			$contractData = filter_var_array(json_decode($data['documentData'], true), FILTER_DEFAULT);
 
 			$dompdf->loadHtml(view('/render/template/contract_poa', $contractData));
 			$dompdf->setPaper('A4', 'landscape');

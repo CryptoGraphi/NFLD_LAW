@@ -47,17 +47,6 @@ class Contracts extends BaseController
 				return $header .view('/dashboard/contract/' . $contract, $data) . $footer;
 			break;
 
-			case 'livingwill':
-
-				$data = [
-                    'headerTitle' => 'Living Will',
-					'headerDesc' => 'A Living Will states your preferred medical treatments in 
-                    case you’re unable to. Live with the knowledge that your most important decisions are taken care of.'
-				];
-                
-				return $header . view('/dashboard/contract/' . $contract, $data) . $footer;
-			break;
-
 			default:
 				return $header .  view('/dashboard/template/documentSelection'). $footer;
 			break;

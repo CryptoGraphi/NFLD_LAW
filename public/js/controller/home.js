@@ -19,6 +19,14 @@ class home extends baseClass {
        this.validateMethod();
     }
 
+    /**
+     * 
+     *  @method: index 
+     * 
+     *  @purpose: to add interactivity to the home content that is fetched by the server 
+     *  
+     */
+
     index()
     {
         let btnRegister = document.getElementById('btnRegisterPage');
@@ -26,6 +34,8 @@ class home extends baseClass {
         btnRegister.addEventListener('click', () => {
             window.location.pathname = '/home/register';
         });
+
+        
     }
 
     login()

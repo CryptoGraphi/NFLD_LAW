@@ -37,7 +37,5 @@ class Users extends BaseController
         // preform the change password action.
         // on the account that is logged in. 
         // and return success or failure.
-
-        return "test";
     }
 }

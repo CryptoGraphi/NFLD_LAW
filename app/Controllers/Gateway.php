@@ -8,37 +8,46 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Users;
 use App\Models\Orders;
+use App\Services\Auth\Auth;
 use App\Models\DocumentStorage;
 use sessionManager;
 
 
 class Gateway extends BaseController
 {
-
-	// this is authentication code 
 	public function __construct()
 	{
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
+
+		// make sure the user is logged in before accessing the payment gateway. 
+		if (!Auth::isLoggedIn()['status']) {
+			die(Auth::deny());
+		}
+
 		
 	}
 
 	public function index()
 	{
-		
+		// make sure that route cannot be accessed without a contract id.
+		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+			http_response_code(403);
+			die('Invalid request');
+		}
 	}
 
 	// use sessions inorder to procces the document type when fetching the document 
 	public function proccess($documentName = null, $paymenttype = null)
 	{
-		// we need to reasi
 
+		// make sure that route is not accessed directly
 		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-			echo view('/dashboard/template/header');
-			http_response_code(401);
-			die (view('/errors/html/error_403'));
+			http_response_code(403);
+			die('Invalid request');
 		}
+
 
 
 		if ($paymenttype === 'free') {
