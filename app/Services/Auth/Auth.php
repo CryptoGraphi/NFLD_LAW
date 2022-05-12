@@ -25,7 +25,7 @@
      * 
      */
 
-    public static function login($user) : bool {
+    public static function login($user) {
         // login the user.... 
         $email = $user['email'];
         $password = $user['password'];
@@ -39,13 +39,19 @@
 
         // is the honey pot filled in?
         if (empty($honeypot)) {
-            // its a script making the requests and not a real user
-            return false;
+    
+            return [
+                'status' => false,
+                'message' => 'Could not validate the request'
+            ];
         }
 
         // is the user already logged in 
-        if (self::isLoggedIn()) {
-                return true;
+        if (self::isLoggedIn()['status'] === true) {
+                return [
+                    'status' => true,
+                    'message' => 'You are already logged in'
+                ];
         }
         
         // authenticate the user
@@ -66,12 +72,25 @@
                     // set the sessions variables
                     $_SESSION['token'] = $token;
                     $_SESSION['time'] = time();
-                  
-                    return true;
-                }
-        }
 
-        return false;
+                    // unset any error messages
+                    return [
+                        'status' => true,
+                        'message' => 'You are now logged in'
+                    ];
+                }
+                // set the error wrong message
+                return [
+                    'status' => false,
+                    'message' => 'Wrong password'
+                ];
+               
+        }
+        // set the wrong username message
+        return [
+            'status' => false,
+            'message' => 'User does not exist'
+        ];
     }
 
     /**
@@ -88,9 +107,7 @@
         // deny the user access to the system 
         // delete all sessions 
         session_destroy();
-        // delete all cookies 
         setcookie('token', '', time() - 3600);
-
         header('HTTP/1.0 403 Forbidden');
 		header('location: /home/login');
         exit;
@@ -112,49 +129,57 @@
             $password = htmlspecialchars($user['password']);
             $confirm_password = htmlspecialchars($user['confirm_password']);
             $userModel = new Users();
+            $cookie = helper('cookie');
 
             // check all the flags for any errors
             // that may or may not be present
-
-
-            // error container to contain the 
-            // error messages that will be displayed
-            // if one of our triggers is activated. 
-
-            $errors = [
-                'invalid_password' => false,
-                'invalid_email' => false,
-                'email_exists' => false,
-                'passwords_dont_match' => false,
-                'honeypot' => false,
-            ];
-
             
             if ($password !== $confirm_password) {
-                return false;
+                // set a error cookie '
+       
+                return [
+                    'status' => false,
+                    'message' => 'Passwords do not match'
+                ];
             }
-    
             // check to see if the password is valid 
             if (strlen($password) < 8) {
-                return false;
+                // set a error cookie
+                // only valid for 1 minute 
+          
+                return [
+                    'status' => false,
+                    'message' => 'Password must be at least 8 characters'
+                ];
             }
-
             // check to see if the email is valid
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return false;
+                // set a error cookie
+             
+                return [
+                    'status' => false,
+                    'message' => 'Email is not valid'
+                ];
             }
-
             // check to see if the user already exists
             if ($userModel->exists($email)) {
-                return false;
+                // set a error cookie
+             
+                return [
+                    'status' => false,
+                    'message' => 'User already exists'
+                ];
             }
-
             // hash the password and create the user
             $password = hash('sha512', $password . $salt);
             $userModel->create($email, $password, $salt);
+        
 
             // return true
-            return true;
+            return [
+                'status' => true,
+                'message' => 'User created successfully'
+            ];
      }
 
 
@@ -176,7 +201,10 @@
             // check if the token is valid
             if (!$token || !$time) {
                 // the token is not valid
-                return false;
+                return [
+                    'status' => false,
+                    'message' => 'Token is not valid'
+                ];
             }
             // validate the request is a real request or a invalid request
             $userModel = new Users();
@@ -187,13 +215,22 @@
                     // the session is expired
                     // destroy the session
                     self::deny();
-                    return false;
+                    return [
+                        'status' => false,
+                        'message' => 'Session has expired'
+                    ];
                 }
-                    return true;
+                    return [
+                        'status' => true,
+                        'message' => 'User is logged in'
+                    ];
             }
         }
 
-        return false;
+        return [
+            'status' => false,
+            'message' => 'User is not logged in'
+        ];
      }
 
      /**

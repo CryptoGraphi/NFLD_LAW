@@ -22,11 +22,11 @@ class Dashboard extends BaseController
 		}
 		// add the authentication middleware to the controller in question
 
-		if (!Auth::isLoggedIn()) {
-			return Auth::deny();
-			exit;
+		if (!Auth::isLoggedIn()['status']) {
+			die(Auth::deny());
 		}
 	}
+
 
 	public function index()
 	{

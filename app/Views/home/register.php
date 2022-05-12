@@ -14,7 +14,17 @@
             <form method='post' action='/Authentication/register/'>
 
 
-<span class='text-danger error-message'>    </span>
+<span class='text-danger error-message'> 
+
+<?php
+
+if (isset($message)) {
+    echo $message;
+}
+
+?>
+
+</span>
 <div class="form-group m-2">
     <label for="email">Email address</label>
     <span class='error-message text-danger'></span>

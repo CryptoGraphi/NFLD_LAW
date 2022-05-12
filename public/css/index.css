@@ -14,9 +14,9 @@ body {
 /* nav bar styling */
 
 .navbar {
-  background: #d6d5d5;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FFFFFF, #dfdcda);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #FFFFFF, #dddbd8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #e9e7e7ce;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #e6e5e4c7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #eeeeecce); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: rgba(0, 0, 0, 0.19) 0px 3px 3px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .navbar li {

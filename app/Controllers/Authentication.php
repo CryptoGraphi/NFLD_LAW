@@ -44,15 +44,19 @@ class Authentication extends BaseController
 			'honeypot' => $_POST['SID_TRACKER']
 		];
 
+
+		$loginStatus = Auth::login($user);
+
 		// process the login form
-		if (Auth::login($user)) {
+		if ($loginStatus['status'] === true) {
 			// have to use the naked php way since codeigniter return index.php + the route 
 			// and breaks the front end implimentation of the router. 
-			
 			return redirect()->to('/dashboard');
 		}
 
-		return Auth::deny();
+		$data = $loginStatus;
+
+		return view('/home/template/header') . view('/home/login', $loginStatus) . view('/home/template/footer');
 	}
 
 	/**
@@ -73,15 +77,17 @@ class Authentication extends BaseController
 
 		];
 
-		if (Auth::register($user)) {
+		$loginStatus = Auth::register($user);
+
+		if (($loginStatus['status'] === true)) {
 			// redirect the user to the login page
 			return redirect()->to('/home/login');
-		} 
+		}
+		// deny the request and run the cleanu]
+		// return error message to the view 
+		return view('/home/template/header') . view('/home/register', $loginStatus) . view('/home/template/footer');
 
-		// deny the request and run the cleanup
-		return Auth::deny();
 	}
-
 	/**
 	 * 
 	 *   @function: logout

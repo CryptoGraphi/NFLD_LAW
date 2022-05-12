@@ -1,19 +1,24 @@
 <div class='container'>
     <div class='row loginPannel p-4'>
-            <h4 class='text-danger'> <?php  ?>  </h4> 
+            <h4 class='text-danger'> 
+            <?php 
+                if (isset($message)) {
+                    echo $message;
+                }
+            ?>
+            </h4> 
      
         <div class='col-md-6'>
                     <img class='img-fluid' src='/img/SVG/lawyer2.svg' />
         </div>
-        <div class='col-md-6 <?php  ?>'>            
+        <div class='col-md-6'>            
         <form method='post' action='/Authentication/login/'>
         <h2 class='text-center'>  Please Login <i class='fas fa-user-shield	'></i></h2>
             <div class="form-group m-2">
                 <label for="email">Email address</label>
                 <span class='error-message text-danger'></span>
                 <input type="email" name='email' class="form-control" id="email" placeholder="Enter email"/ >
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group m-2">
                 <label for="password">Password</label>
