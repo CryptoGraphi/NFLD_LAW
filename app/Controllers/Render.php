@@ -89,7 +89,6 @@ class Render extends BaseController
 		{
 			return $this->display404Error();
 		}
-
 		// set the data and procceed. 
 		$data = $_SESSION['DOCUMENT_RAW_DATA'];
 
