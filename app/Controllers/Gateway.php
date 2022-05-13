@@ -53,8 +53,7 @@ class Gateway extends BaseController
 	{
 		// for only support the following a paid document purchase 
 		// and free documents
-
-
+		
 		if ($paymentType === 'free') {
 			// free documents here.... 
 			return $this->order->freeOrder($documentName);

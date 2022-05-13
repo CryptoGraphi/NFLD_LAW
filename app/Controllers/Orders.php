@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Services\Payments\OrderSystem;
 use App\Controllers\Storage as DocumentStorage;
+use App\Services\Auth\Auth;
 use App\Services\Payments\PaymentDispatcher;
 
 class Orders extends BaseController
@@ -13,6 +14,20 @@ class Orders extends BaseController
 
     public function __construct()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
+		// only allow post requests to this controller.... 
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			http_response_code(405);
+			die();
+		}
+
+		// make sure the user is logged in before accessing the payment gateway. 
+		if (!Auth::isLoggedIn()['status']) {
+			die(Auth::deny());
+		}
 
     }
 
@@ -53,7 +68,6 @@ class Orders extends BaseController
                     die('Payment failed');
                 }
 
-
                 // paid document purchase
                 $paymentInterface = new PaymentDispatcher();
                 $paymentStatus = $paymentInterface->charge($document);
@@ -70,7 +84,7 @@ class Orders extends BaseController
                         return $order->place();
                     }
                     // something went wrong couldnt add the document into the database
-                    return $this->order->place();
+                    return $order->place();
                 }
 
             }

@@ -74,6 +74,7 @@
             <tbody>
             <?php
 
+// TODO: I MIGHT CHANGE THIS TO A AJAX CALL INSIDE OF OF USING SERVER SIDE PAGINATION
 if (!empty($userDocuments)) {
 
     foreach ($userDocuments as $nodes) {

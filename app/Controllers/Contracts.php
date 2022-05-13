@@ -55,6 +55,72 @@ class Contracts extends BaseController
     }
 
 
+	/**
+	 * 
+	 *  @method: lastwill
+	 * 
+	 *  @purpose: to render the last will and testament page
+	 * 
+	 */
+
+	 private static function lastwill($contractType)
+	 {
+
+		$header = view('/dashboard/template/header');
+		$footer = view('/dashboard/template/footer');
+		$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
+
+		$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+		// set the data for the contract. 
+		$data = [
+			"contractData" => $contract,
+			"contractType" => $contractType,
+			"contractTitle" => "Last Will, and Testament",
+			"contractContent" => view('/render/template/contract_lastwill', $contract),
+			"contractPayment" => 'true', // is a paid document
+			"contractPaymentStatus" => null, // check if payment went though before verifying anything in our rending
+		];
+
+		$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+		return $header . view('/render/paymentPage', $data) . $footer;
+	 }
+
+
+	 /**
+	  *  @method: poa
+	  *
+	  *  @purpose: to render the power of attorney page
+
+	  */
+
+	 private static function poa($contractType)
+	 {
+
+		$footer = view('/dashboard/template/footer');
+		$header = view('/dashboard/template/header');
+		$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
+
+		$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
+
+		// set the data for the contract
+		$data = [
+			"contractData" => $contract,
+			"contractType" => $contractType,
+			"contractTitle" => "Power of Attorney",
+			"contractContent" => view('render/template/contract_poa', $contract),
+			"contractPayment" => 'true',
+			"contractPaymentStatus" => null,
+		];
+
+		$_SESSION['DOCUMENT_RAW_DATA'] = $data;
+
+		return $header.  view('/render/paymentPage', $data) . $footer;
+		
+	 }
+
+
     /**
      * 
      *  @method: create 
@@ -77,48 +143,23 @@ class Contracts extends BaseController
 
 			die($header . view('/render/paymentPage', $error) . $footer);
 		}
-
-		// check the contract type. 
-		if ($contractType === 'lastwill') {
-			// check if the request contains the post data. 
-			$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
-
-			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-			// set the data for the contract. 
-			$data = [
-				"contractData" => $contract,
-				"contractType" => $contractType,
-				"contractTitle" => "Last Will, and Testament",
-				"contractContent" => view('/render/template/contract_lastwill', $contract),
-				"contractPayment" => 'true', // is a paid document
-				"contractPaymentStatus" => null, // check if payment went though before verifying anything in our rending
-			];
-
-			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-			return $header . view('/render/paymentPage', $data) . $footer;
-
-
-		} else if ($contractType === 'poa') {
 		
-			$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
+		// check what document to return to the user.
+		// is way we can easily add new contracts to the existing system
+		// not really have to worry about scalibility here.
+		// so as our contracts grows go will our switch statement
 
-			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
-
-
-			// set the data for the contract
-			$data = [
-				"contractData" => $contract,
-				"contractType" => $contractType,
-				"contractTitle" => "Power of Attorney",
-				"contractContent" => view('render/template/contract_poa', $contract),
-				"contractPayment" => 'true',
-				"contractPaymentStatus" => null,
-			];
-
-			$_SESSION['DOCUMENT_RAW_DATA'] = $data;
-			return $header.  view('/render/paymentPage', $data) . $footer;
-
+		switch($contractType)
+		{
+			case 'lastwill':
+				return self::lastwill($contractType);
+			break;
+				
+			case 'poa':
+				return self::poa($contractType);
+			break;
 		}
+		// trigger a error if the contract type is not found.
+		return $header . view('/render/paymentPage', ['FormSubmissionError' => 'Contract type not found']) . $footer;
      }
 }
