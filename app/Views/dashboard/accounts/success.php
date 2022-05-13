@@ -5,6 +5,13 @@
       <div class="outercontainer3">
         <div class="outercontainer4">
           <h1>Thank you, your request has been submitted successfully!</h1>
+
+          <p>
+            <?php  
+            // send the message back to the user 
+                if (isset($message)) { echo $message; }
+          ?>
+          </p>
           <img src='/img/SVG/undraw_Gifts_re_97j6.svg' class='img-fluid' width='400px' height='400px' />
           <p class='mt-4'> Please click <a href='/dashboard/'>here</a> to go back to home page! </p>
           </div>

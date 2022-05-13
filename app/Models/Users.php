@@ -72,6 +72,31 @@ class Users extends Model
 		return $this->update($id, ['token' => $value, 'updated_at' => date('Y-m-d H:i:s')]);
 	}
 
+
+	/**
+	 * 
+	 *  @method: UpdatePassword 
+	 * 
+	 * 
+	 *  @purpose: in order to update the password of the user in the system
+	 * 
+	 */
+
+	 public function updatePassword($token, $oldPassword, $newPassword)
+	 {
+		$user = $this->where('token', $token)->first();
+		// check  if the salt password matches on the database
+		$oldPassword = hash('sha512', $oldPassword . $user['salt']);
+
+		if ($oldPassword === $user['password']) {
+			// hash the new password
+			$newPassword = hash('sha512', $newPassword . $user['salt']);
+			// update the password
+			return $this->update($user['id'], ['password' => $newPassword, 'updated_at' => date('Y-m-d H:i:s')]);
+		}
+		  return false;
+	 }
+
 	/**
 	 * 
 	 *  @function: create 

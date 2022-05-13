@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-xl">
 
     <div class='row intro-hero'>
 
         <div class='col-md-12 intro-hero-shadow'>
-            <h1 class="mt-4" style='font-size: 3em; font-weight:800;'> Everyone should have a will!</h1>
-            <h2 class="mt-2" style='font-size: 1.5em; font-weight: 600;'> Use our Free tool</h2>
-            <p class="mt-2 bg-white rounded" style='font-size: 1em;'>
+            <h1 class="mt-4" style='font-size: 3.25em; font-weight:800;'> Everyone should have a will!</h1>
+            <h2 class="mt-2" style='font-size: 2em; font-weight: 600;'> Use our Free tool</h2>
+            <p class="mt-2 rounded bg-transparent`` hero-text" style='font-size: 1em;'>
                 Get peace of mind It take(s) less than 20 minutes to write or update   <br/>
                 your legal will, for Free.
             </p>
@@ -14,26 +14,30 @@
 
         <div class='d-flex flex-row mt-2 intro-hero-images'>
             <div class='col m-1'>
-                <img src='/img/redcoat_man.webp' class='img-fluid frame' />
+                <img src='/img/redcoat_man.webp' alt='man with girl' class='img-fluid frame' />
             </div>
             <div class='col m-1'>    
-                <img src='/img/kid_glasses.webp' class='img-fluid shadow-lg'/>
+                <img src='/img/dreads.webp' alt='man with dreads' class='img-fluid shadow-lg'/>
             </div>
 
             <div class='col m-1'>
-                <img src='/img/kid_bike.webp' class='img-fluid shadow-lg'  />
+                <img src='/img/kid_bike.webp' alt='woman holding child' class='img-fluid shadow-lg'  />
             </div>
         </div>
     </div>
+</div>
 
-        
-    <div class='row mt-4 bg-white p-4 shadow-lg' id='whyContainer'>
+
+<!-- SERVICES SECTION   -->
+<div class='container bg-white shadow-lg mt-5 rounded service'>
+
+<div class='row mt-4 bg-white p-4 shadow-lg' id='whyContainer'>
         <div class='col-sm mt-4'>
 
                 <div class='mt-4 p-4'>
                     <h1 class='text-start'> Why use our service</h1>
                     <div class='mx-auto d-block w-auto' >
-                        <img src='/img/SVG/document_review.svg' class='img img-fluid text-center mx-auto' />
+                        <img src='/img/SVG/document_review.svg'  alt='intro image' class='img img-fluid text-center mx-auto' />
                     </div>
 
                         <p>
@@ -48,9 +52,8 @@
 </div>
 
 
-<!-- SERVICES SECTION   -->
-<div class='container bg-white shadow-lg mt-5 rounded service'>
-    <div class='row'>
+<div class='container bg-white shadow-lg mt-5 rounded'>
+    <div class='row mt-4'>
         <div class='col-sm p-4 hero'>
             <h1 id='services'> Our Services</h1>
 
@@ -60,8 +63,8 @@
         </div>
 
     </div>
-    <div class='row'>
-        <div class='col-md padd'>
+    <div class='row p-5'>
+        <div class='col-md padd '>
             <h2> <i class="bi bi-file-earmark-font" style='margin: 5px;'></i> Wills & Estates</h2>
             <hr />
             <ul class='navbar-nav'>
@@ -72,18 +75,19 @@
     </div>
 </div>
 
-<div class='container bg-white p-5 mt-5 shadow-lg'>
 
-    <div class="mt-4 mb-4">
-        <h1 style='font-size:3rem;'> Getting Started </h1>
+<div class='container bg-white rounded  p-0 mt-5 shadow-lg' style='border-radius: 20px;'>
+
+    <div class="mt-4 hero">
+        <h1 style='font-size:3rem;' class='p-4'> Getting Started </h1>
     </div>
 
-
+ 
     <div class='row m-0 p-0'>
 
-        <ul class="list-group space hero-list m-0 p-0">
-            <li class="list-group space hero m-0">
-                <h1 class='p-4' id='howitworks' style='font-size: 2rem;'> How to get started using our service </h1>
+        <ul class="list-group space hero-list m-0 p-0" style='border-radius:none'>
+            <li class="list-group space p-4 m-0">
+                <h1 id='howitworks' style='font-size: 2rem;'> How does it work </h1>
             </li>
 
             <li class="list-group-item">

@@ -59,6 +59,13 @@ class Gateway extends BaseController
 		// for only support the following a paid document purchase 
 		// and free documents
 
+		//TODO: WE NEED TO ADD THE POA DOCUMENTS TO THE PAYMENT SYSTEM
+		// TODO: AND ALSO WE NEED TO ADD THE DATABASE FUNCTIONALITY TO THE PAYMENT SYSTEM
+		// SO THAT DOCUMENTS CAN BE PURCHASED AND STORED IN THE DATABASE. 
+		// ALSO WRITE SOME TESTS FOR THE NEW SYSTEM ONCE THAT IS COMPLETE THAT PROJECT 
+		// SHOULD BE JUST ABOUT READY FOR PRODUCTION. 
+
+
 		try {
 		if (empty($_POST['stripeToken']) || empty($_POST['email'])) {
 			// the stripe and email are not set in the post request
@@ -181,8 +188,8 @@ class Gateway extends BaseController
 
 	/* 		try {o
 			
-		@Todo: finish that document to refactor in a cleaner way.
-		
+		@TODO: REFACTOR THIS METHOD INORDER A MUUCCHHH.... CLEANER WAS THIS IS VERY DIFFICULT TO READ.....
+
 					case 'poa':
 							if ($paymenttype === 'paid') {
 								// Create a Customer

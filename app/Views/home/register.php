@@ -2,10 +2,10 @@
     <div class='row  loginPannel p-4'>
 
     <div class='col-md-6'>
-                    <img class='img-fluid' src='/img/SVG/register.svg' />
+                    <img class='img-fluid' alt='group-image' src='/img/SVG/register.svg' />
              </div>
 
-    <div class='col-md-6'>
+    <div class='col-md-6 text-black'>
 
             <h2> Register </h2>
             <small class='text-center' style='font-weight: bold;'> Please fill out required information to use our service </small>
@@ -17,11 +17,8 @@
 <span class='text-danger error-message'> 
 
 <?php
-
-if (isset($message)) {
-    echo $message;
-}
-
+// render the error message of the page
+if (isset($message)) { echo $message; }
 ?>
 
 </span>

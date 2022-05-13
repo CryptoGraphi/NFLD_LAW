@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <meta name="description" content="FreeWill Lawyer">
+    <meta name="keywords" content="FreeWill Lawyer free wills free legal contracts" />
+    <meta name="author" content="FreeWill Lawyer">
+    <meta name="copyright" content="FreeWill Lawyer">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
     <link rel="shortcut icon" href="/img/Freewill-logos/Freewill-logos_black.webp" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
     <link rel='stylesheet' href='/css/index.css' />
     <script src='/js/router.js'></script>
 
@@ -35,7 +37,7 @@
           </button></li></ul>
         <a class='nav-link' href=''>
         <span class='text-bold'> NFLD LEGAL </span>    
-        <img class='img-fluid'src='/img/Freewill-logos/Freewill-logos_black.webp' style='max-height: 150px' />
+        <img class='img-fluid'src='/img/Freewill-logos/Freewill-logos_black.webp' alt='logo' style='max-height: 150px' />
     </a>
 
         <ul class="navbar-nav" id='nav-section-topMenu'>

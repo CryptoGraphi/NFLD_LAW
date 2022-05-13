@@ -25,7 +25,7 @@
 
     <div class='row mt-4 shadow-lg rounded-lg border'>
 
-        <div class='container'>
+        <div class='container bg-white'>
             <div class='row hero'>
 
                 <div class='col-sm text-center'>
@@ -48,8 +48,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 

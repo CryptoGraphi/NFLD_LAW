@@ -2,14 +2,13 @@
     <div class='row loginPannel p-4'>
             <h4 class='text-danger'> 
             <?php 
-                if (isset($message)) {
-                    echo $message;
-                }
+            // render the error message of the page
+                if (isset($message)) {  echo $message; }
             ?>
             </h4> 
      
         <div class='col-md-6'>
-                    <img class='img-fluid' src='/img/SVG/lawyer2.svg' />
+                    <img class='img-fluid' alt='lawyer' src='/img/SVG/lawyer2.svg' />
         </div>
         <div class='col-md-6'>            
         <form method='post' action='/Authentication/login/'>
