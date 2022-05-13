@@ -811,4 +811,3 @@ function generateProvinceList()
     </div>
 
 </div>
-</div>

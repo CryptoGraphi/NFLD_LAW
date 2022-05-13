@@ -44,7 +44,7 @@ class  OrderSystem {
      * 
      */ 
 
-    public function order()
+    public function place()
     {
 
         if ($this->document === 'lastwill') {
@@ -55,6 +55,16 @@ class  OrderSystem {
 			}
 
             return view('/dashboard/template/header') . view('/gateway/confirmPage') . view('/dashboard/template/footer');
+        }
+        
+        if ($this->document === 'poa')
+        {
+            if ($_SESSION['DOCUMENT_RAW_DATA']['contractType'] === $this->document)
+            {
+                $_SESSION['DOCUMENT_RAW_DATA']['contractPaymentStatus'] = true;
+
+                return view('/dashboard/template/header') . view('/gateway/confirmPage') . view('/dashboard/template/footer');
+            }
         }
 
         // return the error since something has went wrong. 

@@ -554,7 +554,7 @@ function generateProvinceList()
                             </div>
 
 
-                            <input type='hidden' name='_data_' value='' id='_data_' />
+                            <input type='hidden' name='__data__' value='' id='_data_' />
                         </div>
                     </fieldset>
 

@@ -287,7 +287,9 @@ footer .nav-item:hover {
 }
 
 .loginPannel {
-  background-color: whitesmoke;
+  /** background color 2 colors **/ 
+  background: linear-gradient(145deg, #0a1e3be5 5%, #0c254be5 10%, #0d2850e5 15%,   #0e2d5ce5 30%,
+   #ffffff 30.5%, #fff 80%);
   padding: 20px;
   border: 0.5px solid rgba(112, 128, 144, 0.521);
   border-radius: 5px;

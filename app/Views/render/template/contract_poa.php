@@ -151,7 +151,7 @@ $mainPageCounter = 0;
                             for any such purpose;</span><span style="color:#000000;"><br></span>
                     </li>';
                 }
-                if ($powers['homeExpenses'] === 'on') {
+                if (isset($powers['homeExpenses']) && $powers['homeExpenses'] === 'on') {
 
                     echo ' 
                     <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
@@ -164,7 +164,7 @@ $mainPageCounter = 0;
                             circumstances, including the size of my estate and the income requirements of me, my spouse
                             and dependent children;</span><span style="color:#000000;"><br></span>
                     </li>';
-                } else if ($powers['familyExpenses'] === 'on') {
+                } else if (isset($powers['familyExpenses']) && $powers['familyPowers'] === 'on') {
                     echo '  <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                     style="font-style:normal;font-weight:bold;">Family Care</span><span
                     style="color:#000000;"><br></span>
@@ -177,7 +177,7 @@ $mainPageCounter = 0;
                     style="color:#000000;"><br></span>
             </li>';
                 }
-                if ($powers['taxMatters'] === 'on') {
+                if (isset($powers['taxMatters']) && $powers['taxMatters'] === 'on') {
 
                     echo '
                     <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
@@ -200,7 +200,7 @@ $mainPageCounter = 0;
                         </ol>
                     </li>';
                 }
-                if ($powers['familyGifts'] === 'on') {
+                if (isset($powers['familyGifts']) && $powers['familyGifts'] === 'on') {
 
                     echo '     <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                     style="font-style:normal;font-weight:bold;">Gift Transactions</span><span
@@ -216,7 +216,7 @@ $mainPageCounter = 0;
                     requirements;</span><span style="color:#000000;"><br></span></li>';
                 }
 
-                if ($powers['chairityGifts'] === 'on') {
+                if (isset($powers['chairityGifts']) && $powers['charityGifts'] === 'on') {
 
                     echo '   <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                     style="font-style:normal;font-weight:bold;">Charity Transactions</span><span
@@ -232,7 +232,7 @@ $mainPageCounter = 0;
                 }
 
 
-                if ($powers['businessInvestments'] === 'on') {
+                if (isset($powers['businessInvestments']) && $powers['businessInvestments'] === 'on') {
 
                     echo '   <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                     style="font-style:normal;font-weight:bold;">Maintain Property and Make
@@ -245,7 +245,7 @@ $mainPageCounter = 0;
                     legislation;</span><span style="color:#000000;"><br></span></li>';
                 }
 
-                if ($powers['stocks'] === 'on') {
+                if (isset($powers['stocks']) && $powers['stocks'] === 'on') {
 
                     echo '       <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                     style="font-style:normal;font-weight:bold;">Manage Corporate Shares</span><span
@@ -273,7 +273,7 @@ $mainPageCounter = 0;
             </li>';
                 }
 
-                if ($powers['employProfessionals'] === 'on') {
+                if (isset($powers['employProfessionals']) && $powers['employProfessionals'] === 'on') {
                     echo '
                     <li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span
                             style="font-style:normal;font-weight:bold;">Employ any Required Professionals</span><span
@@ -287,7 +287,7 @@ $mainPageCounter = 0;
                 }
 
 
-                if ($limited['propertySale'] === 'on') {
+                if (isset($limited['propertySale']) && $limited['propertySale'] === 'on') {
                     echo '<br/><li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span style="font-style:normal;font-weight:bold;">Real Estate Sale</span><span style="color:#000000;"><br></span>
                         </li>';
 
@@ -296,7 +296,7 @@ $mainPageCounter = 0;
                 }
 
 
-                if ($limited['propertyPurchase'] === 'on') {
+                if (isset($limited['propertyPurchase']) && $limited['propertyPurchase'] === 'on') {
                     echo '<li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span style="font-style:normal;font-weight:bold;">Real Estate Purchase</span><span style="color:#000000;"><br></span>
                         </li>';
 
@@ -304,7 +304,7 @@ $mainPageCounter = 0;
                 }
 
 
-                if ($limited['propertyPaymentCollection'] === 'on') {
+                if (isset($limited['propertyPaymentCollection']) && $limited['propertyPaymentCollection'] === 'on') {
                     echo '<li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span style="font-style:normal;font-weight:bold;">Manage Real Estate</span><span style="color:#000000;"><br></span>
                         </li>';
 
@@ -313,7 +313,7 @@ $mainPageCounter = 0;
                 }
 
 
-                if ($limited['bankAccount'] === 'on') {
+                if (isset($limited['bankAccount']) && $limited['bankAccount'] === 'on') {
                     echo '<li class="lh" style="text-align:Left;margin-bottom:18.0pt;list-style:none;"><span style="font-style:normal;font-weight:bold;">Manage Specific Financial Account</span><span style="color:#000000;"><br></span>
                         </li>';
 

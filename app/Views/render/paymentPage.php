@@ -7,11 +7,18 @@
  * 
  */
 
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
 ?>
 
-<div class='container'>
-    <div class='row text-center mt-3'>
-        <h4> To download and print your <?php echo $contractTitle ?>, you must select a licence. </h4>
+
+
+<div class='container bg-white mt-4 shadow-lg'>
+    <div class='row text-center mt-4 p-4'>
+        <h4> To download and print your <?php if (isset($contractTitle)) { echo $contractTitle; } ?>, you must select a licence. </h4>
         <h5 class='text-danger'> <?//$FormSubmissionError; ?> </h5>
             </h4>
             <div class='col-sm-4' style='width: 50%; height: 50%; margin: auto;'>
@@ -85,8 +92,10 @@
 
         <h3> Pricing </h3>
         <small class='small-caption mt-2 mb-2'> Print and download your
-            <?php echo $contractTitle; ?> as soon as you select an option below.</small>
-        <div class='col-md-6'>
+            <?php if (isset($contractTitle)) { echo $contractTitle;  } ?> as soon as you select an option below.</small>
+
+            
+        <div class='col-md-6 mt-3'>
             <div class='card'>
                 <div class='card-header'>
                     <h3> Full Price </h3>
@@ -105,43 +114,6 @@
             </div>
         </div>
 
-        <div class='col-md-6'>
-            <div class='card'>
-                <div class='card-header'>
-                    <h3> Donate Option </h3>
-                </div>
-                <div class='card-body' style='padding: 10px;'>
-                    <h1 class="card-title pricing-card-title">$250 <small class="text-muted"> / Donate option </small>
-                    </h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li> <b> Features: </b></li>
-                        <li> Download legal contract in pdf format </li>
-                        <li> Store and download anytime </li>
-                        <li> Change / update anytime 24/7 </li>
-                    </ul>
-                    <button class='btn started' id='btn-donate'>Select Licence</button>
-                </div>
-            </div>
-        </div>
-
-        <div class='col-md-6 mt-3'>
-            <div class='card'>
-                <div class='card-header'>
-                    <h3> Pay what you want </h3>
-                </div>
-
-                <div class='card-body' style='padding: 10px;'>
-                    <h1 class="card-title pricing-card-title">$0 <small class="text-muted"> / You choose the price
-                        </small> </h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li> <b> Features: </b></li>
-                        <li> Download legal contract in pdf format </li>
-                        <li> Document is never stored </li>
-                    </ul>
-                    <button class='btn started' id='btn-customPayment'>Select Licence</button>
-                </div>
-            </div>
-        </div>
 
         <div class='col-md-6 mt-3'>
             <div class='card'>
@@ -156,6 +128,7 @@
                         <li> <b> Features: </b></li>
                         <li> Download legal contract in pdf format </li>
                         <li> Document is never stored </li>
+                        <li> &nbsp; </li>
                     </ul>
                     <button class='btn started' id='btn-free'>Select Licence</button>
                 </div>
@@ -173,7 +146,7 @@
             </div>
 
             <div class='card-body'>
-                <?php echo $contractContent;  ?>
+                <?php if (isset($contractContent)) { echo $contractContent; }  ?>
             </div>
         </div>
     </div>

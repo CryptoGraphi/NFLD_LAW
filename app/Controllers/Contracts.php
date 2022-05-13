@@ -101,9 +101,10 @@ class Contracts extends BaseController
 
 		} else if ($contractType === 'poa') {
 		
-			$contract = filter_var_array(json_decode($_POST['_data_'], true), FILTER_DEFAULT);
+			$contract = filter_var_array(json_decode($_POST['__data__'], true), FILTER_DEFAULT);
 
 			$_SESSION['DOCUMENT_JSON_DATA'] = $contract;
+
 
 			// set the data for the contract
 			$data = [
