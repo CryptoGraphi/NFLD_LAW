@@ -59,12 +59,9 @@ class Orders extends BaseController
         public function paidOrder($document = null)
         {
             $order = new OrderSystem($document);
-
-
+            
             try {
                 if (empty($_POST['stripeToken']) || empty($_POST['email'])) {
-                    // the stripe and email are not set in the post request
-                    // therefore we cannot process the payment
                     die('Payment failed');
                 }
 
@@ -75,7 +72,6 @@ class Orders extends BaseController
                 // did the payment go through?
                 if ($paymentStatus->paid === true) {
                     // payment went through
-    
                     // add the document into the datbase since the payment has went through
                     $documentStorage = new DocumentStorage();
     
@@ -87,9 +83,7 @@ class Orders extends BaseController
                     return $order->place();
                 }
 
-            }
-            /// handle all posible errors that may or may not occur with our payment system. 
-            catch (\Stripe\Exception\CardException $e) {
+            } catch (\Stripe\Exception\CardException $e) {
                 // Since it's a decline, \Stripe\Exception\CardException will be caught
                 $data = [
                     'errorMessage' => "Sorry but the card you entered isn't valid, or has insuffient funds",

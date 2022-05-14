@@ -24,11 +24,6 @@ class Render extends BaseController
 		}
 
 	}
-
-	public function index()
-	{
-		// init the functions of the class 
-	}
 	
 	/**
 	 * 
@@ -47,7 +42,7 @@ class Render extends BaseController
 	 * 
 	 *  @method: display404Error 
 	 * 
-	 *  @purpose: inorder to trigger a 404 error within the system 
+	 *  @purpose: in order to trigger a 404 error within the system 
 	 * 
 	 */
 
@@ -61,7 +56,7 @@ class Render extends BaseController
 	 * 
 	 *  @method: display404Error 
 	 * 
-	 *  @purpose: inorder to display a 404 error within the system if a edgecase is met. 
+	 *  @purpose: in order to display a 404 error within the system if a edge case is met. 
 	*/
 
 
@@ -71,7 +66,6 @@ class Render extends BaseController
 		die('bad request');
 	}
 
-
 	/**
 	 *  
 	 *  @method: pdf
@@ -79,8 +73,6 @@ class Render extends BaseController
 	 *  @purpose: to get a pdf based on if our document session has been met or not. 
 	 * 
 	 */
-
-
 
 	public function pdf()
 	{

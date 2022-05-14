@@ -62,15 +62,9 @@ class Dashboard extends BaseController
 
 		foreach($userOrders as $order) {
 			$orderDocuments = $documents->getDocByID($order['document_id']);
-			// push the paths 
-			// @structure 
-			// id -> doc ID
-			// path -> path to the document file
-			// created_at -> date of creation
-			// updated_at -> date of last update
-
 			array_push($frontEndQuery, $orderDocuments);
 		}
+		
 		return $frontEndQuery;
 	}
 

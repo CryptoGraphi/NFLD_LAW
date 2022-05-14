@@ -10,7 +10,6 @@ use App\Services\Auth\Auth;
 use App\Controllers\Orders;
 
 
-
 class Gateway extends BaseController
 {
 	public function __construct()
@@ -31,7 +30,6 @@ class Gateway extends BaseController
 		}
 
 		// share objects 
-
 		$this->order = new Orders();
 	}
 
@@ -40,11 +38,6 @@ class Gateway extends BaseController
 	 * @method: proccess 
 	 * 
 	 * @purpose: inorder to process the payment for the digital assets purchases. 
-	 * 
-	 * 
-	 * @param [type] $documentName
-	 * @param [type] $paymentType
-	 * @return void
 	 * 
 	 * 
 	 */

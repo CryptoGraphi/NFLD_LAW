@@ -133,9 +133,6 @@ class Contracts extends BaseController
 
 	  public static function download($contractID)
 	  {
-		  // @description: 
-		  // first we need to verify the user own this said document. 
-		  // and if so then we will download the document.
 
 		   if (Auth::isLoggedIn()) {
 				// verify that sessions are activated 
@@ -199,38 +196,25 @@ class Contracts extends BaseController
 		   // and if the delete was successful then we will return a success message.
 
 		   if (Auth::isLoggedIn()) {
-			   // verify the sessions are activated 
 			   if(session_status() === PHP_SESSION_NONE) {
 				   session_start();
 			   }
 
 			   $userModel = new Users();
-			   // fetch the users id from the session
 			   $userID = $userModel->getUserByToken($_SESSION['token']) ? $userModel->getUserByToken($_SESSION['token'])['id'] : null;
-
-			   // fetch the document from the database
 			   $ordersModel = new Orders();
 			   $documentModel = new Documents();
 			   $currentDocument  = $ordersModel->where('user_id', $userID)->where('id', $contractID)->first();
 
-			   // check if the document exists
 			   if ($currentDocument)  {
-				   // check if the document is not empty
-				   $documentEntry = $documentModel->where('id', $currentDocument['document_id'])->first();
-				   // check if the file entry exists 
-				   if ($documentEntry)
-				   {
+
+					$documentEntry = $documentModel->where('id', $currentDocument['document_id'])->first();
+				   if ($documentEntry) {
 					   $filePath = $documentEntry['path'];
-					   // perform test on some urls
-					   // check if the file exists 
 					   if (file_exists($filePath)) {
-						   // delete the file
 						   unlink($filePath);
-						   // delete the document entry
 						   $documentModel->where('id', $documentEntry['id'])->delete();
-						   // delete the order entry
 						   $ordersModel->where('id', $currentDocument['id'])->delete();
-						   // return a success message
 
 						   $data = [
 							   'success' => true,
@@ -261,7 +245,6 @@ class Contracts extends BaseController
         $header = view('/dashboard/template/header');
 		$footer = view('/dashboard/template/footer');
 
-		// check if the request type is a valid request 
 		if (empty($_POST['__data__'])) {
 			$error = [
 				"FormSubmissionError" => "Please complete form, a empty form will not be accepted"
@@ -269,13 +252,7 @@ class Contracts extends BaseController
 
 			die($header . view('/render/paymentPage', $error) . $footer);
 		}
-		
-		// check what documents we need to return the the user
-		// i built this is this way incase I ever need to add more contracts
-		// its modify one line of code here and making a template to use. 
-		// be I hate refacting code over and over again so i will stick with 
-		// this final idea. 
-		
+
 		switch($contractType)
 		{
 			case 'lastwill':
@@ -286,7 +263,7 @@ class Contracts extends BaseController
 				return self::poa($contractType);
 			break;
 		}
-		// trigger a error if the contract type is not found.
+
 		return $header . view('/render/paymentPage', ['FormSubmissionError' => 'Contract type not found']) . $footer;
      }
 }
