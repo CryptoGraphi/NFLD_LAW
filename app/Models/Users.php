@@ -119,4 +119,16 @@ class Users extends Model
 		]);
 	 }
 
+
+	 /**
+	  *   @method: getUserByToken
+	  *
+	  *  @purpose: in order to get the user by the token
+	  */
+
+	  public function getUserByToken($token)
+	  {
+		  return $this->where('token', $token)->first();
+	  }
+
 }

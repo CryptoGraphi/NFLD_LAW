@@ -61,4 +61,16 @@ class Documents extends Model
         // return the id of the document
         return $this->insertID;
      }
+
+
+     /**
+      *  @method: getDocByID
+      *
+      *  @purpose: to get a document by its ID
+      */
+
+      public function getDocByID($id)
+      {
+          return $this->where('id', $id)->first();
+      }
 }

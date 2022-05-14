@@ -64,7 +64,6 @@
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Document Type</th>
                 <th scope="col">Date created</th>
                 <th scope='col'> Date last Modified </th>
                 <th scope='col'> Action </th>
@@ -72,42 +71,28 @@
                 </tr>
             </thead>
             <tbody>
-            <?php
+<?php
+    // enumerate the documents and display them to the user
 
-// TODO: I MIGHT CHANGE THIS TO A AJAX CALL INSIDE OF OF USING SERVER SIDE PAGINATION
-if (!empty($userDocuments)) {
+    // check if size of documents is 0
 
-    foreach ($userDocuments as $nodes) {
-        // generate the table
-        // we need to display to user and also to get the key link inorder to modify / delete the documents
-        // from database if needed
-
-        echo "<tr>";
-        echo "<th scope='row'>" . $nodes['documentID'] . "</th>";
-        echo "<td>" . $nodes['documentType'] . "</td>";
-        echo "<td>" . $nodes['documentCreatedAt'] . "</td>";
-        echo "<td>" . $nodes['documentLastModified'] . "</td>";
-        echo "<td>
-                        <a class='btn btn-primary' href='/render/fetchContract/" . $nodes['documentProductKey'] . "'> download  </a>
-                        <a class='btn btn-danger' href='/render/deleteContract/" . $nodes['documentProductKey'] . "'> Delete </a></td>";
-
-        echo "<tr/>";
+    if (sizeof($documents) === 0) {
+        echo "<tr> <td colspan='4'> You have no documents in your account </td> </tr>";
     }
 
-} else {
+   foreach($documents as $records) {
 
-    // display empty message to the user
-
-    echo "<tr>";
-    echo "<td></td>";
-    echo "<td></td>";
-    echo "<td><b>No Documents Found.</b></td>";
-    echo "<td> </td>";
-    echo "<td></td>";
-    echo "<tr/>";
-
-}
-
+        echo "<tr>";
+        echo "<td>".$records['id']."</td>";
+        echo "<td>". $records['created_at'] . "</td>";
+        echo "<td>". $records['updated_at'] . "</td>";
+        // add a download button and a delete button
+        echo "<td> 
+            <a href='/contracts/download/".$records['id']."' class='btn btn-primary'> Download </a> 
+            <a href='/contracts/delete/".$records['id']."' class='btn btn-danger'> Delete </a> 
+        </td>";
+        echo "</tr>";
+   }
 ?>
 
 

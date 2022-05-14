@@ -67,6 +67,18 @@ class Orders extends Model
 
 
 
+    /***\
+     *  @method: getOrdersByUserId
+     * 
+     *  @purpose: to get all the orders of a user
+     */
+
+     public function getOrdersByUserId($userID)
+     {
+         return $this->where('user_id', $userID)->findAll();
+     }
+
+
     /**
      * 
      *  @delete: delete

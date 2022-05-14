@@ -8,6 +8,8 @@ use Dompdf\Dompdf;
 use App\Controllers\Render;
 use App\Models\Orders;
 use App\Models\Documents;
+use App\Models\Users;
+
 
 class Storage extends BaseController
 {
@@ -95,11 +97,12 @@ class Storage extends BaseController
         // load our models in order to save the data to the database
         $document = new Documents();
         $orders = new Orders();
-    
         // create our documents entry 
         $documentID = $document->add($filePath);
+        $user = new Users();
+        $userID = $user->getUserByToken($_SESSION['token'])['id'];
         // now we need to create our order entry
-        $orders->add(1, 250, date('Y-m-d H:i:s'), $documentID);
+        $orders->add($userID, 250, date('Y-m-d H:i:s'), $documentID);
 
         // lets do some checks to make sure everything is working as expected
         if ($documentID && $orders) {
@@ -107,45 +110,5 @@ class Storage extends BaseController
         }
         return false;
     }
-
-    /***
-     * 
-     *  
-     *  @method: download 
-     * 
-     *  @purpose: to download a document from the storage
-     */
-
-     public function download($document = null)
-     {
-         // this will download a document from the storage. 
-     }
-
-
-     /***
-      *
-      *  @method: delete
-      *
-      *
-      *  @purpose: to delete a document from the storage
-      */
-
-      public function delete()
-      {
-
-      }
-
-      /**
-       * 
-       *  @method: get
-       * 
-       *  @purpose: to get all the records from  the storage that 
-       *            the user is associated with.
-       *  
-       */
-
-       public function get()
-       {
-
-       }
+    
 }
