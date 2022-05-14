@@ -128,6 +128,7 @@ class Contracts extends BaseController
 	  *  @method: download 
 	  *
 	  *  @purpose: to download the contract
+	  *
 	  */
 
 	  public static function download($contractID)
@@ -144,7 +145,7 @@ class Contracts extends BaseController
 
 				$userModel = new Users();
 				// fetch the users id from the session
-				$userID = $userModel->getUserByToken($_SESSION['token']) ? $userModel->getUserByToken($_SESSION['token'])->id : null;
+				$userID = $userModel->getUserByToken($_SESSION['token']) ? $userModel->getUserByToken($_SESSION['token'])['id'] : null;
 				// fetch the document from the database
 				$ordersModel = new Orders();
 				$documentModel = new Documents();
@@ -235,7 +236,7 @@ class Contracts extends BaseController
 							   'success' => true,
 							   'message' => 'The document has been deleted successfully.'
 						   ];
-						   
+
 						   // return the view with the success message. 
 						   return view('/contracts/response', $data);
 					   }

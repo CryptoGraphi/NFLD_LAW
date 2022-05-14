@@ -10,8 +10,18 @@ use App\Models\Orders;
 use App\Models\Users;
 
 
+/**
+ * 
+ *  @class: Dashboard
+ * 
+ *  @purpose: to dispatch all the dashboard functionality 
+ * 
+ * 
+ */
+
 class Dashboard extends BaseController
 {
+
 
 	public function __construct()
 	{
@@ -29,15 +39,14 @@ class Dashboard extends BaseController
 
 	/**
 	 * 
-	 *  @method: index
+	 *  @fetchDocuments 
 	 * 
-	 * 
-	 *  @purpose: to display the default dashboard route.....
-	 * 
+	 *  @purpose: in order to fetch all the documents that belongs 
+	 * 			  to the user.
+	 *  
 	 */
 
-
-	public function index()
+	private function fetchDocuments()
 	{
 		// check if the user has documents in the system. 
 		$user = new Users();
@@ -62,22 +71,28 @@ class Dashboard extends BaseController
 
 			array_push($frontEndQuery, $orderDocuments);
 		}
-
-
-		$data = [
-			'documents' => $frontEndQuery,
-		];
-		
-		return view('/dashboard/template/header') . view('/dashboard/home.php', $data) . view('/dashboard/template/footer');
+		return $frontEndQuery;
 	}
-
 
 	/**
 	 * 
+	 *  @method: index
 	 * 
 	 * 
+	 *  @purpose: to display the default dashboard route.....
 	 * 
 	 */
+
+
+	public function index()
+	{
+		// fetch the documents that belongs to the user.
+		$data = [
+			'documents' => $this->fetchDocuments(),
+		];
+		// return the view.
+		return view('/dashboard/template/header') . view('/dashboard/home.php', $data) . view('/dashboard/template/footer');
+	}
 
 	/**
 	 * 
