@@ -6,12 +6,12 @@ use App\Controllers\BaseController;
 use App\Services\Auth\Auth;
 use Dompdf\Dompdf;
 use App\Controllers\Render;
+use App\Models\Orders;
+use App\Models\Documents;
 
 class Storage extends BaseController
 {
-
     // default path of all the documents that will uploaded to the system...
-
     private $storageLocation = './uploads/contracts/';
 
     public function __construct()
@@ -35,7 +35,7 @@ class Storage extends BaseController
      * 
      *  @purpose: in order to render the raw pdf file
      * 
-     * 
+     *  @return: binary
      */
 
     private function render($rawData)
@@ -58,26 +58,55 @@ class Storage extends BaseController
 
     public function add($document = null)
     {
-        // this will add a new document to the database.
-        
-        // temp while we do some testing
-      /*   if ($_SERVER['REQUEST_METHOD'] !== 'POST')
-        {
+        // check if the document null or empty 
+        // and the request is a post request
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             die();
-        } */
+        }
 
+        // does the upload directory exist?
+        if (!file_exists($this->storageLocation)) {
+            mkdir($this->storageLocation, 0777, true);
+        }
 
+        // check to make sure that we have vaild data
+        if (empty($_SESSION['DOCUMENT_RAW_DATA']) || empty($_SESSION['DOCUMENT_RAW_DATA']['contractContent'])) {
+            http_response_code(400);
+            die();
+        }
+
+        // get the raw data inorder to form our pdf file. 
+        $documentData = isset($_SESSION['DOCUMENT_RAW_DATA']) ? $_SESSION['DOCUMENT_RAW_DATA'] : null;
+        $pdfBlob = $this->render($documentData['contractContent']);
+        $fileNameHash = hash('sha256', time() . random_bytes(32));
+
+        // do the file operations 
+        $fp = fopen($this->storageLocation . $fileNameHash . '.pdf', 'w');
+        $filePath = $this->storageLocation . $fileNameHash . '.pdf';
+
+        // make sure we get a file pointer returned
+        if ($fp)
+        {   
+            fwrite($fp, $pdfBlob);
+            fclose($fp);
+        }
         
+        // load our models in order to save the data to the database
+        $document = new Documents();
+        $orders = new Orders();
+    
+        // create our documents entry 
+        $documentID = $document->add($filePath);
+        // now we need to create our order entry
+        $orders->add(1, 250, date('Y-m-d H:i:s'), $documentID);
 
-        // add the document to the database.... 
-
-
-
-        // create file in the file syste
-
+        // lets do some checks to make sure everything is working as expected
+        if ($documentID && $orders) {
+            return true;
+        }
+        return false;
     }
-
 
     /***
      * 

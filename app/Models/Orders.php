@@ -55,10 +55,13 @@ class Orders extends Model
             'user_id' => $userID,
             'price' => $price,
             'order_date' => $order_date,
-            'document_id' => $documentID
+            'document_id' => $documentID,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         ];
-
+        
         $this->insert($data);
+        // return the id of the newly added document
         return $this->insertID;
     }
 
@@ -78,5 +81,5 @@ class Orders extends Model
                     ->delete();
     }
 
-    
+
 }

@@ -14,7 +14,7 @@ class Documents extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['path', 'created_at', 'updated_at'];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,4 +39,26 @@ class Documents extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+
+    /**
+     * 
+     *  @method: add 
+     * 
+     *  @purpose: to add a new document to the storage
+     */
+
+     public function add($filePath)
+     {
+        $data = [
+            'path' => $filePath,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+        // add the document to the database
+        $this->insert($data);
+        // return the id of the document
+        return $this->insertID;
+     }
 }
