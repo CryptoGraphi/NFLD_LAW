@@ -64,22 +64,20 @@ class Orders extends BaseController
                 if (empty($_POST['stripeToken']) || empty($_POST['email'])) {
                     die('Payment failed');
                 }
-
                 // paid document purchase
                 $paymentInterface = new PaymentDispatcher();
                 $paymentStatus = $paymentInterface->charge($document);
-    
+
                 // did the payment go through?
                 if ($paymentStatus->paid === true) {
-                    // payment went through
-                    // add the document into the datbase since the payment has went through
+             
                     $documentStorage = new DocumentStorage();
     
                     if ($documentStorage->add($document))
                     {
                         return $order->place();
                     }
-                    // something went wrong couldnt add the document into the database
+        
                     return $order->place();
                 }
 

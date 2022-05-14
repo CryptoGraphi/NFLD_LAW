@@ -33,7 +33,7 @@ class PaymentDispatcher
      * 
      *  @method: createCustomer 
      * 
-     *  @purpose: inorder to create a new customer instance 
+     *  @purpose: in order to create a new customer instance 
      * 
      */
 
@@ -50,9 +50,10 @@ class PaymentDispatcher
      *  @method: charge 
      * 
      * 
-     *  @purpose: inorder to proccess a chage upon the account 
+     *  @purpose: in order to process a charge upon the account 
      * 
      */
+    
     public function charge($document)
     {
         // init the customer instance
@@ -73,7 +74,5 @@ class PaymentDispatcher
     }
 
 }
-
-
 
 ?>

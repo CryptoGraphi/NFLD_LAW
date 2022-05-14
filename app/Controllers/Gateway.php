@@ -8,6 +8,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Services\Auth\Auth;
 use App\Controllers\Orders;
+use App\Controllers\Requests;
 
 
 class Gateway extends BaseController
@@ -17,19 +18,11 @@ class Gateway extends BaseController
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
-
-		// only allow post requests to this controller.... 
-		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-			http_response_code(405);
-			die();
-		}
-
-		// make sure the user is logged in before accessing the payment gateway. 
-		if (!Auth::isLoggedIn()['status']) {
+		if (!Auth::isLoggedIn()['status'] ) {
 			die(Auth::deny());
 		}
-
-		// share objects 
+		// make sure requests is a post request for this controller. 
+		Requests::post();
 		$this->order = new Orders();
 	}
 
@@ -37,22 +30,17 @@ class Gateway extends BaseController
 	 * 
 	 * @method: proccess 
 	 * 
-	 * @purpose: inorder to process the payment for the digital assets purchases. 
-	 * 
+	 * @purpose: in order to process the payment for the digital assets purchases. 
 	 * 
 	 */
 
 	public function proccess($documentName = null, $paymentType = null)
 	{
-		// for only support the following a paid document purchase 
-		// and free documents
-		
+	
 		if ($paymentType === 'free') {
-			// free documents here.... 
 			return $this->order->freeOrder($documentName);
 		}
 
-		// for the paid documents.. 
 		return $this->order->paidOrder($documentName);
 	}
 }

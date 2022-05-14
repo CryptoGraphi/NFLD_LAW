@@ -41,8 +41,7 @@ class Dashboard extends BaseController
 	 * 
 	 *  @fetchDocuments 
 	 * 
-	 *  @purpose: in order to fetch all the documents that belongs 
-	 * 			  to the user.
+	 *  @purpose: in order to fetch all the documents that belongs to the user.
 	 *  
 	 */
 
@@ -71,7 +70,6 @@ class Dashboard extends BaseController
 	/**
 	 * 
 	 *  @method: index
-	 * 
 	 * 
 	 *  @purpose: to display the default dashboard route.....
 	 * 
@@ -106,7 +104,6 @@ class Dashboard extends BaseController
 	 *  @method: account
 	 * 
 	 *  @purpose: to display the account dashboard route.....
-	 * 
 	 * 
 	 */
 

@@ -37,16 +37,13 @@ class Authentication extends BaseController
 			'password' => $_POST['password'],
 			'honeypot' => $_POST['SID_TRACKER']
 		];
-
-
+		
 		$loginStatus = Auth::login($user);
 
 		// process the login form
 		if ($loginStatus['status'] === true) {
 			return redirect()->to('/dashboard');
 		}
-
-		$data = $loginStatus;
 
 		return view('/home/template/header') . view('/home/login', $loginStatus) . view('/home/template/footer');
 	}

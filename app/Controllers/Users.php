@@ -31,6 +31,9 @@ class Users extends BaseController
         }
     }
 
+
+    
+
     /**
      * 
      *  @method: changePassword 
@@ -41,9 +44,6 @@ class Users extends BaseController
 
     public function changePassword()
     {
-        // preform the change password action.
-        // on the account that is logged in. 
-        // and return success or failure.
         
         $user = new UsersModel();
         $accessToken = $_SESSION['token'];
