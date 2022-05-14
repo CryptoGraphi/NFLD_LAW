@@ -58,15 +58,21 @@ class Storage extends BaseController
 
     public function add($document = null)
     {
-        // this will add a new document to the database. 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        // this will add a new document to the database.
+        
+        // temp while we do some testing
+      /*   if ($_SERVER['REQUEST_METHOD'] !== 'POST')
         {
             http_response_code(405);
             die();
-        }
+        } */
+
+
+        
 
         // add the document to the database.... 
-     
+
+
 
         // create file in the file syste
 

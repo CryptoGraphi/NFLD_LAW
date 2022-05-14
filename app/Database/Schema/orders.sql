@@ -14,5 +14,7 @@ create table if not exists orders (
     order_date datetime not null,
     price float not null,
     document_id int(11) not null unique,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp on update current_timestamp,
     primary key(id)
 );
