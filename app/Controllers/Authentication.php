@@ -43,8 +43,6 @@ class Authentication extends BaseController
 
 		// process the login form
 		if ($loginStatus['status'] === true) {
-			// have to use the naked php way since codeigniter return index.php + the route 
-			// and breaks the front end implimentation of the router. 
 			return redirect()->to('/dashboard');
 		}
 

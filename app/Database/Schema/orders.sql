@@ -1,6 +1,12 @@
 
 -- table to store digital products
-
+-- 
+-- @desc: this table is going to used to store
+-- any orders that happen to go through the
+-- system. 
+-- and ref the user to the document in the databasse
+-- so its a way to track customer purchases, purchase details,
+-- THE users that has purchased the product. and the symbol link to the product
 
 create table if not exists orders (
     id int(11) not null auto_increment,

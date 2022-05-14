@@ -33,7 +33,7 @@ class Storage extends BaseController
      * 
      *  @method: render 
      * 
-     *  @purpose: inorder to render the raw pdf file
+     *  @purpose: in order to render the raw pdf file
      * 
      * 
      */
@@ -68,7 +68,7 @@ class Storage extends BaseController
         // add the document to the database.... 
      
 
-        // create file in the file system
+        // create file in the file syste
 
     }
 
@@ -105,7 +105,7 @@ class Storage extends BaseController
        *  @method: get
        * 
        *  @purpose: to get all the records from  the storage that 
-       *            the user is asccocated with.
+       *            the user is associated with.
        *  
        */
 

@@ -144,11 +144,12 @@ class Contracts extends BaseController
 			die($header . view('/render/paymentPage', $error) . $footer);
 		}
 		
-		// check what document to return to the user.
-		// is way we can easily add new contracts to the existing system
-		// not really have to worry about scalibility here.
-		// so as our contracts grows go will our switch statement
-
+		// check what documents we need to return the the user
+		// i built this is this way incase I ever need to add more contracts
+		// its modify one line of code here and making a template to use. 
+		// be I hate refacting code over and over again so i will stick with 
+		// this final idea. 
+		
 		switch($contractType)
 		{
 			case 'lastwill':
