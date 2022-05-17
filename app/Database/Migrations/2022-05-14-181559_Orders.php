@@ -47,6 +47,9 @@ class Orders extends Migration
                 'null' => true,
             ]
         ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('orders');
     }
 
     public function down()

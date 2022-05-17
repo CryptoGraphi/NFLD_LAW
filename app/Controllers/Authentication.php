@@ -30,12 +30,18 @@ class Authentication extends BaseController
 
 	public function login()
 	{
+
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			exit;
+		}
+
+		
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $_POST['email'],
-			'password' => $_POST['password'],
-			'honeypot' => $_POST['SID_TRACKER']
+			'email' => $this->request->getPost('email'),
+			'password' => $this->request->getPost('password'),
+			'honeypot' =>  $this->request->getPost('SID_TRACKER'),
 		];
 		
 		$loginStatus = Auth::login($user);
@@ -57,12 +63,17 @@ class Authentication extends BaseController
 
 	public function register()
 	{
+
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
+			exit;
+		}
+
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $_POST['email'],
-			'password' => $_POST['password'],
-			'confirm_password' => $_POST['passwordConfirm'],
+			'email' => $this->request->getPost('email'),
+			'password' => $this->request->getPost('password'),
+			'confirm_password' => $this->request->getPost('passwordConfirm'),
 
 		];
 
