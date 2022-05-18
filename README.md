@@ -1,6 +1,6 @@
 <section>
   <h1> New Found Law </h1>
-  <b> Abstract </b>
+  <b> purpose </b>
   <p>
     The purpose of this application was to come up with a solution of how to intergrate, document generation of legal forms
     with in canada. 
