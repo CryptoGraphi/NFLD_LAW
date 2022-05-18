@@ -35,7 +35,7 @@ class Authentication extends BaseController
 			die('You must use HTTPS');
 		}
 
-		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			die('Invalid request');
 		}
 
@@ -73,7 +73,7 @@ class Authentication extends BaseController
 			die('You must use HTTPS');
 		}
 
-		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			die('Invalid request');
 		}
 
