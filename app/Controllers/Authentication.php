@@ -30,12 +30,22 @@ class Authentication extends BaseController
 
 	public function login()
 	{
+
+		if (!$this->request->isSecure()) {
+			die('You must use HTTPS');
+		}
+
+		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('Invalid request');
+		}
+
+		
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $_POST['email'],
-			'password' => $_POST['password'],
-			'honeypot' => $_POST['SID_TRACKER']
+			'email' => $this->request->getPost('email'),
+			'password' => $this->request->getPost('password'),
+			'honeypot' =>  $this->request->getPost('SID_TRACKER'),
 		];
 		
 		$loginStatus = Auth::login($user);
@@ -45,7 +55,8 @@ class Authentication extends BaseController
 			return redirect()->to('/dashboard');
 		}
 
-		return view('/home/template/header') . view('/home/login', $loginStatus) . view('/home/template/footer');
+		// if the login failed, then we will redirect the user to the login page
+		return redirect()->to('/login')->with('error', $loginStatus['message']);
 	}
 
 	/**
@@ -57,12 +68,21 @@ class Authentication extends BaseController
 
 	public function register()
 	{
+
+		if (!$this->request->isSecure()) {
+			die('You must use HTTPS');
+		}
+
+		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('Invalid request');
+		}
+
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $_POST['email'],
-			'password' => $_POST['password'],
-			'confirm_password' => $_POST['passwordConfirm'],
+			'email' => $this->request->getPost('email'),
+			'password' => $this->request->getPost('password'),
+			'confirm_password' => $this->request->getPost('passwordConfirm'),
 
 		];
 
@@ -74,8 +94,7 @@ class Authentication extends BaseController
 		}
 		// deny the request and run the cleanu]
 		// return error message to the view 
-		return view('/home/template/header') . view('/home/register', $loginStatus) . view('/home/template/footer');
-
+		return redirect()->to('/home/register')->with('error', $loginStatus['message']);
 	}
 	
 	/**

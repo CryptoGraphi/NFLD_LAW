@@ -30,6 +30,9 @@ class Documents extends Migration
                 'null' => true,
             ]
         ]);
+
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('documents');
     }
 
     public function down()
