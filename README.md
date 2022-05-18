@@ -32,10 +32,3 @@
   </ul>
   </p>
  </section>
- 
- <section>
-  <h2> Foot Notes: </h2>
-  <p>
-    Lastly enjoy the proccess of turning the idea in your head inorder something you can interact with 
-  </p>
- </section>
