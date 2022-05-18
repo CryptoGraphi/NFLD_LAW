@@ -31,8 +31,12 @@ class Authentication extends BaseController
 	public function login()
 	{
 
-		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-			exit;
+		if (!$this->request->isSecure()) {
+			die('You must use HTTPS');
+		}
+
+		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('Invalid request');
 		}
 
 		
@@ -51,7 +55,8 @@ class Authentication extends BaseController
 			return redirect()->to('/dashboard');
 		}
 
-		return view('/home/template/header') . view('/home/login', $loginStatus) . view('/home/template/footer');
+		// if the login failed, then we will redirect the user to the login page
+		return redirect()->to('/login')->with('error', $loginStatus['message']);
 	}
 
 	/**
@@ -64,8 +69,12 @@ class Authentication extends BaseController
 	public function register()
 	{
 
-		if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
-			exit;
+		if (!$this->request->isSecure()) {
+			die('You must use HTTPS');
+		}
+
+		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('Invalid request');
 		}
 
 		$user = [
@@ -85,8 +94,7 @@ class Authentication extends BaseController
 		}
 		// deny the request and run the cleanu]
 		// return error message to the view 
-		return view('/home/template/header') . view('/home/register', $loginStatus) . view('/home/template/footer');
-
+		return redirect()->to('/home/register')->with('error', $loginStatus['message']);
 	}
 	
 	/**
