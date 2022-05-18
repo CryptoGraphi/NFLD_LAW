@@ -42,6 +42,14 @@ class home extends baseClass {
         
     }
 
+    /**
+     * 
+     *  @method: register  
+     * 
+     *  @purpose: to add interactivity to the home content that is fetched by the server
+     * 
+     */
+
     register()
     {
 
@@ -91,36 +99,43 @@ class home extends baseClass {
                             
             });
 
-
-
-
             submitBtn.addEventListener('submit', (e) => {
                 e.preventDefault();
             });
         }
     }
 
+    /**
+     * 
+     * @method: login
+     * 
+     *  @purpose: to add interactivity to the home content that is fetched by the server
+     * 
+     */
+
 
     login()
     {
-        
+
 
         let loginForm = document.getElementById('loginForm');
         let path =      '/Authentication/login/';
         let message =   document.getElementById('ajaxContainer');
+        let submitBtn = document.getElementById('submitBtn');
 
+        // is the login form activated?
         if (loginForm) {
-            let submitBtn = document.getElementById('submitBtn');
+            // prevent the form from submitting
+           loginForm.addEventListener('submit', (e) => {
+              e.preventDefault();
 
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+                // get the form data
                 let formData = new FormData(loginForm);
                 let data = {};
                 formData.forEach((value, key) => {
                     data[key] = value;
-
                 });
-
+                
                 const headers = {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
@@ -129,26 +144,27 @@ class home extends baseClass {
                 const req = new API();
 
                 // send the request to the server of the application
-                req.post(path, data, headers).then(data => {    
-                     // check the response of the appliction 
-                     if (data.status === true) {
-                         // display the message to the user
-                         message.classList.remove('text-danger');
-                         message.classList.add('text-success');
-                         message.innerText = data.message;
-                         // redirect the user to the login page
-                         window.location.pathname = '/dashboard';
-                     } else {
-                            // display the message to the user
-                            message.classList.remove('text-success');
-                            message.classList.add('text-danger');
-                            message.innerText = data.message;
-                     }
-                });
-                            
-            });
+                req.post(path, data, headers).then(data => {
 
-            // prevent the form from submitting
+                    // check the response of the application  
+                    if (data.status === true) {
+                        // display the message to the user
+                        message.classList.remove('text-danger');
+                        message.classList.add('text-success');
+                        message.innerText = data.message;
+                        // redirect the user to the dashboard page
+                        window.location.pathname = '/dashboard';
+                    } else {
+                        // display the message to the user
+                        message.classList.remove('text-success');
+                        message.classList.add('text-danger');
+                        message.innerText = data.message;
+                    }
+                });
+                
+           });
+
+            // submit the form
             submitBtn.addEventListener('submit', (e) => {
                 e.preventDefault();
             });
@@ -156,7 +172,6 @@ class home extends baseClass {
     }
 
 }
-        
-        // get the messages for the login pa
 
+// activate the login page... 
 const homeController = new home();

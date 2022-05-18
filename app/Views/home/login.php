@@ -2,12 +2,13 @@
     <div class='row loginPannel p-4'>
         
         <div class='col-md-6'>
-                    <img class='img-fluid' alt='lawyer' src='/img/SVG/lawyer2.svg' />
+            <img class='img-fluid' alt='lawyer' src='/img/SVG/lawyer2.svg' />
         </div>
         <div class='col-md-6'>            
         <form method='post' id='loginForm'>
-        <span id='ajaxContainer'> </span>
+
         <h2 class='text-center'>  Please Login <i class='fas fa-user-shield	'></i></h2>
+        <span id='ajaxContainer'> </span>
             <div class="form-group m-2">
                 <label for="email">Email address</label>
                 <span class='error-message text-danger'></span>
