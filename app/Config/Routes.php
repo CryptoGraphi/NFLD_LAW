@@ -36,6 +36,10 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 
 
+
+$routes->post('/authentication/login', 'Authentication::login');
+$routes->post('/authentication/register', 'Authentication::register');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

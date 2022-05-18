@@ -12,8 +12,7 @@
 
  namespace App\Services\Auth;
  use App\Models\Users;
-
-
+ 
 
  class Auth
  {
@@ -133,7 +132,17 @@
 
             // check all the flags for any errors
             // that may or may not be present
-            
+
+            // check if the email is already in the database..
+
+            if (empty($email) || empty($password) || empty($confirm_password)) {
+                return [
+                    'status' => false,
+                    'message' => 'Please fill in all the fields'
+                ];
+            }
+
+            // check if the email is valid
             if ($password !== $confirm_password) {
                 // set a error cookie '
        
@@ -142,6 +151,9 @@
                     'message' => 'Passwords do not match'
                 ];
             }
+
+
+        
             // check to see if the password is valid 
             if (strlen($password) < 8) {
                 // set a error cookie

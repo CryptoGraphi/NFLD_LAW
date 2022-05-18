@@ -1,17 +1,12 @@
 <div class='container'>
     <div class='row loginPannel p-4'>
-            <h4 class='text-danger'> 
-            <?php 
-            // render the error message of the page
-                if (isset($message)) {  echo $message; }
-            ?>
-            </h4> 
-     
+        
         <div class='col-md-6'>
                     <img class='img-fluid' alt='lawyer' src='/img/SVG/lawyer2.svg' />
         </div>
         <div class='col-md-6'>            
-        <form method='post' action='/Authentication/login/'>
+        <form method='post' id='loginForm'>
+        <span id='ajaxContainer'> </span>
         <h2 class='text-center'>  Please Login <i class='fas fa-user-shield	'></i></h2>
             <div class="form-group m-2">
                 <label for="email">Email address</label>
@@ -30,9 +25,8 @@
                 <label class="form-check-label" for="check">Please remember me</label>
                 <input type='text' class='form-control' name='SID_TRACKER' value="<?php  echo hash('sha256', bin2hex(random_bytes(20))); ?>"  style='display: none;' />
             </div>
-            <button type="submit" class="btn started m-2">Submit</button>
+            <button type="submit" class="btn started m-2" id='submitBtn'>Submit</button>
         </form>
-        </div>
-        
+    </div>    
 </div>
 </div>
