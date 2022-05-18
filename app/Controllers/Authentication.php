@@ -30,33 +30,28 @@ class Authentication extends BaseController
 
 	public function login()
 	{
-
+		// make sure the request is over https
 		if (!$this->request->isSecure()) {
 			die('You must use HTTPS');
-		}
+		} 
 
-		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
-			die('Invalid request');
-		}
 
+		// make sure the request is a post request 
+		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('You must use a POST request');
+		}
 		
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $this->request->getPost('email'),
-			'password' => $this->request->getPost('password'),
-			'honeypot' =>  $this->request->getPost('SID_TRACKER'),
+			'email' => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
+			'password' => $this->request->getVar('password', FILTER_DEFAULT),
+			'honeypot' =>  $this->request->getVar('SID_TRACKER', FILTER_DEFAULT),
 		];
+
 		
-		$loginStatus = Auth::login($user);
-
-		// process the login form
-		if ($loginStatus['status'] === true) {
-			return redirect()->to('/dashboard');
-		}
-
-		// if the login failed, then we will redirect the user to the login page
-		return redirect()->to('/login')->with('error', $loginStatus['message']);
+		// we wil use rest calls in order to send the error message to the user
+		return json_encode(Auth::login($user));
 	}
 
 	/**
@@ -67,34 +62,31 @@ class Authentication extends BaseController
 	 */
 
 	public function register()
-	{
-
+	{	
+		// make sure the request is used over https
 		if (!$this->request->isSecure()) {
 			die('You must use HTTPS');
 		}
 
-		if (!$_SERVER['REQUEST_METHOD'] != 'POST') {
-			die('Invalid request');
+		// make sure the request is a post request
+
+		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+			die('You must use a POST request');
 		}
+
 
 		$user = [
 			// place the values of the user in an array
 			// our login function will automatically check the array, sanitize the data, and check the credentials
-			'email' => $this->request->getPost('email'),
-			'password' => $this->request->getPost('password'),
-			'confirm_password' => $this->request->getPost('passwordConfirm'),
-
+			'email' => $this->request->getVar('email', FILTER_SANITIZE_EMAIL),
+			'password' => $this->request->getVar('password', FILTER_DEFAULT),
+			'confirm_password' => $this->request->getVar('passwordConfirm', FILTER_DEFAULT),
 		];
 
-		$loginStatus = Auth::register($user);
 
-		if (($loginStatus['status'] === true)) {
-			// redirect the user to the login page
-			return redirect()->to('/home/login');
-		}
-		// deny the request and run the cleanu]
-		// return error message to the view 
-		return redirect()->to('/home/register')->with('error', $loginStatus['message']);
+		// we will use rest calls in order to check this.
+		return json_encode(Auth::register($user));
+
 	}
 	
 	/**
