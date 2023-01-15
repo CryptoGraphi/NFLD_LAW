@@ -21,7 +21,7 @@ class PaymentDispatcher
 
     public function __construct()
     {
-        $this->StripeKey = \Stripe\Stripe::setApiKey("sk_test_51IoHyoHRqaEOzZ9RXDXn7da75g3xKDlPYcgJc4cEQjDnwvp682OR9wsFGfXn4qk3gycT40ruS1EfvLITGo3dzlPv00e9hSnWl7");
+        $this->StripeKey = \Stripe\Stripe::setApiKey('API_KEY_HERE');
         $this->token = $_POST['stripeToken'];
         $this->customerEmail = $_POST['email'];
         $this->amount = 25000;
