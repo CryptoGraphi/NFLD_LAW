@@ -21,7 +21,7 @@ Allows for secure and convenient payments, allowing users to purchase and downlo
 Implemented system for storing and managing documents in a secure and organized manner. Users can also download and modify their documents at any time.
 
 ## Contact Us
-If you have any question or suggestion, please feel free to contact us.
+If you have any question or suggestion, please feel free to contact me.
 
 ## Note
 This is a open source application and is always open for contribution and suggestion.
