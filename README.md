@@ -1,34 +1,27 @@
-<section>
-  <h1> New Found Law </h1>
-  <b> purpose </b>
-  <p>
-    The purpose of this application was to come up with a solution of how to intergrate, document generation of legal forms
-    with in canada. 
-  </p>
- </section>
- 
- 
- <section>
-  <h1> Tech Stack </h1>
-  <ul>
-    <li> PHP </li>
-    <li> Vanilla JS </li>
-    <li> CSS </li>
-    <li> HTML </li>
-    <li> Code Ignitor </li>
-  </ul>
-  </section>
+# New Found Law
 
-<section>
-  <h1> Functionality </h1>
-  
-  <p>
-      <ul>
-        <li><b> User Authentication </b></li>
-        <li><b> Stripe API intergratation </b></li>
-        <li><b> Document storage and permisssions </b></li>
-        <li><b> Download and modify documents anytime </b></li>
-        
-  </ul>
-  </p>
- </section>
+## Purpose
+The purpose of this application is to provide an easy and efficient way for users to generate and manage legal forms in Canada.
+
+## Technology Stack
+- PHP
+- Vanilla JavaScript
+- CSS
+- HTML
+- CodeIgniter framework
+
+## Features
+### User Authentication
+Ensures that only authorized users can access and manage the legal forms.
+
+### Stripe API Integration
+Allows for secure and convenient payments, allowing users to purchase and download the legal forms they need.
+
+### Document Storage and Permissions
+Implemented system for storing and managing documents in a secure and organized manner. Users can also download and modify their documents at any time.
+
+## Contact Us
+If you have any question or suggestion, please feel free to contact us.
+
+## Note
+This is a open source application and is always open for contribution and suggestion.
